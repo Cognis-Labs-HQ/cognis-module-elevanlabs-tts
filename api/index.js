@@ -1,85 +1,60 @@
-import { readJson, sendJson } from "./reuse/http.js";
 import { ShowcaseStore } from "./store.js";
-
-function requesterId(request) {
-    return String(request.auth?.accountId ?? request.auth?.sub ?? "").trim();
-}
+import { registerItemRoutes } from "./routes/items/index.js";
 
 export function registerApi(router, ctx) {
     const database = ctx.getCapability("db:executor");
     const requireAuth = ctx.getCapability("auth:requireAuth");
-    if (!database || typeof requireAuth !== "function") {
+    if (!database || typeof requireAuth !== "function")
         throw new Error(
             "Module template requires db:executor and auth:requireAuth.",
         );
-    }
     const store = new ShowcaseStore(database);
-    const ready = store.ensureSchema();
-    const listItems = async (ownerId) => {
-        await ready;
-        return store.list(ownerId);
+    const operations = {
+        list: (input) => store.list(input.ownerId),
+        create: (input) => store.create(input.ownerId, input.title),
     };
-
-    router.get(
-        "/api/v1/modules/module-template/items",
-        async (request, response) => {
-            await requireAuth(request, response);
-            if (response.writableEnded) return;
-            sendJson(response, 200, {
-                data: await listItems(requesterId(request)),
-            });
-        },
-        { access: { minRole: "user" } },
-    );
-
-    router.post(
-        "/api/v1/modules/module-template/items",
-        async (request, response) => {
-            await requireAuth(request, response);
-            if (response.writableEnded) return;
-            try {
-                const body = await readJson(request);
-                const title =
-                    typeof body.title === "string" ? body.title.trim() : "";
-                if (!title || title.length > 120) {
-                    sendJson(response, 400, {
-                        error: {
-                            code: "invalid_title",
-                            message: "Title must contain 1–120 characters.",
-                        },
-                    });
-                    return;
-                }
-                await ready;
-                const item = await store.create(requesterId(request), title);
-                ctx.log?.("info", "Showcase item created.", {
-                    component: "module-template",
-                    operation: "create_item",
-                    itemId: item.id,
-                });
-                sendJson(response, 201, { data: item });
-            } catch (error) {
-                const clientError = [
-                    "invalid_json",
-                    "request_too_large",
-                ].includes(error.message);
-                ctx.log?.("error", "Showcase item creation failed.", {
-                    component: "module-template",
-                    operation: "create_item",
-                    error: error.message,
-                });
-                sendJson(response, clientError ? 400 : 500, {
-                    error: {
-                        code: clientError ? error.message : "internal_error",
-                        message: clientError
-                            ? "The request body is invalid."
-                            : "The item could not be created.",
-                    },
-                });
-            }
-        },
-        { access: { minRole: "user" } },
-    );
-
-    return { listItems };
+    for (const [action, execute] of Object.entries(operations)) {
+        const flowId = `module-template:${action}Items`;
+        ctx.registerFlow({
+            id: flowId,
+            stages: ["validate", "execute", "present"],
+        });
+        ctx.flow.extend(
+            flowId,
+            "validate",
+            { id: `${flowId}.validate` },
+            ({ input }) => {
+                if (!input.ownerId) throw new Error("invalid_owner");
+                if (
+                    action === "create" &&
+                    (!input.title || input.title.length > 120)
+                )
+                    throw new Error("invalid_title");
+            },
+        );
+        ctx.flow.extend(
+            flowId,
+            "execute",
+            { id: `${flowId}.execute` },
+            async (stage) => {
+                await store.ensureSchema();
+                stage.data.result = await execute(stage.input);
+            },
+        );
+        ctx.flow.extend(
+            flowId,
+            "present",
+            { id: `${flowId}.present` },
+            (stage) => stage.data.result,
+        );
+    }
+    const run = async (action, input) =>
+        (await ctx.flow.run(`module-template:${action}Items`, input)).data
+            .result;
+    const service = {
+        listItems: (ownerId) => run("list", { ownerId }),
+        createItem: (ownerId, title) => run("create", { ownerId, title }),
+    };
+    registerItemRoutes(router, { requireAuth, service, log: ctx.log });
+    return service;
 }

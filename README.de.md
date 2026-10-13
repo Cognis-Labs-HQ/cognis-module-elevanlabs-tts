@@ -2,7 +2,7 @@
 
 [English](README.en.md) · **Deutsch** · [Bahasa Indonesia](README.id.md) · [日本語](README.ja.md)
 
-Ein bewusst kleines, installierbares Referenzmodul für die **UI-, API-, Datenbank-, CLI-, Capability-, Flow-, Lokalisierungs-, Test- und Marketplace-Paketierungsoberflächen** von Cognis. Es dient als Lernhilfe – nicht als Generator – und bildet die Grenze für externe Module ab, die durch Cognis PR #172 und das Jitsi-Meet-Modul etabliert wurde.
+Erstellen Sie jedes neue externe Cognis-Modul aus diesem Repository. Das installierbare Beispiel zeigt UI, API, Datenbank, CLI, Fähigkeiten, Flows, Lokalisierung, Lebenszyklustests und Paketintegrität. Ersetzen Sie Beispielidentität und Inhalte, behalten Sie Beitragsstandard und Prüfungen.
 
 ## Erste Schritte
 
@@ -12,7 +12,7 @@ npm test
 npm run check:manifest
 ```
 
-Installiere das Repository als Cognis-Modulquelle, prüfe seine Berechtigungen, aktiviere es und öffne anschließend `/showcase` oder führe `cognisctl module-template:list` aus.
+Installiere das Repository als Cognis-Modulquelle, prüfe seine Berechtigungen, aktiviere es und öffne anschließend `/showcase` oder führe `cognisctl modules:module-template:list` aus.
 
 ## Architekturübersicht
 
@@ -49,7 +49,7 @@ Komponentenübergreifendes Verhalten gehört in **Capabilities** (ein aufrufbare
 5. Füge nur tatsächlich benötigte Capabilities hinzu und halte den Routenzugriff minimal.
 6. Führe zuletzt `npm run manifest:hashes`, danach `npm run check` und `git diff --check` aus.
 
-Lies vor der Implementierung eines Produktionsmoduls [`docs/standard.de.md`](docs/standard.de.md); gleichwertige englische, indonesische und japanische Referenzen befinden sich daneben.
+Lies vor der Implementierung eines Produktionsmoduls [`docs/index.de.md`](docs/index.de.md); gleichwertige englische, indonesische und japanische Referenzen befinden sich daneben.
 
 ## Qualitätsprüfungen für Mitwirkende
 

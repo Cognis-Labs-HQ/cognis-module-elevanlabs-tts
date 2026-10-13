@@ -1,13 +1,13 @@
-# Standar Modul Eksternal Cognis
+# Templat Modul Eksternal
 
-Templat ini adalah referensi yang dapat dipasang untuk kontrak API, UI, CLI, persistensi, kapabilitas, alur, lokalisasi, siklus hidup, pengujian, dan pengemasan yang terisolasi. Gunakan sebagai peta kontrak, bukan generator.
+Buat setiap modul Cognis eksternal baru dari repositori ini. Contoh yang dapat dipasang menunjukkan UI, API, basis data, CLI, kapabilitas, alur, pelokalan, uji siklus hidup dan integritas paket. Ganti identitas serta konten contoh sambil mempertahankan standar dan pemeriksaannya.
 
 ## Contoh Penggunaan
 
 - Buka `/showcase` setelah modul diaktifkan untuk memakai UI page composer yang dilokalkan.
-- Jalankan `cognisctl module-template:list` untuk memakai API terautentikasi yang sama melalui CLI.
+- Jalankan `cognisctl modules:module-template:list` untuk memakai API terautentikasi yang sama melalui CLI.
 - Gunakan `module-template:listItems` melalui `ctx`, bukan dengan mengimpor internal modul.
-- Perluas alur `module-template:showcaseItems` melalui tahap bernama yang dapat dilepas.
+- Perluas alur `module-template:listItems` melalui tahap bernama yang dapat dilepas.
 - Nonaktifkan lalu aktifkan kembali modul untuk memverifikasi registrasi tercakup dapat diulang.
 
 ## Spesifikasi Teknis
@@ -61,3 +61,5 @@ Aturan berikut merangkum kontrak runtime inti dan pola yang telah terbukti pada 
 3. Jalankan `npm install`, `npm run lint`, dan `npm test`.
 4. Jalankan `npm run manifest:hashes` setelah perubahan berkas distribusi terakhir, lalu `npm run check:manifest` dan `git diff --check`.
 5. Untuk modul selain templat, tambahkan empat berkas lokal `docs/changelog/<branch>.<lang>.md` dan selesaikan asal commit tanpa mencerna changelog.
+
+Setiap modul eksternal baru dimulai dari templat ini. Buat UUID produk baru sekali, ganti metadata dan namespace contoh, dan pertahankan AGENTS.md serta alat validasi. Rute domain ada di `api/routes/<domain>/`, style di `ui/styles/`, markup di `ui/templates/`, dan catatan rilis di `docs/changelog/`. Baca dan tulis API menjalankan tahap terdaftar; halaman browser memakai page composer dan navigasi terbatas.

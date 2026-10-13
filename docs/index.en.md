@@ -1,13 +1,13 @@
-# Cognis External Module Standard
+# External Module Template
 
-This template is an installable reference for isolated API, UI, CLI, persistence, capability, flow, localization, lifecycle, testing, and packaging contracts. Use it as a contract map, not as a generator.
+Create every new external Cognis module from this repository. The installable showcase demonstrates UI, API, database, CLI, capabilities, flows, localization, lifecycle tests and package integrity. Replace its example identity and content while retaining the contributor standard and checks.
 
 ## Usage Examples
 
 - Open `/showcase` after enabling the module to use its localized page-composer UI.
-- Run `cognisctl module-template:list` to consume the same authenticated API through the CLI.
+- Run `cognisctl modules:module-template:list` to consume the same authenticated API through the CLI.
 - Resolve `module-template:listItems` through `ctx` instead of importing module internals.
-- Extend the `module-template:showcaseItems` flow through a named, removable stage.
+- Extend the `module-template:listItems` flow through a named, removable stage.
 - Disable and re-enable the module to verify that scoped registrations are repeatable.
 
 ## Technical Specification
@@ -61,3 +61,5 @@ The rules below aggregate the core runtime contract and patterns proven by adjac
 3. Run `npm install`, `npm run lint`, and `npm test`.
 4. Run `npm run manifest:hashes` after the final shipped-file edit, then `npm run check:manifest` and `git diff --check`.
 5. For non-template modules, add the four localized `docs/changelog/<branch>.<lang>.md` files and finish their commit provenance without digesting changelogs.
+
+Start from this template for every new external module. Generate a new product UUID once, replace example metadata and namespaces, and retain AGENTS.md plus validation tools. Domain routes live in `api/routes/<domain>/`, styles in `ui/styles/`, markup in `ui/templates/`, and release notes in `docs/changelog/`. API reads and writes execute their registered stages; browser mounts use page composer and scoped navigation.

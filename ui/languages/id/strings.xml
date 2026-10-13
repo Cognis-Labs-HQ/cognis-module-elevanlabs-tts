@@ -3,7 +3,6 @@
   <string name="module.module_template.title">Contoh modul</string>
   <string name="module.module_template.intro">Modul Cognis menyeluruh yang kecil.</string>
   <string name="module.module_template.label">Judul item</string>
-  <string name="module.module_template.create">Buat</string>
   <string name="module.module_template.name">Templat Modul</string>
   <string name="module.module_template.summary">Modul referensi menyeluruh untuk kontributor Cognis.</string>
   <string name="module.module_template.description">Mendemonstrasikan kontrak UI, API, basis data, CLI, kapabilitas, alur, pelokalan, pengujian, dan pemaketan Cognis.</string>
@@ -11,4 +10,5 @@
   <string name="module.module_template.tag_template">Templat</string>
   <string name="module.module_template.tag_development">Pengembangan</string>
   <string name="module.module_template.tag_example">Contoh</string>
+  <string name="module.module_template.item.created">Item dibuat</string>
 </resources>

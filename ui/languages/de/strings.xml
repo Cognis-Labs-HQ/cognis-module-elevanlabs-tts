@@ -3,7 +3,6 @@
   <string name="module.module_template.title">Modulbeispiel</string>
   <string name="module.module_template.intro">Ein kleines vollständiges Cognis-Modul.</string>
   <string name="module.module_template.label">Elementtitel</string>
-  <string name="module.module_template.create">Erstellen</string>
   <string name="module.module_template.name">Modulvorlage</string>
   <string name="module.module_template.summary">Ein durchgängiges Referenzmodul für Cognis-Mitwirkende.</string>
   <string name="module.module_template.description">Veranschaulicht Cognis-Verträge für UI, API, Datenbank, CLI, Capabilities, Abläufe, Lokalisierung, Tests und Paketierung.</string>
@@ -11,4 +10,5 @@
   <string name="module.module_template.tag_template">Vorlage</string>
   <string name="module.module_template.tag_development">Entwicklung</string>
   <string name="module.module_template.tag_example">Beispiel</string>
+  <string name="module.module_template.item.created">Eintrag erstellt</string>
 </resources>

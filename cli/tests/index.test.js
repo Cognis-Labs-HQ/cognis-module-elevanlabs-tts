@@ -10,7 +10,7 @@ test("CLI registers list and create commands", () => {
         apiPost() {},
     });
     assert.deepEqual(commands, [
-        "module-template:list",
-        "module-template:create",
+        "modules:module-template:list",
+        "modules:module-template:create",
     ]);
 });

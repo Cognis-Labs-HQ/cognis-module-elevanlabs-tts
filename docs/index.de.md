@@ -1,13 +1,13 @@
-# Standard für externe Cognis-Module
+# Vorlage für externe Module
 
-Diese Vorlage ist eine installierbare Referenz für isolierte API-, UI-, CLI-, Persistenz-, Capability-, Flow-, Lokalisierungs-, Lebenszyklus-, Test- und Paketverträge. Verwenden Sie sie als Vertragsübersicht, nicht als Generator.
+Erstellen Sie jedes neue externe Cognis-Modul aus diesem Repository. Das installierbare Beispiel zeigt UI, API, Datenbank, CLI, Fähigkeiten, Flows, Lokalisierung, Lebenszyklustests und Paketintegrität. Ersetzen Sie Beispielidentität und Inhalte, behalten Sie Beitragsstandard und Prüfungen.
 
 ## Anwendungsbeispiele
 
 - Öffnen Sie nach der Aktivierung `/showcase`, um die lokalisierte Page-Composer-Oberfläche zu verwenden.
-- Führen Sie `cognisctl module-template:list` aus, um dieselbe authentifizierte API über die CLI zu nutzen.
+- Führen Sie `cognisctl modules:module-template:list` aus, um dieselbe authentifizierte API über die CLI zu nutzen.
 - Lösen Sie `module-template:listItems` über `ctx` auf, statt Modulinterna zu importieren.
-- Erweitern Sie den Flow `module-template:showcaseItems` durch eine benannte, entfernbare Stufe.
+- Erweitern Sie den Flow `module-template:listItems` durch eine benannte, entfernbare Stufe.
 - Deaktivieren und reaktivieren Sie das Modul, um wiederholbare Registrierungen zu prüfen.
 
 ## Technische Spezifikation
@@ -61,3 +61,5 @@ Die folgenden Regeln bündeln den Core-Laufzeitvertrag und in benachbarten Cogni
 3. Führen Sie `npm install`, `npm run lint` und `npm test` aus.
 4. Führen Sie nach der letzten ausgelieferten Dateiänderung `npm run manifest:hashes`, danach `npm run check:manifest` und `git diff --check` aus.
 5. Fügen Sie bei Nicht-Vorlagenmodulen vier lokalisierte `docs/changelog/<branch>.<lang>.md` hinzu und vervollständigen Sie deren Commit-Provenienz ohne Changelog-Digests.
+
+Jedes neue externe Modul beginnt mit dieser Vorlage. Einmalig eine eigene Produkt-UUID erzeugen, Beispielmetadaten und Namensräume ersetzen, AGENTS.md und Prüfwerkzeuge behalten. Domänenrouten liegen in `api/routes/<domain>/`, Styles in `ui/styles/`, Markup in `ui/templates/` und Release-Notizen in `docs/changelog/`. API-Lese- und Schreibaktionen durchlaufen registrierte Stufen; Browserseiten nutzen Page Composer und begrenzte Navigation.

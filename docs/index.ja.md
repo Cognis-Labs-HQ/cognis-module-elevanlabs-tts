@@ -1,13 +1,13 @@
-# Cognis 外部モジュール標準
+# 外部モジュールテンプレート
 
-このテンプレートは、分離された API、UI、CLI、永続化、Capability、フロー、ローカライズ、ライフサイクル、テスト、パッケージ契約のインストール可能な参照実装です。ジェネレーターではなく契約マップとして使用してください。
+新しい外部 Cognis モジュールは、このリポジトリから作成します。導入可能なサンプルで UI、API、データベース、CLI、機能、フロー、翻訳、ライフサイクル検証、パッケージ完全性を示します。識別情報とサンプル内容を置き換え、開発標準と検証を保持してください。
 
 ## 使用例
 
 - モジュールを有効化した後に `/showcase` を開き、ローカライズ済みの Page Composer UI を使用します。
-- `cognisctl module-template:list` を実行し、CLI から同じ認証済み API を使用します。
+- `cognisctl modules:module-template:list` を実行し、CLI から同じ認証済み API を使用します。
 - モジュール内部をインポートせず、`ctx` を通して `module-template:listItems` を解決します。
-- 名前付きで削除可能なステージから `module-template:showcaseItems` フローを拡張します。
+- 名前付きで削除可能なステージから `module-template:listItems` フローを拡張します。
 - モジュールを無効化して再度有効化し、スコープ付き登録の再現性を確認します。
 
 ## 技術仕様
@@ -61,3 +61,5 @@
 3. `npm install`、`npm run lint`、`npm test` を実行します。
 4. 最後の配布ファイル編集後に `npm run manifest:hashes`、続いて `npm run check:manifest` と `git diff --check` を実行します。
 5. テンプレート以外のモジュールでは、4 言語の `docs/changelog/<branch>.<lang>.md` を追加し、Changelog を Digest 対象にせず Commit 出所を完成させます。
+
+新しい外部モジュールは必ずこのテンプレートから始めます。製品 UUID を一度だけ生成し、サンプルのメタデータと名前空間を置き換え、AGENTS.md と検証ツールを保持します。ドメインルートは `api/routes/<domain>/`、スタイルは `ui/styles/`、マークアップは `ui/templates/`、リリース文書は `docs/changelog/` に配置します。API の読み書きは登録段階を実行し、ブラウザーはページコンポーザーと限定されたナビゲーションを利用します。
