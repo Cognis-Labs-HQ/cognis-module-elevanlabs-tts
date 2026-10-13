@@ -2,7 +2,7 @@
 
 [English](README.en.md) · [Deutsch](README.de.md) · **Bahasa Indonesia** · [日本語](README.ja.md)
 
-Modul referensi yang sengaja dibuat ringkas dan dapat dipasang untuk memperlihatkan bagian **UI, API, basis data, CLI, kapabilitas, flow, pelokalan, pengujian, dan pengemasan marketplace** Cognis. Modul ini adalah sarana belajar—bukan generator—dan mengikuti batas modul eksternal yang ditetapkan oleh Cognis PR #172 serta modul Jitsi Meet.
+Buat setiap modul Cognis eksternal baru dari repositori ini. Contoh yang dapat dipasang menunjukkan UI, API, basis data, CLI, kapabilitas, alur, pelokalan, uji siklus hidup dan integritas paket. Ganti identitas serta konten contoh sambil mempertahankan standar dan pemeriksaannya.
 
 ## Mulai di sini
 
@@ -12,7 +12,7 @@ npm test
 npm run check:manifest
 ```
 
-Pasang repositori sebagai sumber modul Cognis, tinjau izinnya, aktifkan, lalu buka `/showcase` atau jalankan `cognisctl module-template:list`.
+Pasang repositori sebagai sumber modul Cognis, tinjau izinnya, aktifkan, lalu buka `/showcase` atau jalankan `cognisctl modules:module-template:list`.
 
 ## Peta arsitektur
 
@@ -49,7 +49,7 @@ Perilaku lintas komponen ditempatkan dalam **kapabilitas** (kontrak yang dapat d
 5. Tambahkan hanya kapabilitas yang benar-benar diperlukan dan pertahankan akses rute seminimal mungkin.
 6. Jalankan `npm run manifest:hashes` terakhir, lalu `npm run check` dan `git diff --check`.
 
-Baca [`docs/standard.id.md`](docs/standard.id.md) sebelum menerapkan modul produksi; referensi setara dalam bahasa Jerman, Inggris, dan Jepang tersedia di sebelahnya.
+Baca [`docs/index.id.md`](docs/index.id.md) sebelum menerapkan modul produksi; referensi setara dalam bahasa Jerman, Inggris, dan Jepang tersedia di sebelahnya.
 
 ## Pemeriksaan kualitas kontributor
 

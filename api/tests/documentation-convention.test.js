@@ -74,7 +74,11 @@ test("every documentation topic has one variant per supported language", () => {
 });
 
 test("the template repository does not publish its own changelog", () => {
-    assert.equal(existsSync(resolve(ROOT, "docs/changelog")), false);
+    const manifest = JSON.parse(
+        readFileSync(resolve(ROOT, "manifest.json"), "utf8"),
+    );
+    if (manifest.template === true)
+        assert.equal(existsSync(resolve(ROOT, "docs/changelog")), false);
 });
 
 test("changelog digests stay outside the module manifest", () => {

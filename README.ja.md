@@ -2,7 +2,7 @@
 
 [English](README.en.md) · [Deutsch](README.de.md) · [Bahasa Indonesia](README.id.md) · **日本語**
 
-Cognis の **UI、API、データベース、CLI、ケイパビリティ、フロー、ローカライズ、テスト、マーケットプレイス向けパッケージ化**を扱う、意図的に小さく設計されたインストール可能なリファレンスモジュールです。これはジェネレーターではなく学習用資料であり、Cognis PR #172 と Jitsi Meet モジュールで確立された外部モジュール境界に準拠しています。
+新しい外部 Cognis モジュールは、このリポジトリから作成します。導入可能なサンプルで UI、API、データベース、CLI、機能、フロー、翻訳、ライフサイクル検証、パッケージ完全性を示します。識別情報とサンプル内容を置き換え、開発標準と検証を保持してください。
 
 ## はじめに
 
@@ -12,7 +12,7 @@ npm test
 npm run check:manifest
 ```
 
-このリポジトリを Cognis モジュールソースとしてインストールし、権限を確認して有効化した後、`/showcase` を開くか `cognisctl module-template:list` を実行します。
+このリポジトリを Cognis モジュールソースとしてインストールし、権限を確認して有効化した後、`/showcase` を開くか `cognisctl modules:module-template:list` を実行します。
 
 ## アーキテクチャマップ
 
@@ -49,7 +49,7 @@ npm run check:manifest
 5. 本当に必要なケイパビリティだけを追加し、ルートアクセスを最小権限に保ちます。
 6. 最後に `npm run manifest:hashes` を実行し、その後 `npm run check` と `git diff --check` を実行します。
 
-本番モジュールを実装する前に [`docs/standard.ja.md`](docs/standard.ja.md) を参照してください。同等のドイツ語、英語、インドネシア語版も同じ場所にあります。
+本番モジュールを実装する前に [`docs/index.ja.md`](docs/index.ja.md) を参照してください。同等のドイツ語、英語、インドネシア語版も同じ場所にあります。
 
 ## コントリビューター向け品質チェック
 

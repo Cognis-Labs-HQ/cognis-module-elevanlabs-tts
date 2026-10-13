@@ -1,6 +1,6 @@
 export function registerCommands({ register, apiGet, apiPost }) {
     register(
-        "module-template:list",
+        "modules:module-template:list",
         async ({ apiBaseUrl, getApiToken }) =>
             apiGet(
                 apiBaseUrl,
@@ -8,17 +8,17 @@ export function registerCommands({ register, apiGet, apiPost }) {
                 await getApiToken(),
             ),
         {
-            usage: "cognisctl module-template:list",
+            usage: "cognisctl modules:module-template:list",
             description: "List your module-template showcase items.",
         },
     );
     register(
-        "module-template:create",
+        "modules:module-template:create",
         async ({ args, apiBaseUrl, getApiToken }) => {
             const title = args.join(" ").trim();
             if (!title)
                 throw new Error(
-                    "Usage: cognisctl module-template:create <title>",
+                    "Usage: cognisctl modules:module-template:create <title>",
                 );
             return apiPost(
                 apiBaseUrl,
@@ -28,7 +28,7 @@ export function registerCommands({ register, apiGet, apiPost }) {
             );
         },
         {
-            usage: "cognisctl module-template:create <title>",
+            usage: "cognisctl modules:module-template:create <title>",
             description: "Create a showcase item.",
         },
     );

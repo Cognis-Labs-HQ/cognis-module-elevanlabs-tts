@@ -1,49 +1,118 @@
+import { uiCtx, importReuseModule } from "./reuse/resources.js";
+
+const [
+    { apiFetch },
+    { createI18n },
+    { createPageComposer },
+    { escapeHtml },
+    { mountWhenDirect },
+] = await Promise.all([
+    importReuseModule("api-client.js"),
+    importReuseModule("i18n.js"),
+    importReuseModule("page-composer/index.js"),
+    importReuseModule("escape-html.js"),
+    importReuseModule("page-entry.js"),
+]);
 const API_PATH = "/api/v1/modules/module-template/items";
+const controllers = new WeakMap();
 
-function escapeHtml(value) {
-    const element = document.createElement("span");
-    element.textContent = String(value);
-    return element.innerHTML;
+export function unmount(root) {
+    controllers.get(root)?.abort();
+    controllers.delete(root);
 }
 
-async function mount(root) {
-    const response = await fetch(API_PATH, { credentials: "same-origin" });
-    const payload = await response.json();
-    const items = response.ok ? payload.data : [];
-    root.innerHTML = `
-    <main class="showcase card-elevated">
-      <h1 data-i18n="module.module_template.title">Module showcase</h1>
-      <p data-i18n="module.module_template.intro">A small end-to-end Cognis module.</p>
-      <form id="showcase-form">
-        <label for="showcase-title" data-i18n="module.module_template.label">Item title</label>
-        <input id="showcase-title" name="title" maxlength="120" required>
-        <button type="submit" data-i18n="module.module_template.create">Create</button>
-      </form>
-      <ul>${items.map((item) => `<li>${escapeHtml(item.title)}</li>`).join("")}</ul>
-    </main>`;
-    root.querySelector("form").addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const title = new FormData(event.currentTarget).get("title");
-        const created = await fetch(API_PATH, {
-            method: "POST",
-            credentials: "same-origin",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({ title }),
-        });
-        if (created.ok) await mount(root);
-        else
-            window.dispatchEvent(
-                new CustomEvent("cognis:toast", {
-                    detail: {
-                        variant: "error",
-                        message: "Unable to create item.",
-                    },
-                }),
-            );
+export async function mount(root, { signal: mountSignal } = {}) {
+    unmount(root);
+    const controller = new AbortController();
+    controllers.set(root, controller);
+    const { signal } = controller;
+    if (mountSignal?.aborted) return;
+    mountSignal?.addEventListener("abort", () => controller.abort(), {
+        once: true,
+        signal,
     });
+    const i18n = await createI18n({
+        componentStringBaseUrls: ["/static/modules/module-template/languages"],
+    });
+    const response = await apiFetch(
+        "/static/modules/module-template/templates/showcase.html",
+        { signal },
+    );
+    if (!response.ok) throw new Error("Module template markup is unavailable.");
+    const template = (await response.text()).replace(/{{([^}]+)}}/g, (_, key) =>
+        escapeHtml(i18n.t(key)),
+    );
+    const reportError = (error) => {
+        uiCtx.capabilities.get("ui:log")(
+            "error",
+            "Showcase operation failed.",
+            {
+                component: "module:module-template",
+                operation: "showcase",
+                error: error instanceof Error ? error.message : String(error),
+            },
+        );
+        uiCtx.capabilities.get("ui:showToast")(i18n.t("ui.reuse.error"), {
+            variant: "error",
+        });
+    };
+    const loadItems = async () => {
+        const result = await apiFetch(API_PATH, { signal });
+        if (!result.ok) throw new Error("Item loading failed.");
+        const payload = await result.json();
+        const list = root.querySelector("[data-module-template-items]");
+        if (list && !signal.aborted)
+            list.innerHTML = payload.data
+                .map((item) => `<li>${escapeHtml(item.title)}</li>`)
+                .join("");
+    };
+    if (signal.aborted) return;
+    root.addEventListener(
+        "submit",
+        async (event) => {
+            if (!event.target.matches(".module-template-form")) return;
+            event.preventDefault();
+            try {
+                const title = new FormData(event.target).get("title");
+                const created = await apiFetch(API_PATH, {
+                    method: "POST",
+                    signal,
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({ title }),
+                });
+                if (!created.ok) throw new Error("Item creation failed.");
+                await loadItems();
+                uiCtx.capabilities.get("ui:showToast")(
+                    i18n.t("module.module_template.item.created"),
+                    { variant: "success" },
+                );
+            } catch (error) {
+                if (!signal.aborted) reportError(error);
+            }
+        },
+        { signal },
+    );
+    const composer = createPageComposer(root, {
+        i18n,
+        allowCustomization: false,
+        pageContext: { title: i18n.t("module.module_template.title") },
+        elements: [
+            {
+                id: "module-template-showcase",
+                label: i18n.t("module.module_template.title"),
+                pinned: true,
+                gridSize: { default: [12, 4] },
+                render: () => template,
+            },
+        ],
+        onRender() {
+            if (signal.aborted) return;
+            void loadItems().catch((error) => {
+                if (!signal.aborted) reportError(error);
+            });
+        },
+    });
+    await composer.init();
 }
 
-const root =
-    document.querySelector("#module-template-root") ??
-    document.querySelector("main");
-if (root) void mount(root);
+await mountWhenDirect(mount);

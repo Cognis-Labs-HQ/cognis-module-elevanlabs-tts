@@ -1,11 +1,11 @@
-.showcase {
+.module-template-showcase {
     display: grid;
     gap: 1rem;
     margin: 2rem auto;
     max-width: 48rem;
     padding: 1.5rem;
 }
-.showcase form {
+.module-template-form {
     display: grid;
     gap: 0.5rem;
 }

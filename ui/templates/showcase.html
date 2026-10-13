@@ -1,0 +1,16 @@
+<div class="module-template-showcase">
+    <p>{{module.module_template.intro}}</p>
+    <form class="module-template-form">
+        <label for="module-template-title"
+            >{{module.module_template.label}}</label
+        >
+        <input
+            id="module-template-title"
+            name="title"
+            maxlength="120"
+            required
+        />
+        <button type="submit" class="btn-confirm">{{ui.reuse.create}}</button>
+    </form>
+    <ul data-module-template-items></ul>
+</div>

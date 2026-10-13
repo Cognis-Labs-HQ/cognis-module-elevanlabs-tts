@@ -2,7 +2,7 @@
 
 **English** · [Deutsch](README.de.md) · [Bahasa Indonesia](README.id.md) · [日本語](README.ja.md)
 
-An intentionally small, installable reference module that touches the **UI, API, database, CLI, capabilities, flows, localization, tests, and marketplace packaging** surfaces of Cognis. It is a learning aid—not a generator—and mirrors the external-module boundary established by Cognis PR #172 and the Jitsi Meet module.
+Create every new external Cognis module from this repository. The installable showcase demonstrates UI, API, database, CLI, capabilities, flows, localization, lifecycle tests and package integrity. Replace its example identity and content while retaining the contributor standard and checks.
 
 ## Start here
 
@@ -12,7 +12,7 @@ npm test
 npm run check:manifest
 ```
 
-Install the repository as a Cognis module source, review its permissions, enable it, then open `/showcase` or run `cognisctl module-template:list`.
+Install the repository as a Cognis module source, review its permissions, enable it, then open `/showcase` or run `cognisctl modules:module-template:list`.
 
 ## Architecture map
 
@@ -49,7 +49,7 @@ Cross-component behavior belongs in **capabilities** (a callable contract) or **
 5. Add only capabilities the module truly needs, and keep route access least-privileged.
 6. Run `npm run manifest:hashes` last, then `npm run check` and `git diff --check`.
 
-See [`docs/standard.en.md`](docs/standard.en.md) before implementing a production module; equivalent German, Indonesian, and Japanese references live beside it.
+See [`docs/index.en.md`](docs/index.en.md) before implementing a production module; equivalent German, Indonesian, and Japanese references live beside it.
 
 ## Contributor quality checks
 
