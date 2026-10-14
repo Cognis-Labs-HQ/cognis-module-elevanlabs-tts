@@ -63,3 +63,5 @@ Aturan berikut merangkum kontrak runtime inti dan pola yang telah terbukti pada 
 5. Untuk modul selain templat, tambahkan empat berkas lokal `docs/changelog/<branch>.<lang>.md` dan selesaikan asal commit tanpa mencerna changelog.
 
 Setiap modul eksternal baru dimulai dari templat ini. Buat UUID produk baru sekali, ganti metadata dan namespace contoh, dan pertahankan AGENTS.md serta alat validasi. Rute domain ada di `api/routes/<domain>/`, style di `ui/styles/`, markup di `ui/templates/`, dan catatan rilis di `docs/changelog/`. Baca dan tulis API menjalankan tahap terdaftar; halaman browser memakai page composer dan navigasi terbatas.
+
+Titik masuk dan target gambar harus berupa file reguler di dalam checkout, termasuk setelah resolusi jalur. Target ini divalidasi sebelum hash inventaris. Dokumen pengembang menjelaskan kontrak publik dan merujuk manifes untuk metadata rilis. ID tahap alur yang sudah diterbitkan dipertahankan. `mountWhenDirect(mount)` menyediakan AbortSignal navigasi host; periksa setelah inisialisasi asinkron sebelum membuat sumber daya UI.

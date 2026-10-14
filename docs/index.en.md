@@ -63,3 +63,5 @@ The rules below aggregate the core runtime contract and patterns proven by adjac
 5. For non-template modules, add the four localized `docs/changelog/<branch>.<lang>.md` files and finish their commit provenance without digesting changelogs.
 
 Start from this template for every new external module. Generate a new product UUID once, replace example metadata and namespaces, and retain AGENTS.md plus validation tools. Domain routes live in `api/routes/<domain>/`, styles in `ui/styles/`, markup in `ui/templates/`, and release notes in `docs/changelog/`. API reads and writes execute their registered stages; browser mounts use page composer and scoped navigation.
+
+Entrypoints and artwork targets must be regular files inside the checkout, including their resolved paths. Validate these targets before inventory hashes. Developer documents describe public contracts and link manifests for release metadata. Preserve published flow-stage IDs. `mountWhenDirect(mount)` supplies the host navigation AbortSignal; check it after awaited initialization before creating UI resources.

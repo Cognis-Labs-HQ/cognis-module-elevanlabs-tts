@@ -63,3 +63,5 @@ Die folgenden Regeln bündeln den Core-Laufzeitvertrag und in benachbarten Cogni
 5. Fügen Sie bei Nicht-Vorlagenmodulen vier lokalisierte `docs/changelog/<branch>.<lang>.md` hinzu und vervollständigen Sie deren Commit-Provenienz ohne Changelog-Digests.
 
 Jedes neue externe Modul beginnt mit dieser Vorlage. Einmalig eine eigene Produkt-UUID erzeugen, Beispielmetadaten und Namensräume ersetzen, AGENTS.md und Prüfwerkzeuge behalten. Domänenrouten liegen in `api/routes/<domain>/`, Styles in `ui/styles/`, Markup in `ui/templates/` und Release-Notizen in `docs/changelog/`. API-Lese- und Schreibaktionen durchlaufen registrierte Stufen; Browserseiten nutzen Page Composer und begrenzte Navigation.
+
+Einstiegspunkte und Bildziele müssen reguläre Dateien innerhalb des Checkouts sein, auch nach Pfadauflösung. Diese Ziele werden vor Inventar-Hashes geprüft. Entwicklerdokumente beschreiben öffentliche Verträge und verweisen für Veröffentlichungsmetadaten auf Manifeste. Veröffentlichte Flow-Stage-IDs bleiben erhalten. `mountWhenDirect(mount)` liefert das Navigations-AbortSignal des Hosts; es wird nach asynchroner Initialisierung vor der Erstellung von UI-Ressourcen geprüft.

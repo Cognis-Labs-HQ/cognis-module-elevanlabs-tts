@@ -22,11 +22,11 @@ export function unmount(root) {
 }
 
 export async function mount(root, { signal: mountSignal } = {}) {
+    if (mountSignal?.aborted) return;
     unmount(root);
     const controller = new AbortController();
     controllers.set(root, controller);
     const { signal } = controller;
-    if (mountSignal?.aborted) return;
     mountSignal?.addEventListener("abort", () => controller.abort(), {
         once: true,
         signal,
@@ -34,6 +34,7 @@ export async function mount(root, { signal: mountSignal } = {}) {
     const i18n = await createI18n({
         componentStringBaseUrls: ["/static/modules/module-template/languages"],
     });
+    if (signal.aborted) return;
     const response = await apiFetch(
         "/static/modules/module-template/templates/showcase.html",
         { signal },
@@ -42,6 +43,7 @@ export async function mount(root, { signal: mountSignal } = {}) {
     const template = (await response.text()).replace(/{{([^}]+)}}/g, (_, key) =>
         escapeHtml(i18n.t(key)),
     );
+    if (signal.aborted) return;
     const reportError = (error) => {
         uiCtx.capabilities.get("ui:log")(
             "error",
@@ -112,6 +114,7 @@ export async function mount(root, { signal: mountSignal } = {}) {
             });
         },
     });
+    signal.addEventListener("abort", () => composer.destroy(), { once: true });
     await composer.init();
 }
 
