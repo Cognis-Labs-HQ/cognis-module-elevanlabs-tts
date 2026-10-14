@@ -2,7 +2,7 @@
     "id": "module-template",
     "uuid": "cc810afb-4fe6-5ef7-8f0b-e23676e01db3",
     "name": "module.module_template.name",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "class": "extension",
     "template": true,
     "coreApiVersion": "v1",
@@ -60,7 +60,7 @@
         },
         {
             "path": ".github/copilot-instructions.md",
-            "sha256": "49e0ec5f2fa3996efe3536b94d01b98f2b14711438978e1616ab2476c9646216"
+            "sha256": "441300ff8a29cb3d5cd1771475c69f2b9bf5f4d2f054bd90affa7cd8defd22bf"
         },
         {
             "path": ".gitignore",
@@ -131,6 +131,10 @@
             "sha256": "1008886fc8722bd499024b815150c7b800e889a5e7d1cd8516339bd609c15054"
         },
         {
+            "path": "api/tests/manifest-targets.test.js",
+            "sha256": "ead5d55842241939d629b43556cb20f87590b6a6c4b8cd5ae3c3dd4a8f188dd6"
+        },
+        {
             "path": "api/tests/module-structure.test.js",
             "sha256": "64f72e6c7e05c87fcc9dee01844e4cf46d9af8147bc862b30f65c64c299307d0"
         },
@@ -172,27 +176,27 @@
         },
         {
             "path": "docs/index.de.md",
-            "sha256": "3210c63106317b7bccd79c2dca2774fed681ecc96d57ea0d12a0a6c736116465"
+            "sha256": "331d64f573d11a4b44b27d523266f195aa8d246e6814f3ee9a26e703dac8e17f"
         },
         {
             "path": "docs/index.en.md",
-            "sha256": "de50df8dad741e84ce565b79b931300ae1d26f474b03703da2e65b1a2a980da0"
+            "sha256": "0f8855e7eb4cfae06f1fd81ee8bb451bf9d79a588b5b61b8bad3ca52c3c614b2"
         },
         {
             "path": "docs/index.id.md",
-            "sha256": "9fccc040636614a7e26724330675459f63765446e8b73aa5dbf741b4b2095d35"
+            "sha256": "b571dda61012cfc4616d828f4268197d2c8a3d9288a25996ca0dc3f823cf00c0"
         },
         {
             "path": "docs/index.ja.md",
-            "sha256": "70820bd6dee84e43ffa593c92037a4e11f41e11241da7f6ad642b2dc2f591998"
+            "sha256": "71b41dff37d021cf09e5c29cdb0498220d2c1220b44b34d6530ed4ef55972882"
         },
         {
             "path": "package-lock.json",
-            "sha256": "b4cd0ed5f8e5affb0150bc97e87c1cf32cfb6edd862285eed18cbcc69e7e0433"
+            "sha256": "c8e1342b8a227c28aa05efb2e741c516fd0227e9a4cee9ddb76a62ca56ce2123"
         },
         {
             "path": "package.json",
-            "sha256": "6714841a468196f16350449ec6fc39413181472c834f920635bbfd89a0b9fbbf"
+            "sha256": "937d90c647cc363069be23eac1788a115374e3102036bea4bd412023194d084e"
         },
         {
             "path": "routes.json",
@@ -208,7 +212,7 @@
         },
         {
             "path": "scripts/validate-manifest.js",
-            "sha256": "c1981f7bfb7842fc6536047a52839d2fdd79764dfd3924bf42a81843576272fe"
+            "sha256": "944205e7335ee60ee6db1404e20c36733da8536ca594c76efbca1f130443b298"
         },
         {
             "path": "tooling/scripts/lint-placeholder.mjs",
@@ -220,7 +224,7 @@
         },
         {
             "path": "ui/app.js",
-            "sha256": "7d262102c15ee664f72389a5c5fff3be25a4f1122d3c4543a7ffed7371ded366"
+            "sha256": "ee17ccf34d0965d6cca26f951a716bf486c178c9aab9d6bebdf61e4cc84ce4ed"
         },
         {
             "path": "ui/index.html",
@@ -265,6 +269,10 @@
         {
             "path": "ui/tests/localization-quality.test.js",
             "sha256": "4183cebdd4aacbbb61c2b6e6d3acb230198fc253e1911f6d6cfb53cef9c8a820"
+        },
+        {
+            "path": "ui/tests/mount-lifecycle.test.js",
+            "sha256": "4ee6df1353c914a710fdca09a721a144057bb89dfdd874f09aa1724bdac485aa"
         },
         {
             "path": "ui/tests/regression.test.js",
