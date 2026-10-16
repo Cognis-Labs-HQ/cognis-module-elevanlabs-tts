@@ -1,31 +1,31 @@
-import { registerApi } from "./api/index.js";
-import { ShowcaseStore } from "./api/store.js";
-import { registerUi } from "./api/ui.js";
+import { createService } from "./api/service.js";
+import { Configuration } from "./api/config.js";
+import { registerConfigurationRoutes } from "./api/routes/config/index.js";
+import path from "node:path";
 
-export async function uninstallModule(ctx, { deleteContent }) {
-    if (!deleteContent) return;
-
-    const store = new ShowcaseStore(ctx.getCapability("db:executor"));
-    await store.ensureSchema();
-    await store.deleteAllData();
-    ctx.log?.("info", "Module template saved data deleted.", {
-        component: "module-template",
-        operation: "uninstall_cleanup",
-        deleteContent,
+export async function bootstrapModule(ctx) {
+    const service = await createService(ctx);
+    registerConfigurationRoutes(ctx, service);
+    ctx.registerStaticDir("", path.join(ctx.moduleRoot, "ui"));
+    ctx.contributePublicCapability("speech:synthesis", {
+        get revision() {
+            return service.revision;
+        },
+        synthesize: service.synthesize,
+    });
+    ctx.log?.("info", "ElevenLabs speech synthesis enabled.", {
+        component: "elevenlabs-tts",
+        operation: "bootstrap",
     });
 }
 
-export function bootstrapModule(ctx) {
-    registerUi(ctx);
-    const service = registerApi(ctx.router, ctx);
-
-    ctx.contributePublicCapability(
-        "module-template:listItems",
-        service.listItems,
-    );
-
-    ctx.log?.("info", "Module template enabled.", {
-        component: "module-template",
-        operation: "bootstrap",
+export async function uninstallModule(ctx, { deleteContent }) {
+    if (!deleteContent) return;
+    const configuration = new Configuration(ctx.getCapability("db:executor"));
+    await configuration.load();
+    await configuration.clear();
+    ctx.log?.("info", "ElevenLabs configuration deleted.", {
+        component: "elevenlabs-tts",
+        operation: "uninstall",
     });
 }

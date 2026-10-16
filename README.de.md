@@ -1,66 +1,15 @@
-# Vorlage für externe Cognis-Module
+# ElevenLabs Sprache
 
-[English](README.en.md) · **Deutsch** · [Bahasa Indonesia](README.id.md) · [日本語](README.ja.md)
+Das Modul wird im Konfigurationsdialog für Administratoren eingerichtet, auch im deaktivierten Zustand. Einen ElevenLabs-API-Schlüssel eingeben, Stimmen suchen und eine Standardstimme wählen oder ihre ID manuell eingeben. Testaudio verwendet die aktuellen, noch nicht gespeicherten Einstellungen. Der Schlüssel wird bei Lesezugriffen verborgen und bleibt nach Neustart und Deaktivierung erhalten; beim Löschen der Modulinhalte wird er entfernt.
 
-Erstellen Sie jedes neue externe Cognis-Modul aus diesem Repository. Das installierbare Beispiel zeigt UI, API, Datenbank, CLI, Fähigkeiten, Flows, Lokalisierung, Lebenszyklustests und Paketintegrität. Ersetzen Sie Beispielidentität und Inhalte, behalten Sie Beitragsstandard und Prüfungen.
+## Nutzung
 
-## Erste Schritte
+## Technische Spezifikation
 
-```sh
-npm install
-npm test
-npm run check:manifest
-```
+Das aktivierte Modul veröffentlicht `speech:synthesis`. `synthesize({ text, language?, voiceId?, phonemes? }, signal?)` liefert `{ mediaType, data }`. Ohne `voiceId` gilt die Standardstimme. `revision` ändert sich nach dem Speichern zur Cache-Invalidierung. Englische IPA-Angaben verwenden SSML, sonst wird das mehrsprachige Modell genutzt. Höchstens 5000 Zeichen und begrenzte MP3-Ausgaben sind erlaubt. Anfragen nutzen einen festen HTTPS-Ursprung ohne Weiterleitungen und mit Zeitlimit; beim Abbau werden laufende Anfragen abgebrochen. Protokolle enthalten weder Schlüssel noch Text oder Audio.
 
-Installiere das Repository als Cognis-Modulquelle, prüfe seine Berechtigungen, aktiviere es und öffne anschließend `/showcase` oder führe `cognisctl modules:module-template:list` aus.
+Unter `/api/v1/modules/elevenlabs-tts/config` stehen GET, PUT, DELETE und POST `/voices` (paginierte Suche) sowie `/test` (Audiovorschau) nur Administratoren zur Verfügung. Die Aktionen akzeptieren aktuelle Formularwerte und behalten einen ausgelassenen gespeicherten Schlüssel. Deaktiviert laufen nur Konfigurationsrouten. Die Speicherung verwendet `db:executor` ohne gebündelten Datenbanktreiber.
 
-## Architekturübersicht
+Die Sprachfunktion enthält keine Study-Regeln. Aufrufer prüfen Berechtigungen und Namensräume vor der Synthese. Cognis Study erzeugt Sprache nur für gespeicherte globale Karten; private und Klassenkarten erlauben Aufnahmen oder Zusammensetzung vorhandener Aufnahmen. Dieses Repository enthält keine Sprachpakete.
 
-| Pfad            | Verantwortung                                                                                             | Wichtigste Erkenntnis                                                        |
-| --------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `manifest.json` | Identität, Kompatibilität, Capabilities, Einstiegspunkte, Speichermetadaten, unveränderliche Datei-Hashes | UUIDs sind Abhängigkeiten; IDs sind menschenlesbar                           |
-| `bootstrap.js`  | Einziger Integrationspunkt zum Host                                                                       | Über `ctx` registrieren; niemals Cognis-Interna importieren                  |
-| `routes.json`   | Vorabdeklaration des Seitenzugriffs                                                                       | Der Host validiert geschützte Routen vor der Aktivierung                     |
-| `api/index.js`  | Authentifizierte HTTP-Grenze und Orchestrierung                                                           | Eingaben validieren und Persistenz delegieren                                |
-| `api/store.js`  | Portable Datenbank-Executor-Befehle und Schema                                                            | Ein Modul niemals an einen Datenbanktreiber binden                           |
-| `api/ui.js`     | Statische Assets, SPA-Route, Navigation                                                                   | Host-Registrierung begrenzt die Bereinigung beim Deaktivieren/Deinstallieren |
-| `ui/`           | Browser-Einstiegspunkt, Styling, vier Sprachpakete                                                        | `ui.stringsBaseUrl` setzen; Host-Routen und -Toasts verwenden                |
-| `cli/index.js`  | Erweiterung für `cognisctl`                                                                               | Die CLI ruft die öffentliche API auf, statt sie zu umgehen                   |
-| `docs/`         | Vertiefungen für Mitwirkende                                                                              | Verträge und sichere Erweiterungsmuster erklären                             |
-| `scripts/`      | Prüfungen der Paketintegrität                                                                             | Jede ausgelieferte Datei besitzt einen SHA-256-Hash                          |
-
-## Lebenszyklus und Grenzen
-
-1. Cognis validiert `manifest.json`, Komponentenabhängigkeiten, Capability-Anforderungen, Routen und Datei-Hashes.
-2. Beim Aktivieren wird `bootstrapModule(ctx)` aufgerufen. Das Modul registriert UI/API-Beiträge, veröffentlicht eine Capability und erweitert einen Flow.
-3. API-Handler authentifizieren und validieren. Der Store verwaltet Schema und Persistenz über `db:executor`.
-4. UI und CLI verwenden dieselbe HTTP-API. Andere Komponenten können `module-template:listItems` über `ctx` nutzen.
-5. Bereichsgebundene Registrierungen werden beim Deaktivieren entfernt. Erstelle und liefere einen expliziten Disposer zurück, wenn du Timer, Listener, Sockets oder andere Ressourcen außerhalb solcher Registrierungen anlegst.
-6. Beim Deinstallieren wird `uninstallModule(ctx, { deleteContent })` aufgerufen; die Vorlage löscht ihre Datenbankzeilen nur, wenn die Administration das Löschen der Inhalte anfordert.
-
-Komponentenübergreifendes Verhalten gehört in **Capabilities** (ein aufrufbarer Vertrag) oder **Flows** (geordnete Erweiterungsstufen). Greife nicht auf Cognis, Gateways oder Quellbäume benachbarter Module zu. Erforderliche Komponentenverknüpfungen in `requires` sind UUIDs; Laufzeitverträge gehören in `requiresCapabilities`.
-
-## Diese Vorlage forken
-
-1. Wähle eine stabile, lesbare ID und generiere einmalig eine neue UUID. Verwende die UUID dieser Vorlage niemals in einem veröffentlichten Fork.
-2. Benenne Paket, Befehl, API-/Static-Pfade, DB-Tabellenpräfix, Lokalisierungs-Namespace, Flow-Erweiterungs-IDs und Capability-Schlüssel um.
-3. Ersetze Publisher-, Repository- und Support-Metadaten sowie Grafiken.
-4. Halte die Versionen in Manifest, Paket und Lockfile identisch und setze `ui.stringsBaseUrl` im Manifest auf die Basis-URL der Sprachpakete des Moduls.
-5. Füge nur tatsächlich benötigte Capabilities hinzu und halte den Routenzugriff minimal.
-6. Führe zuletzt `npm run manifest:hashes`, danach `npm run check` und `git diff --check` aus.
-
-Lies vor der Implementierung eines Produktionsmoduls [`docs/index.de.md`](docs/index.de.md); gleichwertige englische, indonesische und japanische Referenzen befinden sich daneben.
-
-## Qualitätsprüfungen für Mitwirkende
-
-Diese Vorlage enthält dieselben automatisierten Leitplanken wie das Jitsi-Meet-Modul: Prettier-Formatierung, Lesbarkeitsgrenzen, Strukturprüfungen für externe Module, Parität der Dokumentationsvorlagen und Prüfungen auf mehrdeutige Namen.
-
-```sh
-npm install
-npm run lint
-npm test
-npm run check:manifest
-git diff --check
-```
-
-Neue Vertragsdokumentation kann mit den lokalisierten Vorlagen in `.github/DOCUMENTATION_TEMPLATE.<language>.md` beginnen. Halte alle vier Varianten strukturell synchron.
+`npm install` · `npm run lint` · `npm test` · `npm run manifest:hashes` · `npm run check:manifest`

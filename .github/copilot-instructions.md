@@ -121,3 +121,7 @@ Treat human and automated review comments as actionable engineering feedback unl
 ## Persistent review preferences
 
 Treat ctx as the backbone of every supported server and browser action. Extend declared flows instead of importing foreign implementations, adding side-channel references or changing core/page-composer classes for convenience. Test component isolation and executable flow participation, not just source text. Optional components may disappear; retain neutral capability contracts and lifecycle-owned cleanup. Keep styles, scripts, templates and tests with their owning module. Reuse parameterizable duplicated behavior at its narrowest owner; avoid forwarding shims and speculative fallback contracts. Keep documentation cohesive, genuinely translated and focused on current supported behavior. Review complete diffs, preserve declaration spacing, and verify versions, dependency ceilings, lockfiles and final hashes.
+
+## ElevenLabs ownership
+
+Template baseline: f63d56d5cebc41ff5c6cdc271c13c5f4bfd68dd2. This module owns provider transport, voice discovery, concealed operational credentials and neutral speech synthesis. Consumers own content authorization and namespace policy. Never import Study internals or persist synthesized user text.

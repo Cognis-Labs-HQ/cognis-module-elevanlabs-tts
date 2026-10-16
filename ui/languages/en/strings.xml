@@ -1,14 +1,12 @@
 <resources>
-  <string name="module.module_template.nav">Showcase</string>
-  <string name="module.module_template.title">Module Showcase</string>
-  <string name="module.module_template.intro">A small end-to-end Cognis module.</string>
-  <string name="module.module_template.label">Item title</string>
-  <string name="module.module_template.name">Module Template</string>
-  <string name="module.module_template.summary">An end-to-end reference module for Cognis contributors.</string>
-  <string name="module.module_template.description">Demonstrates Cognis UI, API, database, CLI, capability, flow, localization, testing, and packaging contracts.</string>
-  <string name="module.module_template.category_developer_tools">Developer Tools</string>
-  <string name="module.module_template.tag_template">Template</string>
-  <string name="module.module_template.tag_development">Development</string>
-  <string name="module.module_template.tag_example">Example</string>
-  <string name="module.module_template.item.created">Item Created</string>
+    <string name="module.elevenlabs-tts.name">ElevenLabs Speech</string>
+    <string name="module.elevenlabs-tts.summary">Generate speech with ElevenLabs.</string>
+    <string name="module.elevenlabs-tts.description">Configure a default voice and publish reusable speech synthesis through ctx.</string>
+    <string name="module.elevenlabs-tts.category">Audio</string>
+    <string name="module.elevenlabs-tts.tag">Speech</string>
+    <string name="module.elevenlabs-tts.api.key">ElevenLabs API key</string>
+    <string name="module.elevenlabs-tts.voice.id">Default voice ID (discover or enter manually)</string>
+    <string name="module.elevenlabs-tts.test.text">Test phrase</string>
+    <string name="module.elevenlabs-tts.discover">Discover voices</string>
+    <string name="module.elevenlabs-tts.test">Generate test audio</string>
 </resources>
