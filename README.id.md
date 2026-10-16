@@ -29,3 +29,5 @@ Respons audio dibatasi 64 MiB untuk masukan 5000 karakter pada 128 kbps. Penyimp
 Kontrak nilai tersembunyi host menyamarkan kredensial pada pembacaan API; kontrak ini tidak menyediakan penyimpanan kredensial terenkripsi atau kapabilitas penyimpanan rahasia dengan referensi opak. Kunci API operasional tetap berada di basis data konfigurasi modul. Prasyarat penyimpanan oleh host dicatat di [Cognis #515](https://github.com/Cognis-Labs-HQ/Cognis/issues/515).
 
 Terbitkan `elevenlabs-tts:synthesis` di namespace milik modul dan hapus penanda hak istimewa. Study Inggris dan Jepang menemukan kapabilitas ini melalui ctx dengan dependensi modul opsional yang ada. Jembatan Study menerima pengambil kapabilitas langsung dari pemanggil sehingga penonaktifan, pengaktifan kembali, dan suara yang diatur tetap berfungsi.
+
+Kapabilitas yang diterbitkan melaporkan kesiapan langsung melalui `configured`. Study mengaktifkan ucapan otomatis hanya setelah kunci API dan suara bawaan disimpan. Jika ElevenLabs tidak terpasang, dinonaktifkan, atau belum diatur, pendaftaran bahasa tetap berhasil dan audio unggahan serta komposisi cadangan tetap tersedia tanpa meminta sintesis.

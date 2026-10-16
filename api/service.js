@@ -43,6 +43,11 @@ async function createRuntime(ctx, request, synthesisEnabled) {
             : {}),
     };
     const service = {
+        get configured() {
+            return Boolean(
+                configuration.value.apiKey && configuration.value.voiceId,
+            );
+        },
         get revision() {
             return configuration.value.revision ?? "unconfigured";
         },

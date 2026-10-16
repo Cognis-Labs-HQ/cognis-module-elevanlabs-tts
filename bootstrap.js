@@ -8,6 +8,9 @@ export async function bootstrapModule(ctx) {
     registerConfigurationRoutes(ctx, service);
     ctx.registerStaticDir("", path.join(ctx.moduleRoot, "ui"));
     ctx.contributePublicCapability("elevenlabs-tts:synthesis", {
+        get configured() {
+            return service.configured;
+        },
         get revision() {
             return service.revision;
         },

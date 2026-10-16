@@ -2,7 +2,7 @@
     "id": "elevenlabs-tts",
     "uuid": "2b71bcdf-e29c-408b-8d12-ead6e377c82e",
     "name": "module.elevenlabs-tts.name",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "class": "extension",
     "coreApiVersion": "v1",
     "capabilities": ["elevenlabs-tts:synthesis"],
@@ -101,19 +101,19 @@
         },
         {
             "path": "README.de.md",
-            "sha256": "7cabc4fada7e948a09d8ec28c56f8e30442bc564cf9d9a04a4babac109438790"
+            "sha256": "6a646818fb678dd33d8975a0aa4d3d05192de42f6feab9a6a209adf185090508"
         },
         {
             "path": "README.en.md",
-            "sha256": "783b439be797c270b034d684d3385b21e0065f325ea3c385788a0a5e84c0ef00"
+            "sha256": "6b1c2fc08dd6614ffdde5339b5f7261bdc126fea18f8c929846bfe295aa22889"
         },
         {
             "path": "README.id.md",
-            "sha256": "309dbd0d16bb174784f827de914c26be1506c32f634068ca37498476113dc92f"
+            "sha256": "213c0d950206a418d48dd087486f2dc1dd132cf7052d8e35610765a2544aa85e"
         },
         {
             "path": "README.ja.md",
-            "sha256": "01fbe1db3165235e8ab1e17a7d36a062d28ee503e9d7335443ead76a043061ad"
+            "sha256": "8f92fd895db1a22ead4827b238536f38cc784de394231913c84e2b563e7380c2"
         },
         {
             "path": "api/config.js",
@@ -129,7 +129,7 @@
         },
         {
             "path": "api/service.js",
-            "sha256": "258fc1423973ee45bcf06c85272b7cbdef1f123318f9531443e860c9f51af3e8"
+            "sha256": "e5b64c17a0b0ef9de631288b3c715a4c957bcc1e42f2497f2d793a6a4983cb26"
         },
         {
             "path": "api/tests/documentation-convention.test.js",
@@ -157,7 +157,7 @@
         },
         {
             "path": "api/tests/synthesis.test.js",
-            "sha256": "aca70d5f27623b11fd2f7dccdf6854a2aff3c16dd14519972a1679587e4c93be"
+            "sha256": "ca51787f8b622f393d68ac69960257732b3716026bd0d721be2218ce4ac91750"
         },
         {
             "path": "api/transport.js",
@@ -173,7 +173,7 @@
         },
         {
             "path": "bootstrap.js",
-            "sha256": "1d17d50f6243d2e9ef359040528e280fe2deee79e5ff9ffd1a5460a0d18c4206"
+            "sha256": "a71ad5f322696e506e5237408903a670014fd2b7b71d298756988afd9f91ede0"
         },
         {
             "path": "cli/index.js",
@@ -185,27 +185,27 @@
         },
         {
             "path": "docs/index.de.md",
-            "sha256": "7cabc4fada7e948a09d8ec28c56f8e30442bc564cf9d9a04a4babac109438790"
+            "sha256": "6a646818fb678dd33d8975a0aa4d3d05192de42f6feab9a6a209adf185090508"
         },
         {
             "path": "docs/index.en.md",
-            "sha256": "783b439be797c270b034d684d3385b21e0065f325ea3c385788a0a5e84c0ef00"
+            "sha256": "6b1c2fc08dd6614ffdde5339b5f7261bdc126fea18f8c929846bfe295aa22889"
         },
         {
             "path": "docs/index.id.md",
-            "sha256": "309dbd0d16bb174784f827de914c26be1506c32f634068ca37498476113dc92f"
+            "sha256": "213c0d950206a418d48dd087486f2dc1dd132cf7052d8e35610765a2544aa85e"
         },
         {
             "path": "docs/index.ja.md",
-            "sha256": "01fbe1db3165235e8ab1e17a7d36a062d28ee503e9d7335443ead76a043061ad"
+            "sha256": "8f92fd895db1a22ead4827b238536f38cc784de394231913c84e2b563e7380c2"
         },
         {
             "path": "package-lock.json",
-            "sha256": "9d0d478b2399bb671b12b7963c9257ced4978828d599f19aca33fd2aeee0b389"
+            "sha256": "b88f4bcdf1ac764d34080f6efe15496ad5a36936c95d571f4d98b553b05fe0be"
         },
         {
             "path": "package.json",
-            "sha256": "e4eca0b551f1a4d05ed8991d1c7f76316f0aded79713336362398630a4bf0f7e"
+            "sha256": "88afa702cebcb0d9035a3dd921ddada8da165a02e7178734aa311f38a612cd25"
         },
         {
             "path": "routes.json",

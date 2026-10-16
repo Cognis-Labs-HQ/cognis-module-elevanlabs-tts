@@ -506,3 +506,30 @@ test("explicit language tags use the enforcing model and omitted language uses d
     assert.equal(body.model_id, "eleven_multilingual_v2");
     assert.equal(Object.hasOwn(body, "language_code"), false);
 });
+
+test("published readiness follows configuration saves and clearing without exposing secrets", async () => {
+    const { ctx, capabilities, routes } = fixture();
+    await bootstrapModule(ctx);
+    const speech = capabilities.get("elevenlabs-tts:synthesis");
+    assert.equal(speech.configured, false);
+    const response = {
+        writeHead(status) {
+            assert.equal(status, 200);
+        },
+        end() {},
+    };
+    await routes
+        .get("Put:/api/v1/modules/elevenlabs-tts/config")
+        .handler(
+            Readable.from([
+                JSON.stringify({ apiKey: "fixture-key", voiceId: "voice" }),
+            ]),
+            response,
+        );
+    assert.equal(speech.configured, true);
+    await routes
+        .get("Delete:/api/v1/modules/elevenlabs-tts/config")
+        .handler({}, response);
+    assert.equal(speech.configured, false);
+    assert.equal(Object.hasOwn(speech, "apiKey"), false);
+});
