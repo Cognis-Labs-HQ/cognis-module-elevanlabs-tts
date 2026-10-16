@@ -36,10 +36,11 @@ ElevenLabs合成を設定可能な独立モジュールへ移します。Study�
 
 ## 認証情報保存の前提条件
 
-現在のホスト契約は設定応答をマスクしますが、不透明参照を返す認証情報ストアは提供しません。安全なホスト側保存はTODO.mdに未解決として記録し、APIキーは引き続き設定データベースに保存されます。
+現在のホスト契約は設定応答をマスクしますが、不透明参照を返す認証情報ストアは提供しません。安全なホスト側保存は[Cognis #515](https://github.com/Cognis-Labs-HQ/Cognis/issues/515)に未解決として記録し、APIキーは引き続き設定データベースに保存されます。
 
 ## コミット
 
 - [fc07131](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fc071312db5bc106977928dc96b7a082c9db1cb8)
 - [49e24af](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/49e24af7ea4dec01c4d173fcdc4d9ddc18fffe8f)
 - [fa92c9b](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fa92c9b607e5a21abc2db3b63c231fa32888b378)
+- [dd89029](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/dd890299216d6f2ebe0fa6caf41103f64cfcde8f)
