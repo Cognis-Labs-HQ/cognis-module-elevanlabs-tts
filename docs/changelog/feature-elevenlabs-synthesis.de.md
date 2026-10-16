@@ -18,7 +18,28 @@ Das offizielle ElevenLabs-Logo dient als scharfes SVG-Symbol; ein gemeinsames Co
 
 Fehlerhafte Konfigurationsanfragen ohne ihren Inhalt protokollieren, zu große Anfragen mit HTTP 413 ablehnen und ungültige Einstellungen von Anbieterfehlern unterscheiden. Den fest vorgegebenen Testsatz entfernen und alle bestehenden Überschriften der Entwicklerdokumentation beibehalten.
 
+## Explizite Sprachen beachten
+
+Flash v2.5 für explizite unterstützte Sprachangaben verwenden, englische IPA-Synthese erhalten und nicht unterstützte Sprachcodes vor Anbieteranfragen ablehnen.
+
+## Testsätze flüchtig halten
+
+Testsätze nicht in Einstellungen speichern, bereits gespeicherte Testtexte beim Laden entfernen und unvollständige Konfigurationen ohne Änderung gespeicherter Werte ablehnen.
+
+## Operative Sprach-Flows deaktivieren
+
+Im deaktivierten Zustand nur den Konfigurationsdienst laden. Stimmensuche und Testvorschau für Administratoren bleiben verfügbar; der allgemeine Synthese-Flow wird nicht registriert.
+
+## Anbieterantworten begrenzen und freigeben
+
+Für akzeptierte lange Texte bis zu 64 MiB MP3-Audio erlauben. Fehlerantworten und Antworten mit ungültigem Medientyp vor der Rückgabe stabiler Fehler abbrechen.
+
+## Voraussetzung für Zugangsdaten
+
+Der vorhandene Hostvertrag maskiert Konfigurationsantworten, bietet aber keinen Zugangsdaten-Speicher mit undurchsichtigen Referenzen. Sichere hostseitige Speicherung bleibt in TODO.md offen; der API-Schlüssel liegt weiterhin in der Konfigurationsdatenbank.
+
 ## Commits
 
 - [fc07131](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fc071312db5bc106977928dc96b7a082c9db1cb8)
 - [49e24af](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/49e24af7ea4dec01c4d173fcdc4d9ddc18fffe8f)
+- [fa92c9b](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fa92c9b607e5a21abc2db3b63c231fa32888b378)
