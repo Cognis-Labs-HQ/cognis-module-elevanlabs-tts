@@ -1,67 +1,33 @@
-# Vorlage für externe Module
+# ElevenLabs Sprache
 
-Erstellen Sie jedes neue externe Cognis-Modul aus diesem Repository. Das installierbare Beispiel zeigt UI, API, Datenbank, CLI, Fähigkeiten, Flows, Lokalisierung, Lebenszyklustests und Paketintegrität. Ersetzen Sie Beispielidentität und Inhalte, behalten Sie Beitragsstandard und Prüfungen.
+Das Modul wird im Konfigurationsdialog für Administratoren eingerichtet, auch im deaktivierten Zustand. Einen ElevenLabs-API-Schlüssel eingeben, Stimmen suchen und eine Standardstimme wählen oder ihre ID manuell eingeben. Testaudio verwendet die aktuellen, noch nicht gespeicherten Einstellungen. Der Schlüssel wird bei Lesezugriffen verborgen und bleibt nach Neustart und Deaktivierung erhalten; beim Löschen der Modulinhalte wird er entfernt.
 
-## Anwendungsbeispiele
+## Nutzung
 
-- Öffnen Sie nach der Aktivierung `/showcase`, um die lokalisierte Page-Composer-Oberfläche zu verwenden.
-- Führen Sie `cognisctl modules:module-template:list` aus, um dieselbe authentifizierte API über die CLI zu nutzen.
-- Lösen Sie `module-template:listItems` über `ctx` auf, statt Modulinterna zu importieren.
-- Erweitern Sie den Flow `module-template:listItems` durch eine benannte, entfernbare Stufe.
-- Deaktivieren und reaktivieren Sie das Modul, um wiederholbare Registrierungen zu prüfen.
+```js
+const speech = ctx.getCapability("elevenlabs-tts:synthesis");
+const audio = await speech.synthesize(
+    { text: phrase, language, voiceId },
+    signal,
+);
+```
 
 ## Technische Spezifikation
 
-Die folgenden Regeln bündeln den Core-Laufzeitvertrag und in benachbarten Cognis-Modulen bewährte Muster.
+Das aktivierte Modul veröffentlicht `elevenlabs-tts:synthesis`. `synthesize({ text, language?, voiceId?, phonemes? }, signal?)` liefert `{ mediaType, data }`. Ohne `voiceId` gilt die Standardstimme. `revision` ändert sich nach dem Speichern zur Cache-Invalidierung. Englische IPA-Angaben verwenden SSML mit `eleven_turbo_v2`. Explizite Sprachangaben nutzen `eleven_flash_v2_5`, das unterstützte Sprachcodes berücksichtigt. Nicht unterstützte Codes werden vor der Anfrage abgelehnt. Ohne Sprachangabe erkennt `eleven_multilingual_v2` die Sprache automatisch. Höchstens 5000 Zeichen und begrenzte MP3-Ausgaben sind erlaubt. Anfragen nutzen einen festen HTTPS-Ursprung ohne Weiterleitungen und mit Zeitlimit; beim Abbau werden laufende Anfragen abgebrochen. Protokolle enthalten weder Schlüssel noch Text oder Audio.
 
-### Repository- und Manifestvertrag
+Unter `/api/v1/modules/elevenlabs-tts/config` stehen GET, PUT, DELETE und POST `/voices` (paginierte Suche) sowie `/test` (Audiovorschau) nur Administratoren zur Verfügung. Die Aktionen akzeptieren aktuelle Formularwerte und behalten einen ausgelassenen gespeicherten Schlüssel. Deaktiviert laufen nur Konfigurationsrouten. Die Speicherung verwendet `db:executor` ohne gebündelten Datenbanktreiber.
 
-- Ein Repository liefert genau ein Modul. `manifest.json`, `package.json`, `routes.json` und `bootstrap.js` bleiben im Stammverzeichnis.
-- Bewahren Sie die UUID dauerhaft und verwenden Sie UUIDs für erforderliche Komponenten. Manifest-, Paket- und Lockfile-Version bleiben synchron.
-- Deklarieren Sie exakte repository-relative Einstiegspunkte und Assets. `routes.json` bleibt ein Array und `package.json` ein ES-Modul-Paket.
-- Setzen Sie `ui.stringsBaseUrl`, verwenden Sie kleingeschriebene, punktgetrennte Lokalisierungsschlüssel und halten Sie Deutsch, Englisch, Indonesisch und Japanisch schlüsselgleich.
-- Deklarieren Sie nur erforderliche Routen, Capabilities, Abhängigkeiten und Rechte. Erzeugen Sie `manifest.files` zuletzt neu. Manifest, `docs/changelog/`, der optionale Kompatibilitätsalias `README.md` im Stammverzeichnis sowie alle symbolischen Links und anderen nicht regulären Einträge bleiben ausgeschlossen. Lokalisierte README-Dateien bleiben reguläre Paketdateien.
+Die Sprachfunktion enthält keine Study-Regeln. Aufrufer prüfen Berechtigungen und Namensräume vor der Synthese. Cognis Study erzeugt Sprache nur für gespeicherte globale Karten; private und Klassenkarten erlauben Aufnahmen oder Zusammensetzung vorhandener Aufnahmen. Dieses Repository enthält keine Sprachpakete.
 
-### Isolation und Lebenszyklus
+`npm install` · `npm run lint` · `npm test` · `npm run manifest:hashes` · `npm run check:manifest`
 
-- `bootstrap.js` orchestriert jede Host-Integration über das bereichsgebundene `ctx`; Feature-Implementierung und Cognis-interne Importe gehören nicht hinein.
-- Capabilities sind neutrale Verträge. Nicht privilegierte Module stellen beigetragenen Capability- und Flow-IDs ihre Manifest-ID voran; doppelpunktgetrennte Segmente verwenden camelCase. Optionale Komponenten werden per Capability erkannt.
-- Wesentliche Orchestrierung verwendet benannte Flows und stabile, entfernbare Stufen. Routen validieren und koordinieren; Capabilities führen anbieterspezifische Arbeit aus.
-- Ein Disposer oder `teardownModule` entfernt ungebundene Timer, Listener, Sockets und Skripte. `uninstallModule(ctx, { deleteContent })` erhält externe Inhalte, sofern deren Löschung nicht ausdrücklich verlangt wurde.
-- Prüfen Sie Installation, Aktivieren–Deaktivieren–Aktivieren und Deinstallation. Keine Route, Asset-Registrierung, UI-Erweiterung, Capability oder Flow-Stufe darf über einen Zyklus hinaus bestehen.
+Stimmen lassen sich über `cognisctl modules:elevenlabs-tts:voices` suchen. Der Befehl nutzt die gespeicherte Konfiguration und die authentifizierte, nur für Administratoren zugängliche Route `/config/voices` einschließlich der Anbieter-Paginierung. Die CLI-Hilfe unterstützt derzeit nur wörtliche Beschreibungen; Meldungen zu Sprache und Konfiguration werden vom Host lokalisiert. Die Modulbilder verwenden das ElevenLabs-Zeichen der offiziellen Website und ein gemeinsames Cognis/ElevenLabs-Banner.
 
-### UI und Host-Eigentum
+Audioantworten sind für die Eingabegrenze von 5000 Zeichen bei 128 kbps auf 64 MiB begrenzt. Beim Speichern müssen nach dem Zusammenführen unveränderter maskierter Werte ein API-Schlüssel und eine Standardstimme vorhanden sein. Testsätze bleiben flüchtig: Speichern schließt sie aus, Lesezugriffe liefern ein leeres Feld, und beim Laden früherer Einstellungen werden gespeicherte Testsätze entfernt. Deaktiviert werden nur Administrations-Flows registriert, niemals `elevenlabs-tts:synthesize`. Abgelehnte Anbieterantworten werden vor der Rückgabe stabiler Fehler abgebrochen.
 
-- Erstellen Sie Seiten mit dem Host-Page-Composer und navigieren Sie über den Host-Router. Links dienen der Navigation, Schaltflächen Aktionen.
-- Ein Modul gestaltet nur eigene Nachfahren seines Mount-Roots. Shell, `document.body`, `document.head` und Host-Klassen werden nicht verändert.
-- Beziehen Sie gemeinsame UI-Bausteine und Stile über `ui:reuse`; laden Sie Laufzeitskripte über `ui:resourceLoader` und geben Sie Handles frei.
-- Nutzen Sie Host-Verträge für Toasts, Fehler-/Entscheidungsdialoge, Zeitstempel, Theme, Schrift, Avatar und Fokus. Keine Browserdialoge, Reload-Navigation, beliebigen Statusknoten, CSS-Kommentare oder kopierten Host-Stile.
-- Lokalisieren Sie sichtbare und barrierefreie Texte in allen vier XML-Paketen. Bevorzugen Sie themefähige SVGs gegenüber Emoji und Plattformglyphen.
+Der Vertrag des Hosts für verdeckte Werte maskiert Zugangsdaten bei API-Lesezugriffen. Er stellt weder verschlüsselte Speicherung noch einen Geheimnisspeicher mit undurchsichtigen Referenzen bereit. API-Schlüssel bleiben in der Konfigurationsdatenbank des Moduls. Die Voraussetzung für hostseitige Speicherung ist in [Cognis #515](https://github.com/Cognis-Labs-HQ/Cognis/issues/515) erfasst.
 
-### API, Daten und Konfiguration
+`elevenlabs-tts:synthesis` im eigenen Modulnamensraum veröffentlichen und die Privilegien-Markierung entfernen. English und Japanese Study lösen diese Fähigkeit über ctx und ihre bestehende optionale Modulabhängigkeit auf. Die Study-Brücke erhält den aktuellen Fähigkeitszugriff vom Aufrufer und bewahrt Deaktivierung, erneute Aktivierung und konfigurierte Stimmen.
 
-- Validieren, normalisieren, authentifizieren und autorisieren Sie an der Grenze vor der Geschäftslogik. Antworten verwenden stabile Fehler ohne interne Details.
-- Speicherzugriff bleibt hinter `ctx`-Executors und moduleigenen Stores; Abfragen sind parametrisiert und Schemaobjekte namensräumlich getrennt. Keine konkreten Treiber importieren.
-- Erfinden Sie kein Ergebnislimit, wenn der Aufrufer keines angibt. Explizite Limits werden validiert, nicht still begrenzt.
-- Nutzen Sie Manifest-`ui.preferences` und die Modulkonfigurations-API statt einer zweiten Einstellungsseite. Konfiguration übersteht Deaktivierung/Neustart; gespeicherte Passwörter werden nie zurückgegeben.
-- Benutzerspezifische Geheimnisse gehören in den Host-Keyring. IDs und Geheimnisse entstehen mit Web Crypto oder Node Crypto, nie mit `Math.random()`.
-- Protokollieren Sie Zustandsänderungen als `info`, abgefangene Fehler als `error` mit sicheren strukturierten Daten und unbehandelte Fehler als fatal. Beabsichtigte Fallbacks bleiben nie still.
-
-### Struktur und Qualität
-
-- Server, Browser, CLI, Dokumentation, Daten, Werkzeuge und Artwork gehören jeweils nach `api/`, `ui/`, `cli/`, `docs/`, `data/`, `scripts/` oder `tooling/` und `assets/`.
-- Wirklich schichtweit wiederverwendbarer Code gehört in `reuse/`; Feature-Code bleibt beim Eigentümer. Verzeichnisse `shared`, `utils`, `helpers` und `common` vermeiden.
-- Dateien bleiben kohärent und höchstens 1000 Zeilen lang. Verwenden Sie aussagekräftige Namen, lesbaren Kontrollfluss, hilfreiche Einschränkungskommentare und keine veralteten Kompatibilitätsschichten.
-- Tests laufen eigenständig mit lokalen `ctx`-Fakes und decken öffentliche APIs, Capabilities, Flows, Autorisierung, Lokalisierung, Lebenszyklus und Manifestintegrität ab.
-
-### Freigabe-Checkliste
-
-1. Prüfen Sie Abhängigkeits-UUIDs, erforderliche Capabilities, Routenzugriff, Metadaten, Übersetzungen, Artwork und Geheimnisbehandlung.
-2. Synchronisieren Sie bei Vertrags-, Code-, Schema- oder API-Änderungen Manifest-, Paket- und Lockfile-Version.
-3. Führen Sie `npm install`, `npm run lint` und `npm test` aus.
-4. Führen Sie nach der letzten ausgelieferten Dateiänderung `npm run manifest:hashes`, danach `npm run check:manifest` und `git diff --check` aus.
-5. Fügen Sie bei Nicht-Vorlagenmodulen vier lokalisierte `docs/changelog/<branch>.<lang>.md` hinzu und vervollständigen Sie deren Commit-Provenienz ohne Changelog-Digests.
-
-Jedes neue externe Modul beginnt mit dieser Vorlage. Einmalig eine eigene Produkt-UUID erzeugen, Beispielmetadaten und Namensräume ersetzen, AGENTS.md und Prüfwerkzeuge behalten. Domänenrouten liegen in `api/routes/<domain>/`, Styles in `ui/styles/`, Markup in `ui/templates/` und Release-Notizen in `docs/changelog/`. API-Lese- und Schreibaktionen durchlaufen registrierte Stufen; Browserseiten nutzen Page Composer und begrenzte Navigation.
-
-Einstiegspunkte und Bildziele müssen reguläre Dateien innerhalb des Checkouts sein, auch nach Pfadauflösung. Diese Ziele werden vor Inventar-Hashes geprüft. Entwicklerdokumente beschreiben öffentliche Verträge und verweisen für Veröffentlichungsmetadaten auf Manifeste. Veröffentlichte Flow-Stage-IDs bleiben erhalten. `mountWhenDirect(mount)` liefert das Navigations-AbortSignal des Hosts; es wird nach asynchroner Initialisierung vor der Erstellung von UI-Ressourcen geprüft.
+Die veröffentlichte Fähigkeit meldet ihre aktuelle Bereitschaft über `configured`. Study aktiviert automatische Sprache erst nach dem Speichern von API-Schlüssel und Standardstimme. Fehlt ElevenLabs oder ist es deaktiviert oder unkonfiguriert, gelingt die Sprachregistrierung weiterhin. Hochgeladene Aufnahmen und die Zusammenstellung vorhandener Audios bleiben verfügbar; Synthese wird nicht angefordert.

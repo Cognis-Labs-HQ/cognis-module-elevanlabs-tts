@@ -1,35 +1,20 @@
-export function registerCommands({ register, apiGet, apiPost }) {
+export function registerCommands({ register, apiPost }) {
+    const usage = "cognisctl modules:elevenlabs-tts:voices";
     register(
-        "modules:module-template:list",
-        async ({ apiBaseUrl, getApiToken }) =>
-            apiGet(
-                apiBaseUrl,
-                "/api/v1/modules/module-template/items",
-                await getApiToken(),
-            ),
-        {
-            usage: "cognisctl modules:module-template:list",
-            description: "List your module-template showcase items.",
-        },
-    );
-    register(
-        "modules:module-template:create",
+        "modules:elevenlabs-tts:voices",
         async ({ args, apiBaseUrl, getApiToken }) => {
-            const title = args.join(" ").trim();
-            if (!title)
-                throw new Error(
-                    "Usage: cognisctl modules:module-template:create <title>",
-                );
+            if (args.length) throw new Error(usage);
             return apiPost(
                 apiBaseUrl,
-                "/api/v1/modules/module-template/items",
+                "/api/v1/modules/elevenlabs-tts/config/voices",
+                {},
                 await getApiToken(),
-                { title },
             );
         },
         {
-            usage: "cognisctl modules:module-template:create <title>",
-            description: "Create a showcase item.",
+            usage,
+            description:
+                "Discover ElevenLabs voices using saved configuration.",
         },
     );
 }

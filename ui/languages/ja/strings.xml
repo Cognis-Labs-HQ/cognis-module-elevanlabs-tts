@@ -1,14 +1,12 @@
 <resources>
-  <string name="module.module_template.nav">サンプル</string>
-  <string name="module.module_template.title">モジュール例</string>
-  <string name="module.module_template.intro">小規模なエンドツーエンドの Cognis モジュールです。</string>
-  <string name="module.module_template.label">項目名</string>
-  <string name="module.module_template.name">モジュールテンプレート</string>
-  <string name="module.module_template.summary">Cognis コントリビューター向けのエンドツーエンドのリファレンスモジュール。</string>
-  <string name="module.module_template.description">Cognis の UI、API、データベース、CLI、Capability、フロー、ローカライズ、テスト、パッケージ化の規約を示します。</string>
-  <string name="module.module_template.category_developer_tools">開発ツール</string>
-  <string name="module.module_template.tag_template">テンプレート</string>
-  <string name="module.module_template.tag_development">開発</string>
-  <string name="module.module_template.tag_example">サンプル</string>
-  <string name="module.module_template.item.created">項目を作成しました</string>
+    <string name="module.elevenlabs-tts.name">ElevenLabs音声</string>
+    <string name="module.elevenlabs-tts.summary">ElevenLabsで音声を生成します。</string>
+    <string name="module.elevenlabs-tts.description">既定の声を設定し、ctx経由で音声合成を提供します。</string>
+    <string name="module.elevenlabs-tts.category">音声</string>
+    <string name="module.elevenlabs-tts.tag">読み上げ</string>
+    <string name="module.elevenlabs-tts.api.key">ElevenLabs APIキー</string>
+    <string name="module.elevenlabs-tts.voice.id">既定の音声ID（検索または手動入力）</string>
+    <string name="module.elevenlabs-tts.test.text">テスト用フレーズ</string>
+    <string name="module.elevenlabs-tts.discover">音声を検索</string>
+    <string name="module.elevenlabs-tts.test">テスト音声を生成</string>
 </resources>

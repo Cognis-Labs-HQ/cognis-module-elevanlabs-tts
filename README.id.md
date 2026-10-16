@@ -1,66 +1,33 @@
-# Templat modul eksternal Cognis
+# Ucapan ElevenLabs
 
-[English](README.en.md) · [Deutsch](README.de.md) · **Bahasa Indonesia** · [日本語](README.ja.md)
+Atur modul melalui popup konfigurasi administrator, termasuk saat dinonaktifkan. Masukkan kunci API ElevenLabs, temukan dan pilih suara bawaan, atau masukkan ID secara manual bila pencarian tidak tersedia. Audio uji memakai pengaturan formulir yang belum disimpan. Kunci disembunyikan saat dibaca dan bertahan setelah mulai ulang atau penonaktifan; penghapusan konten modul menghapus kunci.
 
-Buat setiap modul Cognis eksternal baru dari repositori ini. Contoh yang dapat dipasang menunjukkan UI, API, basis data, CLI, kapabilitas, alur, pelokalan, uji siklus hidup dan integritas paket. Ganti identitas serta konten contoh sambil mempertahankan standar dan pemeriksaannya.
+## Penggunaan
 
-## Mulai di sini
-
-```sh
-npm install
-npm test
-npm run check:manifest
+```js
+const speech = ctx.getCapability("elevenlabs-tts:synthesis");
+const audio = await speech.synthesize(
+    { text: phrase, language, voiceId },
+    signal,
+);
 ```
 
-Pasang repositori sebagai sumber modul Cognis, tinjau izinnya, aktifkan, lalu buka `/showcase` atau jalankan `cognisctl modules:module-template:list`.
+## Spesifikasi teknis
 
-## Peta arsitektur
+Modul aktif menerbitkan `elevenlabs-tts:synthesis`. Panggil `synthesize({ text, language?, voiceId?, phonemes? }, signal?)` untuk memperoleh `{ mediaType, data }`. Tanpa `voiceId`, suara bawaan digunakan. `revision` berubah saat konfigurasi disimpan agar cache dapat diperbarui. Fonem IPA bahasa Inggris memakai SSML dengan `eleven_turbo_v2`. Permintaan bahasa eksplisit memakai `eleven_flash_v2_5` yang menghormati kode bahasa yang didukung; kode tidak didukung ditolak sebelum permintaan. Tanpa bahasa, `eleven_multilingual_v2` mendeteksinya otomatis. Masukan dibatasi 5000 karakter dan keluaran berupa MP3 terbatas. Permintaan memakai asal HTTPS tetap, menolak pengalihan, dan memiliki batas waktu; penghentian modul membatalkan permintaan. Log tidak memuat kunci, teks, atau audio.
 
-| Jalur           | Tanggung jawab                                                                              | Pelajaran utama                                                  |
-| --------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `manifest.json` | Identitas, kompatibilitas, kapabilitas, entrypoint, metadata penyimpanan, hash berkas tetap | UUID adalah dependensi; ID mudah dibaca manusia                  |
-| `bootstrap.js`  | Satu-satunya titik integrasi host                                                           | Daftarkan melalui `ctx`; jangan mengimpor internal Cognis        |
-| `routes.json`   | Deklarasi akses halaman di muka                                                             | Host memvalidasi rute terlindungi sebelum aktivasi               |
-| `api/index.js`  | Batas HTTP terautentikasi dan orkestrasi                                                    | Validasi masukan dan delegasikan persistensi                     |
-| `api/store.js`  | Perintah eksekutor basis data portabel dan skema                                            | Jangan mengikat modul ke driver basis data                       |
-| `api/ui.js`     | Aset statis, rute SPA, navigasi                                                             | Registrasi host membatasi pembersihan saat dinonaktifkan/dihapus |
-| `ui/`           | Entrypoint browser, gaya, empat bundel bahasa                                               | Tetapkan `ui.stringsBaseUrl`; gunakan rute/toast host            |
-| `cli/index.js`  | Ekstensi `cognisctl`                                                                        | CLI memanggil API publik, bukan melewatinya                      |
-| `docs/`         | Uraian mendalam bagi kontributor                                                            | Menjelaskan kontrak dan pola ekstensi yang aman                  |
-| `scripts/`      | Pemeriksaan integritas paket                                                                | Setiap berkas yang dikirim memiliki hash SHA-256                 |
+Rute `/api/v1/modules/elevenlabs-tts/config` menyediakan GET, PUT, DELETE khusus administrator serta POST `/voices` (pencarian berhalaman) dan `/test` (pratinjau audio). Kedua tindakan menerima nilai formulir terkini dan mempertahankan kunci tersimpan bila tidak diberikan. Saat dinonaktifkan hanya rute konfigurasi berjalan. Penyimpanan memakai `db:executor` tanpa pengandar basis data bawaan.
 
-## Siklus hidup dan batas
+Kapabilitas ucapan tidak berisi kebijakan Study. Pemanggil memeriksa otorisasi dan namespace sebelum meminta ucapan. Cognis Study hanya membuat ucapan untuk kartu global tersimpan; kartu pribadi dan kelas menerima rekaman atau merangkai audio kartu penyusun yang tersedia. Repositori ini tidak memuat paket bahasa.
 
-1. Cognis memvalidasi `manifest.json`, dependensi komponen, kebutuhan kapabilitas, rute, dan hash berkas.
-2. Aktivasi memanggil `bootstrapModule(ctx)`. Modul mendaftarkan kontribusi UI/API, menerbitkan kapabilitas, dan memperluas flow.
-3. Handler API mengautentikasi dan memvalidasi. Store memiliki skema dan persistensi melalui `db:executor`.
-4. UI dan CLI memakai API HTTP yang sama. Komponen lain dapat memakai `module-template:listItems` melalui `ctx`.
-5. Registrasi bercakupan dihapus ketika dinonaktifkan. Tambahkan dan kembalikan disposer eksplisit jika Anda membuat timer, listener, socket, atau sumber daya lain di luar registrasi bercakupan.
-6. Penghapusan memanggil `uninstallModule(ctx, { deleteContent })`; templat hanya menghapus baris basis datanya ketika administrator meminta penghapusan konten.
+`npm install` · `npm run lint` · `npm test` · `npm run manifest:hashes` · `npm run check:manifest`
 
-Perilaku lintas komponen ditempatkan dalam **kapabilitas** (kontrak yang dapat dipanggil) atau **flow** (tahap ekstensi berurutan). Jangan mengakses Cognis, gateway, atau pohon sumber modul lain secara langsung. Tautan komponen wajib dalam `requires` berupa UUID; kontrak runtime ditempatkan dalam `requiresCapabilities`.
+Temukan suara melalui `cognisctl modules:elevenlabs-tts:voices`. Perintah memakai konfigurasi tersimpan dan rute `/config/voices` khusus administrator yang terautentikasi, termasuk paginasi penyedia. Kontrak bantuan CLI saat ini hanya menerima deskripsi literal; pesan ucapan dan konfigurasi tetap dilokalkan oleh host. Gambar modul memakai tanda ElevenLabs dari situs resminya dan banner gabungan Cognis/ElevenLabs.
 
-## Membuat fork templat ini
+Respons audio dibatasi 64 MiB untuk masukan 5000 karakter pada 128 kbps. Penyimpanan konfigurasi memerlukan kunci API dan suara bawaan tidak kosong setelah menggabungkan nilai tersamar yang tidak berubah. Frasa pratinjau bersifat sementara: tidak disimpan, pembacaan mengembalikan frasa kosong, dan pemuatan konfigurasi lama menghapus teks pratinjau tersimpan. Konfigurasi nonaktif hanya mendaftarkan alur administrasi, tanpa `elevenlabs-tts:synthesize`. Badan respons penyedia yang ditolak dibatalkan sebelum mengembalikan kesalahan stabil.
 
-1. Pilih ID stabil yang mudah dibaca dan buat UUID baru satu kali. Jangan pernah memakai ulang UUID templat ini dalam fork yang diterbitkan.
-2. Ubah nama paket, perintah, jalur API/statis, prefiks tabel DB, namespace pelokalan, ID ekstensi flow, dan kunci kapabilitas.
-3. Ganti metadata penerbit/repositori/dukungan dan karya visual.
-4. Samakan versi manifest/paket/lockfile dan tetapkan `ui.stringsBaseUrl` dalam manifest ke URL dasar bundel bahasa milik modul.
-5. Tambahkan hanya kapabilitas yang benar-benar diperlukan dan pertahankan akses rute seminimal mungkin.
-6. Jalankan `npm run manifest:hashes` terakhir, lalu `npm run check` dan `git diff --check`.
+Kontrak nilai tersembunyi host menyamarkan kredensial pada pembacaan API; kontrak ini tidak menyediakan penyimpanan kredensial terenkripsi atau kapabilitas penyimpanan rahasia dengan referensi opak. Kunci API operasional tetap berada di basis data konfigurasi modul. Prasyarat penyimpanan oleh host dicatat di [Cognis #515](https://github.com/Cognis-Labs-HQ/Cognis/issues/515).
 
-Baca [`docs/index.id.md`](docs/index.id.md) sebelum menerapkan modul produksi; referensi setara dalam bahasa Jerman, Inggris, dan Jepang tersedia di sebelahnya.
+Terbitkan `elevenlabs-tts:synthesis` di namespace milik modul dan hapus penanda hak istimewa. Study Inggris dan Jepang menemukan kapabilitas ini melalui ctx dengan dependensi modul opsional yang ada. Jembatan Study menerima pengambil kapabilitas langsung dari pemanggil sehingga penonaktifan, pengaktifan kembali, dan suara yang diatur tetap berfungsi.
 
-## Pemeriksaan kualitas kontributor
-
-Templat ini menyertakan pagar pengaman otomatis yang sama dengan modul Jitsi Meet: pemformatan Prettier, batas keterbacaan, pemeriksaan struktur modul eksternal, kesetaraan templat dokumentasi, dan pemeriksaan nama ambigu.
-
-```sh
-npm install
-npm run lint
-npm test
-npm run check:manifest
-git diff --check
-```
-
-Dokumentasi kontrak baru dapat dimulai dari templat terlokalisasi di `.github/DOCUMENTATION_TEMPLATE.<language>.md`. Jaga agar struktur keempat variannya selalu sinkron.
+Kapabilitas yang diterbitkan melaporkan kesiapan langsung melalui `configured`. Study mengaktifkan ucapan otomatis hanya setelah kunci API dan suara bawaan disimpan. Jika ElevenLabs tidak terpasang, dinonaktifkan, atau belum diatur, pendaftaran bahasa tetap berhasil dan audio unggahan serta komposisi cadangan tetap tersedia tanpa meminta sintesis.

@@ -1,13 +1,19 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { lstatSync, readdirSync, readFileSync, statSync } from "node:fs";
+import {
+    existsSync,
+    lstatSync,
+    readdirSync,
+    readFileSync,
+    statSync,
+} from "node:fs";
 import { createHash } from "node:crypto";
 import { join, relative, resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dirname, "../..");
 const SCAN_ROOTS = ["api", "ui", "cli", "tooling"]
     .map((path) => resolve(ROOT, path))
-    .filter((path) => statSync(path).isDirectory());
+    .filter((path) => existsSync(path) && statSync(path).isDirectory());
 const SOURCE_EXTENSIONS = new Set([".js", ".mjs", ".css", ".html"]);
 
 function walk(directory) {
@@ -96,26 +102,16 @@ test("external module metadata and declared files are consistent", () => {
     }
 });
 
-test("unprivileged contributions use the module-owned namespace", () => {
+test("speech publication uses only the unprivileged module namespace", () => {
     const manifest = JSON.parse(readFileSync(resolve(ROOT, "manifest.json")));
     const bootstrap = readFileSync(resolve(ROOT, "bootstrap.js"), "utf8");
-    const ownedPrefix = `${manifest.id}:`;
-    const capabilityIds = manifest.capabilities ?? [];
-    const contributedIds = [
-        ...bootstrap.matchAll(
-            /(?:contributePublicCapability|contributeCapability)\("([^"]+)"/g,
-        ),
+    assert.notEqual(manifest.privileged, true);
+    assert.deepEqual(manifest.capabilities, ["elevenlabs-tts:synthesis"]);
+    const published = [
+        ...bootstrap.matchAll(/contributePublicCapability\("([^"]+)"/g),
     ].map((match) => match[1]);
-    const flowIds = [...bootstrap.matchAll(/(?:id:|FLOW_ID\s*=)\s*"([^"]+)"/g)]
-        .map((match) => match[1])
-        .filter(
-            (id) =>
-                bootstrap.includes(`registerFlow(${id}`) || id.includes(":"),
-        );
-
-    for (const id of [...capabilityIds, ...contributedIds, ...flowIds]) {
-        assert.ok(id.startsWith(ownedPrefix), id);
-    }
+    assert.deepEqual(published, manifest.capabilities);
+    assert.ok(published.every((id) => id.startsWith(`${manifest.id}:`)));
 });
 
 test("manifest inventory excludes aliases and non-regular entries", () => {

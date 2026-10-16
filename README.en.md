@@ -1,66 +1,33 @@
-# Cognis external module template
+# ElevenLabs Speech
 
-**English** · [Deutsch](README.de.md) · [Bahasa Indonesia](README.id.md) · [日本語](README.ja.md)
+Configure the module from the administrator configuration popup, including while disabled. Enter an ElevenLabs API key, discover voices and choose the default voice, or enter its ID manually if discovery is unavailable. Generate test audio from the current, unsaved settings before saving. The API key is concealed on reads and survives restart and disable; deleting module content removes it.
 
-Create every new external Cognis module from this repository. The installable showcase demonstrates UI, API, database, CLI, capabilities, flows, localization, lifecycle tests and package integrity. Replace its example identity and content while retaining the contributor standard and checks.
+## Usage
 
-## Start here
-
-```sh
-npm install
-npm test
-npm run check:manifest
+```js
+const speech = ctx.getCapability("elevenlabs-tts:synthesis");
+const audio = await speech.synthesize(
+    { text: phrase, language, voiceId },
+    signal,
+);
 ```
 
-Install the repository as a Cognis module source, review its permissions, enable it, then open `/showcase` or run `cognisctl modules:module-template:list`.
+## Technical specification
 
-## Architecture map
+The enabled module publishes `elevenlabs-tts:synthesis`. Call `synthesize({ text, language?, voiceId?, phonemes? }, signal?)` to receive `{ mediaType, data }`. Omitting `voiceId` uses the configured default. `revision` changes after configuration is saved so callers can invalidate their caches. English IPA phonemes use SSML with `eleven_turbo_v2`. Explicit language requests use `eleven_flash_v2_5`, which honors supported language codes; unsupported codes are rejected before requesting speech. Without a language, `eleven_multilingual_v2` detects it automatically. Requests accept at most 5000 characters and return bounded MP3 audio. Provider requests use a fixed HTTPS origin, reject redirects, and have a timeout; teardown cancels outstanding requests. Logs exclude API keys, text and audio.
 
-| Path            | Responsibility                                                                            | Key lesson                                               |
-| --------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| `manifest.json` | Identity, compatibility, capabilities, entrypoints, store metadata, immutable file hashes | UUIDs are dependencies; IDs are human-readable           |
-| `bootstrap.js`  | Sole host integration point                                                               | Register through `ctx`; never import Cognis internals    |
-| `routes.json`   | Up-front page access declaration                                                          | The host validates protected routes before activation    |
-| `api/index.js`  | Authenticated HTTP boundary and orchestration                                             | Validate input and delegate persistence                  |
-| `api/store.js`  | Portable database-executor commands and schema                                            | Never bind a module to a database driver                 |
-| `api/ui.js`     | Static assets, SPA route, navigation                                                      | Host registration makes disable/uninstall cleanup scoped |
-| `ui/`           | Browser entrypoint, styling, four locale bundles                                          | Set `ui.stringsBaseUrl`; use host routes/toasts          |
-| `cli/index.js`  | `cognisctl` extension                                                                     | CLI calls the public API instead of bypassing it         |
-| `docs/`         | Contributor deep dives                                                                    | Explain contracts and safe extension patterns            |
-| `scripts/`      | Package integrity checks                                                                  | Every shipped file has a SHA-256 digest                  |
+Configuration routes use `/api/v1/modules/elevenlabs-tts/config`: administrator-only GET, PUT and DELETE, plus POST `/voices` (paginated discovery) and `/test` (audio preview). Both actions accept current form values, retaining the concealed stored key when omitted. Only configuration routes run while disabled. Persistence uses `db:executor`; no database driver is bundled.
 
-## Lifecycle and boundaries
+The speech capability has no Study-specific policy. Callers enforce authorization and namespace rules before requesting speech. Cognis Study generates speech only for saved global cards; private and classroom cards accept recordings or compose existing constituent audio. This repository contains no language content packs.
 
-1. Cognis validates `manifest.json`, component dependencies, capability requirements, routes, and file digests.
-2. Enabling calls `bootstrapModule(ctx)`. The module registers UI/API contributions, publishes a capability, and extends a flow.
-3. API handlers authenticate and validate. The store owns schema and persistence through `db:executor`.
-4. UI and CLI consume the same HTTP API. Other components may consume `module-template:listItems` through `ctx`.
-5. Scoped registrations are removed when disabled. Add and return an explicit disposer if you create timers, listeners, sockets, or other resources outside scoped registrations.
-6. Uninstalling calls `uninstallModule(ctx, { deleteContent })`; the template deletes its database rows only when the administrator requests content deletion.
+`npm install` · `npm run lint` · `npm test` · `npm run manifest:hashes` · `npm run check:manifest`
 
-Cross-component behavior belongs in **capabilities** (a callable contract) or **flows** (ordered extension stages). Do not reach into Cognis, gateways, or sibling module source trees. Required component links in `requires` are UUIDs; runtime contracts belong in `requiresCapabilities`.
+Discover voices from the installed CLI with `cognisctl modules:elevenlabs-tts:voices`. It uses the saved configuration and authenticated administrator-only `/config/voices` route, including provider pagination. The CLI help contract currently accepts literal descriptions; runtime speech and configuration messages remain localized by the host. Module artwork uses the ElevenLabs mark from its official website and a Cognis/ElevenLabs composite banner.
 
-## Forking this template
+Audio responses are bounded to 64 MiB for the 5000-character input limit at 128 kbps. Configuration saves require a nonempty API key and default voice after merging unchanged masked values. Preview phrases are transient: saving settings excludes them, reads return an empty phrase, and loading earlier configuration removes stored preview text. Disabled configuration registers only administration flows and never registers `elevenlabs-tts:synthesize`. Rejected provider responses cancel their bodies before returning stable errors.
 
-1. Choose a stable readable ID and generate a new UUID once. Never reuse this template UUID in a published fork.
-2. Rename package, command, API/static paths, DB table prefix, localization namespace, flow extension IDs, and capability keys.
-3. Replace publisher/repository/support metadata and artwork.
-4. Keep manifest/package/lock versions identical, and set `ui.stringsBaseUrl` in the manifest to the module’s locale bundle base URL.
-5. Add only capabilities the module truly needs, and keep route access least-privileged.
-6. Run `npm run manifest:hashes` last, then `npm run check` and `git diff --check`.
+The host concealed-value contract masks credentials on API reads; it does not provide encrypted credential storage or an opaque-reference secret-store capability. Operational API keys remain in the module configuration database. The host-backed storage prerequisite is tracked in [Cognis #515](https://github.com/Cognis-Labs-HQ/Cognis/issues/515).
 
-See [`docs/index.en.md`](docs/index.en.md) before implementing a production module; equivalent German, Indonesian, and Japanese references live beside it.
+Publish `elevenlabs-tts:synthesis` within the module-owned namespace and remove the privileged flag. English and Japanese Study resolve this capability through ctx using their existing optional module dependency. The Study bridge receives the live capability getter from its caller, preserving provider disable/re-enable and configured voice handling.
 
-## Contributor quality checks
-
-This template includes the same automated contributor guardrails used by the Jitsi Meet module: Prettier formatting, readability limits, external-module structural checks, documentation-template parity, and ambiguous-name checks.
-
-```sh
-npm install
-npm run lint
-npm test
-npm run check:manifest
-git diff --check
-```
-
-New contract documentation can start from the localized templates in `.github/DOCUMENTATION_TEMPLATE.<language>.md`. Keep all four template variants structurally synchronized.
+The published capability reports live `configured` readiness. Study enables automatic speech only after both the API key and default voice are saved. If ElevenLabs is absent, disabled, or unconfigured, language registration still succeeds and uploaded audio and composite fallback remain available; no synthesis is requested.
