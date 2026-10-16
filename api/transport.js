@@ -1,3 +1,39 @@
+export const MAX_AUDIO_BYTES = 64 * 1024 * 1024;
+const FLASH_LANGUAGES = new Set([
+    "en",
+    "ja",
+    "zh",
+    "de",
+    "hi",
+    "fr",
+    "ko",
+    "pt",
+    "it",
+    "es",
+    "ru",
+    "id",
+    "nl",
+    "tr",
+    "fil",
+    "pl",
+    "sv",
+    "bg",
+    "ro",
+    "ar",
+    "cs",
+    "el",
+    "fi",
+    "hr",
+    "ms",
+    "sk",
+    "da",
+    "ta",
+    "uk",
+    "hu",
+    "no",
+    "vi",
+]);
+
 async function bytes(response, maximum, signal) {
     if (!response.body) throw new Error("provider_unavailable");
     const reader = response.body.getReader();
@@ -44,17 +80,23 @@ export class ElevenLabsTransport {
                 signal: deadline,
             },
         );
-        if (!response.ok) throw new Error("provider_unavailable");
-        if (
-            body &&
-            !(response.headers.get("content-type") ?? "").startsWith(
-                "audio/mpeg",
-            )
-        )
-            throw new Error("invalid_audio_response");
+        const failure = !response.ok
+            ? "provider_unavailable"
+            : body &&
+                !(response.headers.get("content-type") ?? "").startsWith(
+                    "audio/mpeg",
+                )
+              ? "invalid_audio_response"
+              : undefined;
+        if (failure) {
+            await response.body?.cancel().catch((cause) => {
+                throw new Error(failure, { cause });
+            });
+            throw new Error(failure);
+        }
         return bytes(
             response,
-            body ? 5 * 1024 * 1024 : 8 * 1024 * 1024,
+            body ? MAX_AUDIO_BYTES : 8 * 1024 * 1024,
             deadline,
         );
     }
@@ -104,7 +146,9 @@ export class ElevenLabsTransport {
             throw new Error("invalid_speech_input");
         if (
             input.language !== undefined &&
-            !/^[a-z]{2,3}(?:-[a-zA-Z0-9]{2,8})*$/.test(input.language)
+            (typeof input.language !== "string" ||
+                !/^[a-z]{2,3}(?:-[a-zA-Z0-9]{2,8})*$/.test(input.language) ||
+                !FLASH_LANGUAGES.has(input.language.split("-")[0]))
         )
             throw new Error("invalid_speech_input");
         const voiceId = input.voiceId ?? configuration.voiceId;
@@ -137,7 +181,9 @@ export class ElevenLabsTransport {
                 text,
                 model_id: input.phonemes
                     ? "eleven_turbo_v2"
-                    : "eleven_multilingual_v2",
+                    : input.language
+                      ? "eleven_flash_v2_5"
+                      : "eleven_multilingual_v2",
                 ...(input.language && !input.phonemes
                     ? { language_code: input.language.split("-")[0] }
                     : {}),

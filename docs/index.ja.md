@@ -14,7 +14,7 @@ const audio = await speech.synthesize(
 
 ## 技術仕様
 
-有効なモジュールは `speech:synthesis` を公開します。`synthesize({ text, language?, voiceId?, phonemes? }, signal?)` は `{ mediaType, data }` を返します。`voiceId` の省略時は既定の声を使用します。設定保存で `revision` が変わり、呼び出し側でキャッシュを更新できます。英語IPAはSSMLを使用し、それ以外は多言語モデルを使用します。入力は5000文字までで、MP3出力にも上限があります。固定HTTPS接続先を使い、リダイレクトを拒否し、タイムアウトを設定します。終了時は実行中の要求を中断します。ログにキー、テキスト、音声を記録しません。
+有効なモジュールは `speech:synthesis` を公開します。`synthesize({ text, language?, voiceId?, phonemes? }, signal?)` は `{ mediaType, data }` を返します。`voiceId` の省略時は既定の声を使用します。設定保存で `revision` が変わり、呼び出し側でキャッシュを更新できます。英語IPAは `eleven_turbo_v2` のSSMLを使用します。明示的な言語要求は対応言語コードを反映する `eleven_flash_v2_5` を使用し、未対応コードは送信前に拒否します。言語省略時は `eleven_multilingual_v2` が自動判定します。入力は5000文字までで、MP3出力にも上限があります。固定HTTPS接続先を使い、リダイレクトを拒否し、タイムアウトを設定します。終了時は実行中の要求を中断します。ログにキー、テキスト、音声を記録しません。
 
 `/api/v1/modules/elevenlabs-tts/config` は管理者専用のGET、PUT、DELETE、およびPOST `/voices`（ページ単位の検索）と `/test`（音声プレビュー）を提供します。両操作は現在のフォーム値を受け取り、キー省略時は保存済みキーを保持します。無効時は設定ルートのみ実行します。保存には `db:executor` を使用し、DBドライバーは同梱しません。
 
@@ -23,3 +23,7 @@ const audio = await speech.synthesize(
 `npm install` · `npm run lint` · `npm test` · `npm run manifest:hashes` · `npm run check:manifest`
 
 インストール済みCLIの `cognisctl modules:elevenlabs-tts:voices` で音声を検索します。保存済み設定と認証済み管理者専用の `/config/voices` ルートを使い、プロバイダーのページ処理にも対応します。CLIヘルプは現在、文字列の説明のみ受け付けます。音声・設定の実行時メッセージはホストが翻訳します。モジュール画像には公式サイトのElevenLabsマークとCognis/ElevenLabsの複合バナーを使用します。
+
+5000文字の入力上限と128 kbpsの出力に対し、音声応答を64 MiBに制限します。設定保存時は変更のないマスク値を統合した後、空でないAPIキーと既定の声が必要です。プレビュー文は一時的です。設定保存から除外し、読み出しは空欄を返し、旧設定の読み込み時に保存済みテスト文を削除します。無効時は管理用フローのみ登録し、`elevenlabs-tts:synthesize` は登録しません。拒否したプロバイダー応答の本文は中断してから安定したエラーを返します。
+
+ホストの非表示値契約はAPI読み出し時の認証情報のマスクを提供しますが、暗号化された認証情報保存や不透明参照を返すシークレットストア機能は提供しません。運用APIキーはモジュールの設定データベースに残ります。ホスト側保存の前提条件は [TODO.md](../TODO.md) に記録しています。

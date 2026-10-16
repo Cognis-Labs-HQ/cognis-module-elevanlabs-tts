@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { ElevenLabsTransport } from "../transport.js";
+import { ElevenLabsTransport, MAX_AUDIO_BYTES } from "../transport.js";
 import { Configuration } from "../config.js";
 import { createService } from "../service.js";
 import { bootstrapModule, uninstallModule } from "../../bootstrap.js";
@@ -46,7 +46,16 @@ function fixture(request) {
     for (const method of ["Get", "Put", "Delete", "Post"])
         ctx[`registerApi${method}`] = (path, handler, options) =>
             routes.set(`${method}:${path}`, { handler, options });
-    return { ctx, request, routes, capabilities, logs, disposers, database };
+    return {
+        ctx,
+        request,
+        routes,
+        capabilities,
+        logs,
+        disposers,
+        database,
+        storedValue: () => stored,
+    };
 }
 
 const audioBytes = new Uint8Array([73, 68, 51, 1, 2, 3]);
@@ -68,6 +77,11 @@ test("speech uses the default voice, honors an override and preserves English IP
     );
     assert.match(calls[0].url, /defaultVoice\?/);
     assert.equal(JSON.parse(calls[0].options.body).text, "犬");
+    assert.equal(
+        JSON.parse(calls[0].options.body).model_id,
+        "eleven_flash_v2_5",
+    );
+    assert.equal(JSON.parse(calls[0].options.body).language_code, "ja");
     assert.equal(calls[0].options.headers["xi-api-key"], configuration.apiKey);
     await transport.synthesize(
         {
@@ -89,6 +103,8 @@ test("speech uses the default voice, honors an override and preserves English IP
         { text: "" },
         { text: "test", voiceId: "../../bad" },
         { text: "x".repeat(5001) },
+        { text: "test", language: "zz" },
+        { text: "test", language: "eng" },
     ])
         await assert.rejects(
             transport.synthesize(input, configuration, signal),
@@ -175,6 +191,11 @@ test("configuration routes require administrators and disabled configuration pub
             allowWhenDisabled: true,
         });
     assert.equal(capabilities.size, 0);
+    assert.equal(ctx.flow.exists("elevenlabs-tts:synthesize"), false);
+    await assert.rejects(
+        ctx.flow.run("elevenlabs-tts:synthesize", { value: { text: "test" } }),
+        /unknown_flow/,
+    );
     let payload;
     await routes.get("Put:/api/v1/modules/elevenlabs-tts/config").handler(
         Readable.from([
@@ -239,7 +260,7 @@ test("provider responses are bounded and malformed audio never reaches callers",
     const signal = new AbortController().signal;
     const tooLarge = new ElevenLabsTransport(
         async () =>
-            new Response(new Uint8Array(5 * 1024 * 1024 + 1), {
+            new Response(new Uint8Array(MAX_AUDIO_BYTES + 1), {
                 headers: { "content-type": "audio/mpeg" },
             }),
     );
@@ -346,4 +367,142 @@ test("provider corruption is a gateway failure rather than invalid administrator
         });
     assert.equal(status, 502);
     assert.equal(payload.error.code, "speech_unavailable");
+});
+
+test("configuration rejects incomplete merged settings without modifying persistence", async () => {
+    const context = fixture();
+    const configuration = new Configuration(context.database);
+    await configuration.load();
+    for (const input of [
+        {},
+        { apiKey: "", voiceId: "" },
+        { apiKey: "key" },
+        { voiceId: "voice" },
+        { apiKey: "****", voiceId: "voice" },
+    ]) {
+        await assert.rejects(
+            configuration.save(input),
+            /invalid_configuration/,
+        );
+        assert.equal(context.storedValue(), undefined);
+    }
+    await configuration.save({ apiKey: "saved-key", voiceId: "saved-voice" });
+    const before = context.storedValue();
+    await assert.rejects(
+        configuration.save({ voiceId: "" }),
+        /invalid_configuration/,
+    );
+    assert.equal(context.storedValue(), before);
+    await configuration.save({ apiKey: "****", voiceId: "new-voice" });
+    assert.equal(configuration.value.apiKey, "saved-key");
+    assert.equal(configuration.value.voiceId, "new-voice");
+});
+
+test("preview phrases remain transient and legacy stored phrases are removed on load", async () => {
+    const context = fixture();
+    const service = await createService(context.ctx, async () =>
+        audioResponse(),
+    );
+    await service.saveConfiguration({
+        apiKey: "key",
+        voiceId: "voice",
+        testText: "private saved phrase",
+    });
+    assert.equal(context.storedValue().includes("private saved phrase"), false);
+    const before = context.storedValue();
+    await service.testSpeech({ testText: "private preview phrase" });
+    assert.equal(context.storedValue(), before);
+    assert.equal((await service.readConfiguration()).testText, "");
+    assert.equal(
+        JSON.stringify(context.logs).includes("private preview phrase"),
+        false,
+    );
+    await context.database.executeCommand({
+        option: "INSERT",
+        values: {
+            value: JSON.stringify({
+                apiKey: "key",
+                voiceId: "voice",
+                testText: "old private phrase",
+            }),
+        },
+    });
+    const restarted = new Configuration(context.database);
+    await restarted.load();
+    assert.equal(Object.hasOwn(restarted.value, "testText"), false);
+    assert.equal(context.storedValue().includes("old private phrase"), false);
+    assert.equal(restarted.value.apiKey, "key");
+});
+
+test("long supported input can return more than the former 5 MiB audio cap", async () => {
+    const data = new Uint8Array(6 * 1024 * 1024);
+    data.set(audioBytes);
+    const transport = new ElevenLabsTransport(async (_url, request) => {
+        assert.equal(JSON.parse(request.body).text.length, 5000);
+        return new Response(data, {
+            headers: { "content-type": "audio/mpeg" },
+        });
+    });
+    const result = await transport.synthesize(
+        { text: "あ".repeat(5000), language: "ja" },
+        { apiKey: "key", voiceId: "voice" },
+        new AbortController().signal,
+    );
+    assert.equal(result.data.length, data.length);
+});
+
+test("rejected provider responses cancel their body before returning a stable error", async () => {
+    for (const [status, mediaType, error] of [
+        [401, "text/plain", "provider_unavailable"],
+        [429, "application/json", "provider_unavailable"],
+        [500, "text/plain", "provider_unavailable"],
+        [200, "text/html", "invalid_audio_response"],
+    ]) {
+        let cancellations = 0;
+        const transport = new ElevenLabsTransport(
+            async () =>
+                new Response(
+                    new ReadableStream({
+                        cancel() {
+                            cancellations++;
+                        },
+                    }),
+                    { status, headers: { "content-type": mediaType } },
+                ),
+        );
+        await assert.rejects(
+            transport.synthesize(
+                { text: "test" },
+                { apiKey: "key", voiceId: "voice" },
+                new AbortController().signal,
+            ),
+            new RegExp(error),
+        );
+        assert.equal(cancellations, 1);
+    }
+});
+
+test("explicit language tags use the enforcing model and omitted language uses detection", async () => {
+    const configuration = { apiKey: "key", voiceId: "voice" };
+    let body;
+    const transport = new ElevenLabsTransport(async (_url, options) => {
+        body = JSON.parse(options.body);
+        return audioResponse();
+    });
+    for (const language of ["en", "ja-JP", "de", "fil"]) {
+        await transport.synthesize(
+            { text: "example", language },
+            configuration,
+            new AbortController().signal,
+        );
+        assert.equal(body.model_id, "eleven_flash_v2_5");
+        assert.equal(body.language_code, language.split("-")[0]);
+    }
+    await transport.synthesize(
+        { text: "example" },
+        configuration,
+        new AbortController().signal,
+    );
+    assert.equal(body.model_id, "eleven_multilingual_v2");
+    assert.equal(Object.hasOwn(body, "language_code"), false);
 });

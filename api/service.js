@@ -1,8 +1,19 @@
 import { Configuration } from "./config.js";
 import { ElevenLabsTransport } from "./transport.js";
 
-export async function createService(ctx, request) {
-    const configuration = new Configuration(ctx.getCapability("db:executor"));
+export function createService(ctx, request) {
+    return createRuntime(ctx, request, true);
+}
+
+export function createConfigurationService(ctx, request) {
+    return createRuntime(ctx, request, false);
+}
+
+async function createRuntime(ctx, request, synthesisEnabled) {
+    const configuration = new Configuration(
+        ctx.getCapability("db:executor"),
+        ctx.log,
+    );
     await configuration.load();
     const transport = new ElevenLabsTransport(request);
     const controller = new AbortController();
@@ -24,8 +35,12 @@ export async function createService(ctx, request) {
                 signal,
             );
         },
-        synthesize: (input, signal) =>
-            transport.synthesize(input, configuration.value, signal),
+        ...(synthesisEnabled
+            ? {
+                  synthesize: (input, signal) =>
+                      transport.synthesize(input, configuration.value, signal),
+              }
+            : {}),
     };
     const service = {
         get revision() {

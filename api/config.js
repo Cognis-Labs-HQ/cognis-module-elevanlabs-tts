@@ -4,8 +4,9 @@ const TABLE = "module_elevenlabs_tts_config";
 export class Configuration {
     value = {};
 
-    constructor(database) {
+    constructor(database, log) {
         this.database = database;
+        this.log = log;
     }
 
     async load() {
@@ -22,7 +23,16 @@ export class Configuration {
             columns: ["value"],
             where: [{ column: "id", value: "configuration" }],
         });
-        this.value = result.rows?.[0] ? JSON.parse(result.rows[0].value) : {};
+        const stored = result.rows?.[0] ? JSON.parse(result.rows[0].value) : {};
+        const { testText: _testText, ...configuration } = stored;
+        this.value = configuration;
+        if (Object.hasOwn(stored, "testText")) {
+            await this.persist(configuration);
+            this.log?.("info", "Stored speech preview text removed.", {
+                component: "elevenlabs-tts",
+                operation: "sanitizeConfiguration",
+            });
+        }
         return this.value;
     }
 
@@ -50,12 +60,20 @@ export class Configuration {
         return {
             apiKeyConfigured: Boolean(this.value.apiKey),
             voiceId: this.value.voiceId ?? "",
-            testText: this.value.testText ?? "",
+            testText: "",
         };
     }
 
     async save(input) {
-        const value = { ...this.preview(input), revision: randomUUID() };
+        const { testText: _testText, ...configuration } = this.preview(input);
+        if (!configuration.apiKey || !configuration.voiceId)
+            throw new Error("invalid_configuration");
+        const value = { ...configuration, revision: randomUUID() };
+        await this.persist(value);
+        return this.publicValue();
+    }
+
+    async persist(value) {
         const encoded = JSON.stringify(value);
         await this.database.executeCommand({
             option: "INSERT",
@@ -68,7 +86,6 @@ export class Configuration {
             },
         });
         this.value = value;
-        return this.publicValue();
     }
 
     async clear() {

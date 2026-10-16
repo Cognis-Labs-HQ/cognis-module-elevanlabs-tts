@@ -21,7 +21,10 @@ export async function bootstrapModule(ctx) {
 
 export async function uninstallModule(ctx, { deleteContent }) {
     if (!deleteContent) return;
-    const configuration = new Configuration(ctx.getCapability("db:executor"));
+    const configuration = new Configuration(
+        ctx.getCapability("db:executor"),
+        ctx.log,
+    );
     await configuration.load();
     await configuration.clear();
     ctx.log?.("info", "ElevenLabs configuration deleted.", {

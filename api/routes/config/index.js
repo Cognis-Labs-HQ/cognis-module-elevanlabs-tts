@@ -1,4 +1,4 @@
-import { createService } from "../../service.js";
+import { createConfigurationService } from "../../service.js";
 import { readJson, sendJson } from "./http.js";
 
 export function registerConfigurationRoutes(ctx, service) {
@@ -69,6 +69,6 @@ export function registerConfigurationRoutes(ctx, service) {
 }
 
 export async function registerDisabledApiRoutes(ctx) {
-    const service = await createService(ctx);
+    const service = await createConfigurationService(ctx);
     registerConfigurationRoutes(ctx, service);
 }
