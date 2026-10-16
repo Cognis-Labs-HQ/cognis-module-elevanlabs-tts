@@ -132,12 +132,28 @@
             "sha256": "304b0b481c96cf8e276e13ee0536208e550371483e7508e772f194472a6cb023"
         },
         {
+            "path": "api/tests/documentation-convention.test.js",
+            "sha256": "118a286cc8012cd547424d50da8b6120722542b8d75073798f1999fa23652c7b"
+        },
+        {
+            "path": "api/tests/manifest-targets.test.js",
+            "sha256": "ead5d55842241939d629b43556cb20f87590b6a6c4b8cd5ae3c3dd4a8f188dd6"
+        },
+        {
+            "path": "api/tests/module-structure.test.js",
+            "sha256": "64f72e6c7e05c87fcc9dee01844e4cf46d9af8147bc862b30f65c64c299307d0"
+        },
+        {
             "path": "api/tests/packaging.test.js",
             "sha256": "46803c14ef21a8393e7a354996850b1b4fa7ac6c6f3fbd0a8a9c96255fabc8f7"
         },
         {
             "path": "api/tests/runtime.js",
             "sha256": "57a085c1236f0c48bf32df467557e4e479a6cdf5273f212168204d6f7bc725dd"
+        },
+        {
+            "path": "api/tests/structural-compliance.test.js",
+            "sha256": "7e16d089198d906bec6b6c147552b9ed9dd4df9bc56f6f9c2ec893ac9901f690"
         },
         {
             "path": "api/tests/synthesis.test.js",
