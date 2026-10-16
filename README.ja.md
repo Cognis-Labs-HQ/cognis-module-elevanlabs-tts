@@ -4,6 +4,14 @@
 
 ## 使用方法
 
+```js
+const speech = ctx.getCapability("speech:synthesis");
+const audio = await speech.synthesize(
+    { text: phrase, language, voiceId },
+    signal,
+);
+```
+
 ## 技術仕様
 
 有効なモジュールは `speech:synthesis` を公開します。`synthesize({ text, language?, voiceId?, phonemes? }, signal?)` は `{ mediaType, data }` を返します。`voiceId` の省略時は既定の声を使用します。設定保存で `revision` が変わり、呼び出し側でキャッシュを更新できます。英語IPAはSSMLを使用し、それ以外は多言語モデルを使用します。入力は5000文字までで、MP3出力にも上限があります。固定HTTPS接続先を使い、リダイレクトを拒否し、タイムアウトを設定します。終了時は実行中の要求を中断します。ログにキー、テキスト、音声を記録しません。

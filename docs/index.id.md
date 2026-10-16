@@ -4,6 +4,14 @@ Atur modul melalui popup konfigurasi administrator, termasuk saat dinonaktifkan.
 
 ## Penggunaan
 
+```js
+const speech = ctx.getCapability("speech:synthesis");
+const audio = await speech.synthesize(
+    { text: phrase, language, voiceId },
+    signal,
+);
+```
+
 ## Spesifikasi teknis
 
 Modul aktif menerbitkan `speech:synthesis`. Panggil `synthesize({ text, language?, voiceId?, phonemes? }, signal?)` untuk memperoleh `{ mediaType, data }`. Tanpa `voiceId`, suara bawaan digunakan. `revision` berubah saat konfigurasi disimpan agar cache dapat diperbarui. Fonem IPA bahasa Inggris memakai SSML, selain itu memakai model multibahasa. Masukan dibatasi 5000 karakter dan keluaran berupa MP3 terbatas. Permintaan memakai asal HTTPS tetap, menolak pengalihan, dan memiliki batas waktu; penghentian modul membatalkan permintaan. Log tidak memuat kunci, teks, atau audio.

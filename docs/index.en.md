@@ -4,6 +4,14 @@ Configure the module from the administrator configuration popup, including while
 
 ## Usage
 
+```js
+const speech = ctx.getCapability("speech:synthesis");
+const audio = await speech.synthesize(
+    { text: phrase, language, voiceId },
+    signal,
+);
+```
+
 ## Technical specification
 
 The enabled module publishes `speech:synthesis`. Call `synthesize({ text, language?, voiceId?, phonemes? }, signal?)` to receive `{ mediaType, data }`. Omitting `voiceId` uses the configured default. `revision` changes after configuration is saved so callers can invalidate their caches. English IPA phonemes use SSML; other speech uses the multilingual model. Requests accept at most 5000 characters and return bounded MP3 audio. Provider requests use a fixed HTTPS origin, reject redirects, and have a timeout; teardown cancels outstanding requests. Logs exclude API keys, text and audio.

@@ -1,13 +1,19 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { lstatSync, readdirSync, readFileSync, statSync } from "node:fs";
+import {
+    existsSync,
+    lstatSync,
+    readdirSync,
+    readFileSync,
+    statSync,
+} from "node:fs";
 import { createHash } from "node:crypto";
 import { join, relative, resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dirname, "../..");
 const SCAN_ROOTS = ["api", "ui", "cli", "tooling"]
     .map((path) => resolve(ROOT, path))
-    .filter((path) => statSync(path).isDirectory());
+    .filter((path) => existsSync(path) && statSync(path).isDirectory());
 const SOURCE_EXTENSIONS = new Set([".js", ".mjs", ".css", ".html"]);
 
 function walk(directory) {

@@ -4,6 +4,14 @@ Das Modul wird im Konfigurationsdialog für Administratoren eingerichtet, auch i
 
 ## Nutzung
 
+```js
+const speech = ctx.getCapability("speech:synthesis");
+const audio = await speech.synthesize(
+    { text: phrase, language, voiceId },
+    signal,
+);
+```
+
 ## Technische Spezifikation
 
 Das aktivierte Modul veröffentlicht `speech:synthesis`. `synthesize({ text, language?, voiceId?, phonemes? }, signal?)` liefert `{ mediaType, data }`. Ohne `voiceId` gilt die Standardstimme. `revision` ändert sich nach dem Speichern zur Cache-Invalidierung. Englische IPA-Angaben verwenden SSML, sonst wird das mehrsprachige Modell genutzt. Höchstens 5000 Zeichen und begrenzte MP3-Ausgaben sind erlaubt. Anfragen nutzen einen festen HTTPS-Ursprung ohne Weiterleitungen und mit Zeitlimit; beim Abbau werden laufende Anfragen abgebrochen. Protokolle enthalten weder Schlüssel noch Text oder Audio.

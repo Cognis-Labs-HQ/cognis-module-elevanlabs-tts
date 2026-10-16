@@ -101,19 +101,19 @@
         },
         {
             "path": "README.de.md",
-            "sha256": "e0923810f400cbe1ff69caeeeb62f21d5b1a5b7c48430c026e0e6ca6635d60f3"
+            "sha256": "c784929aec1295c231cfb1f34fd6916f560e64a0cdea0c1bd5c7e1f63279934d"
         },
         {
             "path": "README.en.md",
-            "sha256": "1187177d7839c392d73d8aa3de77aba7976cb6c6d175a96ade277741e1acbbba"
+            "sha256": "7529fd559b5caf5ae39d20781d4ab7f3814f8b11f27c7c2cc52191b08a4fdc44"
         },
         {
             "path": "README.id.md",
-            "sha256": "9163bef05aa9effb62318a3f55d8c125b24058fc9e753b854e2f7d8a5c939fdb"
+            "sha256": "98a46a1895a713364e635a0a57def0b98ba13bdd0a54e1ee602feb0c1c767265"
         },
         {
             "path": "README.ja.md",
-            "sha256": "5e8564a0112ec6af36cd50e6367098c2177acf42c48aaa45075f8925bc438b5a"
+            "sha256": "6744259235fae817c1c79c7f21c9ad5dc9250cdd3bfb30ccb67ccd07543bb5eb"
         },
         {
             "path": "api/config.js",
@@ -153,7 +153,7 @@
         },
         {
             "path": "api/tests/structural-compliance.test.js",
-            "sha256": "7e16d089198d906bec6b6c147552b9ed9dd4df9bc56f6f9c2ec893ac9901f690"
+            "sha256": "b3266379123fed9bf305aecdb7d2f38ac76fa105f849f402356a7a95f4e1e1d8"
         },
         {
             "path": "api/tests/synthesis.test.js",
@@ -177,19 +177,19 @@
         },
         {
             "path": "docs/index.de.md",
-            "sha256": "e0923810f400cbe1ff69caeeeb62f21d5b1a5b7c48430c026e0e6ca6635d60f3"
+            "sha256": "c784929aec1295c231cfb1f34fd6916f560e64a0cdea0c1bd5c7e1f63279934d"
         },
         {
             "path": "docs/index.en.md",
-            "sha256": "1187177d7839c392d73d8aa3de77aba7976cb6c6d175a96ade277741e1acbbba"
+            "sha256": "7529fd559b5caf5ae39d20781d4ab7f3814f8b11f27c7c2cc52191b08a4fdc44"
         },
         {
             "path": "docs/index.id.md",
-            "sha256": "9163bef05aa9effb62318a3f55d8c125b24058fc9e753b854e2f7d8a5c939fdb"
+            "sha256": "98a46a1895a713364e635a0a57def0b98ba13bdd0a54e1ee602feb0c1c767265"
         },
         {
             "path": "docs/index.ja.md",
-            "sha256": "5e8564a0112ec6af36cd50e6367098c2177acf42c48aaa45075f8925bc438b5a"
+            "sha256": "6744259235fae817c1c79c7f21c9ad5dc9250cdd3bfb30ccb67ccd07543bb5eb"
         },
         {
             "path": "package-lock.json",
