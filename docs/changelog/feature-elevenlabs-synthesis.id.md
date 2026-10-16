@@ -38,9 +38,14 @@ Izinkan audio MP3 hingga 64 MiB untuk teks panjang yang diterima. Batalkan badan
 
 Kontrak host saat ini menyamarkan respons konfigurasi tetapi tidak menyediakan penyimpanan kredensial dengan referensi opak. Penyimpanan aman oleh host masih terbuka di [Cognis #515](https://github.com/Cognis-Labs-HQ/Cognis/issues/515); kunci API tetap di basis data konfigurasi.
 
+## Terbitkan ucapan tanpa hak istimewa
+
+Terbitkan `elevenlabs-tts:synthesis` di namespace milik modul dan hapus penanda hak istimewa. Study Inggris dan Jepang menemukan kapabilitas ini melalui ctx dengan dependensi modul opsional yang ada. Jembatan Study menerima pengambil kapabilitas langsung dari pemanggil sehingga penonaktifan, pengaktifan kembali, dan suara yang diatur tetap berfungsi.
+
 ## Komit
 
 - [fc07131](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fc071312db5bc106977928dc96b7a082c9db1cb8)
 - [49e24af](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/49e24af7ea4dec01c4d173fcdc4d9ddc18fffe8f)
 - [fa92c9b](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fa92c9b607e5a21abc2db3b63c231fa32888b378)
 - [dd89029](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/dd890299216d6f2ebe0fa6caf41103f64cfcde8f)
+- [0f0f782](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/0f0f782c697f80b86c1836da649172d47c3d4108)

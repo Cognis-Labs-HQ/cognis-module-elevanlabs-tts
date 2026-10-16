@@ -38,9 +38,14 @@ Für akzeptierte lange Texte bis zu 64 MiB MP3-Audio erlauben. Fehlerantworten u
 
 Der vorhandene Hostvertrag maskiert Konfigurationsantworten, bietet aber keinen Zugangsdaten-Speicher mit undurchsichtigen Referenzen. Sichere hostseitige Speicherung bleibt in [Cognis #515](https://github.com/Cognis-Labs-HQ/Cognis/issues/515) offen; der API-Schlüssel liegt weiterhin in der Konfigurationsdatenbank.
 
+## Sprache ohne Sonderrechte bereitstellen
+
+`elevenlabs-tts:synthesis` im eigenen Modulnamensraum veröffentlichen und die Privilegien-Markierung entfernen. English und Japanese Study lösen diese Fähigkeit über ctx und ihre bestehende optionale Modulabhängigkeit auf. Die Study-Brücke erhält den aktuellen Fähigkeitszugriff vom Aufrufer und bewahrt Deaktivierung, erneute Aktivierung und konfigurierte Stimmen.
+
 ## Commits
 
 - [fc07131](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fc071312db5bc106977928dc96b7a082c9db1cb8)
 - [49e24af](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/49e24af7ea4dec01c4d173fcdc4d9ddc18fffe8f)
 - [fa92c9b](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fa92c9b607e5a21abc2db3b63c231fa32888b378)
 - [dd89029](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/dd890299216d6f2ebe0fa6caf41103f64cfcde8f)
+- [0f0f782](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/0f0f782c697f80b86c1836da649172d47c3d4108)
