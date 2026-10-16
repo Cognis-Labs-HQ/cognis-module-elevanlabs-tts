@@ -2,10 +2,10 @@
     "id": "elevenlabs-tts",
     "uuid": "2b71bcdf-e29c-408b-8d12-ead6e377c82e",
     "name": "module.elevenlabs-tts.name",
-    "version": "1.1.1",
+    "version": "2.0.0",
     "class": "extension",
     "coreApiVersion": "v1",
-    "capabilities": ["speech:synthesis"],
+    "capabilities": ["elevenlabs-tts:synthesis"],
     "entrypoints": {
         "bootstrap": "./bootstrap.js",
         "disabledApi": "./api/routes/config/index.js",
@@ -81,7 +81,7 @@
         },
         {
             "path": ".github/copilot-instructions.md",
-            "sha256": "2053bca8ade2f4bf90b602c4827fe91a7725a1dce097f6d0939f06a0c38662ea"
+            "sha256": "9d4026440eb6b7f29cd74983fdb905178c35713912eb8f1ce2685c8613374b3d"
         },
         {
             "path": ".gitignore",
@@ -101,19 +101,19 @@
         },
         {
             "path": "README.de.md",
-            "sha256": "a77e4ff7a72eb9a0d56c33d72753f3d3f2f4ab78701ab106034e9dd4a1ddaccd"
+            "sha256": "7cabc4fada7e948a09d8ec28c56f8e30442bc564cf9d9a04a4babac109438790"
         },
         {
             "path": "README.en.md",
-            "sha256": "141c68f34f1632ad83f452df091598e5bcfea401eb02b27784256d9f91cee87c"
+            "sha256": "783b439be797c270b034d684d3385b21e0065f325ea3c385788a0a5e84c0ef00"
         },
         {
             "path": "README.id.md",
-            "sha256": "23205015457b704a5e52d28618eed7ac789b441107f6885d6d86a10dd1e5ad10"
+            "sha256": "309dbd0d16bb174784f827de914c26be1506c32f634068ca37498476113dc92f"
         },
         {
             "path": "README.ja.md",
-            "sha256": "00a7eee4e17079d95dcffad20c5ff56a59218cef3a8dd838782c6213dd33c8c1"
+            "sha256": "01fbe1db3165235e8ab1e17a7d36a062d28ee503e9d7335443ead76a043061ad"
         },
         {
             "path": "api/config.js",
@@ -153,11 +153,11 @@
         },
         {
             "path": "api/tests/structural-compliance.test.js",
-            "sha256": "b3266379123fed9bf305aecdb7d2f38ac76fa105f849f402356a7a95f4e1e1d8"
+            "sha256": "46ebbde5bcc9f7b64fd4a58e65fa6d954130067889463ff7a54dc42777f340ce"
         },
         {
             "path": "api/tests/synthesis.test.js",
-            "sha256": "c573e73a2c2b82ec31d33c60cd856a72e168f791ea51edbdcd87c24484c928f9"
+            "sha256": "aca70d5f27623b11fd2f7dccdf6854a2aff3c16dd14519972a1679587e4c93be"
         },
         {
             "path": "api/transport.js",
@@ -173,7 +173,7 @@
         },
         {
             "path": "bootstrap.js",
-            "sha256": "2ac1e026e1eba610838eb968b19735a49ce0de1af5a3e8b605b6bc134e6036ed"
+            "sha256": "1d17d50f6243d2e9ef359040528e280fe2deee79e5ff9ffd1a5460a0d18c4206"
         },
         {
             "path": "cli/index.js",
@@ -185,27 +185,27 @@
         },
         {
             "path": "docs/index.de.md",
-            "sha256": "a77e4ff7a72eb9a0d56c33d72753f3d3f2f4ab78701ab106034e9dd4a1ddaccd"
+            "sha256": "7cabc4fada7e948a09d8ec28c56f8e30442bc564cf9d9a04a4babac109438790"
         },
         {
             "path": "docs/index.en.md",
-            "sha256": "141c68f34f1632ad83f452df091598e5bcfea401eb02b27784256d9f91cee87c"
+            "sha256": "783b439be797c270b034d684d3385b21e0065f325ea3c385788a0a5e84c0ef00"
         },
         {
             "path": "docs/index.id.md",
-            "sha256": "23205015457b704a5e52d28618eed7ac789b441107f6885d6d86a10dd1e5ad10"
+            "sha256": "309dbd0d16bb174784f827de914c26be1506c32f634068ca37498476113dc92f"
         },
         {
             "path": "docs/index.ja.md",
-            "sha256": "00a7eee4e17079d95dcffad20c5ff56a59218cef3a8dd838782c6213dd33c8c1"
+            "sha256": "01fbe1db3165235e8ab1e17a7d36a062d28ee503e9d7335443ead76a043061ad"
         },
         {
             "path": "package-lock.json",
-            "sha256": "f68918335f9a0428522a764ed95a7e8bf7de96901cd1e108c3405aeed8b53a4f"
+            "sha256": "9d0d478b2399bb671b12b7963c9257ced4978828d599f19aca33fd2aeee0b389"
         },
         {
             "path": "package.json",
-            "sha256": "c63f6c25271ce71e4a4abdacb24c328526c2ec888eab99d4cbd02bebfaf37ec1"
+            "sha256": "e4eca0b551f1a4d05ed8991d1c7f76316f0aded79713336362398630a4bf0f7e"
         },
         {
             "path": "routes.json",
@@ -247,6 +247,5 @@
             "path": "ui/languages/ja/strings.xml",
             "sha256": "bf980f98b38e5d15a67095a0260b84e4ce6e641e4a8c8c577cfdfe038b7cf748"
         }
-    ],
-    "privileged": true
+    ]
 }

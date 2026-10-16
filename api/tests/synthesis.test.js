@@ -241,7 +241,7 @@ test("bootstrap publishes only the neutral speech contract and uninstall respect
     const { ctx, capabilities, database } = fixture();
     await bootstrapModule(ctx);
     assert.equal(
-        typeof capabilities.get("speech:synthesis").synthesize,
+        typeof capabilities.get("elevenlabs-tts:synthesis").synthesize,
         "function",
     );
     const configuration = new Configuration(database);

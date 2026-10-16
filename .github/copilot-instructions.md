@@ -124,4 +124,4 @@ Treat ctx as the backbone of every supported server and browser action. Extend d
 
 ## ElevenLabs ownership
 
-Template baseline: f63d56d5cebc41ff5c6cdc271c13c5f4bfd68dd2. This module owns provider transport, voice discovery, concealed operational credentials and neutral speech synthesis. Consumers own content authorization and namespace policy. Never import Study internals or persist synthesized user text.
+Template baseline: f63d56d5cebc41ff5c6cdc271c13c5f4bfd68dd2. This module owns provider transport, voice discovery, concealed operational credentials and speech synthesis under `elevenlabs-tts:synthesis`. Consumers own content authorization and namespace policy. Never import Study internals or persist synthesized user text.

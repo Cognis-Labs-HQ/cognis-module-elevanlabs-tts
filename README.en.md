@@ -5,7 +5,7 @@ Configure the module from the administrator configuration popup, including while
 ## Usage
 
 ```js
-const speech = ctx.getCapability("speech:synthesis");
+const speech = ctx.getCapability("elevenlabs-tts:synthesis");
 const audio = await speech.synthesize(
     { text: phrase, language, voiceId },
     signal,
@@ -14,7 +14,7 @@ const audio = await speech.synthesize(
 
 ## Technical specification
 
-The enabled module publishes `speech:synthesis`. Call `synthesize({ text, language?, voiceId?, phonemes? }, signal?)` to receive `{ mediaType, data }`. Omitting `voiceId` uses the configured default. `revision` changes after configuration is saved so callers can invalidate their caches. English IPA phonemes use SSML with `eleven_turbo_v2`. Explicit language requests use `eleven_flash_v2_5`, which honors supported language codes; unsupported codes are rejected before requesting speech. Without a language, `eleven_multilingual_v2` detects it automatically. Requests accept at most 5000 characters and return bounded MP3 audio. Provider requests use a fixed HTTPS origin, reject redirects, and have a timeout; teardown cancels outstanding requests. Logs exclude API keys, text and audio.
+The enabled module publishes `elevenlabs-tts:synthesis`. Call `synthesize({ text, language?, voiceId?, phonemes? }, signal?)` to receive `{ mediaType, data }`. Omitting `voiceId` uses the configured default. `revision` changes after configuration is saved so callers can invalidate their caches. English IPA phonemes use SSML with `eleven_turbo_v2`. Explicit language requests use `eleven_flash_v2_5`, which honors supported language codes; unsupported codes are rejected before requesting speech. Without a language, `eleven_multilingual_v2` detects it automatically. Requests accept at most 5000 characters and return bounded MP3 audio. Provider requests use a fixed HTTPS origin, reject redirects, and have a timeout; teardown cancels outstanding requests. Logs exclude API keys, text and audio.
 
 Configuration routes use `/api/v1/modules/elevenlabs-tts/config`: administrator-only GET, PUT and DELETE, plus POST `/voices` (paginated discovery) and `/test` (audio preview). Both actions accept current form values, retaining the concealed stored key when omitted. Only configuration routes run while disabled. Persistence uses `db:executor`; no database driver is bundled.
 
@@ -27,3 +27,5 @@ Discover voices from the installed CLI with `cognisctl modules:elevenlabs-tts:vo
 Audio responses are bounded to 64 MiB for the 5000-character input limit at 128 kbps. Configuration saves require a nonempty API key and default voice after merging unchanged masked values. Preview phrases are transient: saving settings excludes them, reads return an empty phrase, and loading earlier configuration removes stored preview text. Disabled configuration registers only administration flows and never registers `elevenlabs-tts:synthesize`. Rejected provider responses cancel their bodies before returning stable errors.
 
 The host concealed-value contract masks credentials on API reads; it does not provide encrypted credential storage or an opaque-reference secret-store capability. Operational API keys remain in the module configuration database. The host-backed storage prerequisite is tracked in [Cognis #515](https://github.com/Cognis-Labs-HQ/Cognis/issues/515).
+
+Publish `elevenlabs-tts:synthesis` within the module-owned namespace and remove the privileged flag. English and Japanese Study resolve this capability through ctx using their existing optional module dependency. The Study bridge receives the live capability getter from its caller, preserving provider disable/re-enable and configured voice handling.

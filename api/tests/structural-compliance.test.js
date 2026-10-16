@@ -102,15 +102,16 @@ test("external module metadata and declared files are consistent", () => {
     }
 });
 
-test("privileged speech publication uses the declared neutral capability", () => {
+test("speech publication uses only the unprivileged module namespace", () => {
     const manifest = JSON.parse(readFileSync(resolve(ROOT, "manifest.json")));
     const bootstrap = readFileSync(resolve(ROOT, "bootstrap.js"), "utf8");
-    assert.equal(manifest.privileged, true);
-    assert.deepEqual(manifest.capabilities, ["speech:synthesis"]);
+    assert.notEqual(manifest.privileged, true);
+    assert.deepEqual(manifest.capabilities, ["elevenlabs-tts:synthesis"]);
     const published = [
         ...bootstrap.matchAll(/contributePublicCapability\("([^"]+)"/g),
     ].map((match) => match[1]);
     assert.deepEqual(published, manifest.capabilities);
+    assert.ok(published.every((id) => id.startsWith(`${manifest.id}:`)));
 });
 
 test("manifest inventory excludes aliases and non-regular entries", () => {
