@@ -21,3 +21,5 @@ Unter `/api/v1/modules/elevenlabs-tts/config` stehen GET, PUT, DELETE und POST `
 Die Sprachfunktion enthält keine Study-Regeln. Aufrufer prüfen Berechtigungen und Namensräume vor der Synthese. Cognis Study erzeugt Sprache nur für gespeicherte globale Karten; private und Klassenkarten erlauben Aufnahmen oder Zusammensetzung vorhandener Aufnahmen. Dieses Repository enthält keine Sprachpakete.
 
 `npm install` · `npm run lint` · `npm test` · `npm run manifest:hashes` · `npm run check:manifest`
+
+Stimmen lassen sich über `cognisctl modules:elevenlabs-tts:voices` suchen. Der Befehl nutzt die gespeicherte Konfiguration und die authentifizierte, nur für Administratoren zugängliche Route `/config/voices` einschließlich der Anbieter-Paginierung. Die CLI-Hilfe unterstützt derzeit nur wörtliche Beschreibungen; Meldungen zu Sprache und Konfiguration werden vom Host lokalisiert. Die Modulbilder verwenden das ElevenLabs-Zeichen der offiziellen Website und ein gemeinsames Cognis/ElevenLabs-Banner.

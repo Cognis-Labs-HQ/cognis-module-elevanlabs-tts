@@ -21,3 +21,5 @@ Configuration routes use `/api/v1/modules/elevenlabs-tts/config`: administrator-
 The speech capability has no Study-specific policy. Callers enforce authorization and namespace rules before requesting speech. Cognis Study generates speech only for saved global cards; private and classroom cards accept recordings or compose existing constituent audio. This repository contains no language content packs.
 
 `npm install` · `npm run lint` · `npm test` · `npm run manifest:hashes` · `npm run check:manifest`
+
+Discover voices from the installed CLI with `cognisctl modules:elevenlabs-tts:voices`. It uses the saved configuration and authenticated administrator-only `/config/voices` route, including provider pagination. The CLI help contract currently accepts literal descriptions; runtime speech and configuration messages remain localized by the host. Module artwork uses the ElevenLabs mark from its official website and a Cognis/ElevenLabs composite banner.

@@ -291,3 +291,59 @@ test("test output uses unsaved settings and never changes the saved default", as
     assert.equal((await service.readConfiguration()).voiceId, "saved-voice");
     assert.equal(JSON.stringify(context.logs).includes("preview-key"), false);
 });
+
+test("configuration boundary reports malformed and oversized input safely", async () => {
+    const { ctx, routes, logs } = fixture();
+    await registerDisabledApiRoutes(ctx);
+    const handler = routes.get(
+        "Put:/api/v1/modules/elevenlabs-tts/config",
+    ).handler;
+    for (const [body, expected] of [
+        ["{secret-fixture", 400],
+        ["x".repeat(16_385), 413],
+    ]) {
+        let status;
+        let payload;
+        await handler(Readable.from([body]), {
+            writeHead(value, headers) {
+                status = value;
+                assert.equal(headers["cache-control"], "no-store");
+            },
+            end(value) {
+                payload = JSON.parse(value);
+            },
+        });
+        assert.equal(status, expected);
+        assert.equal(
+            payload.error.code,
+            expected === 413 ? "request_too_large" : "invalid_configuration",
+        );
+    }
+    assert.equal(logs.filter(([level]) => level === "error").length, 2);
+    assert.equal(JSON.stringify(logs).includes("secret-fixture"), false);
+});
+
+test("provider corruption is a gateway failure rather than invalid administrator input", async () => {
+    const { ctx, routes } = fixture();
+    const { registerConfigurationRoutes } =
+        await import("../routes/config/index.js");
+    registerConfigurationRoutes(ctx, {
+        discoverVoices: async () => {
+            throw new Error("invalid_voice_response");
+        },
+    });
+    let status;
+    let payload;
+    await routes
+        .get("Post:/api/v1/modules/elevenlabs-tts/config/voices")
+        .handler(Readable.from(["{}"]), {
+            writeHead(value) {
+                status = value;
+            },
+            end(value) {
+                payload = JSON.parse(value);
+            },
+        });
+    assert.equal(status, 502);
+    assert.equal(payload.error.code, "speech_unavailable");
+});

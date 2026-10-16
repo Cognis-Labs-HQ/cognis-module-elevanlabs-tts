@@ -90,3 +90,24 @@ test("changelog digests stay outside the module manifest", () => {
     );
     assert.deepEqual(changelogEntries, []);
 });
+
+test("release filenames match their declared branch and retain implementation provenance", () => {
+    const directory = resolve(ROOT, "docs/changelog");
+    for (const filename of readdirSync(directory)) {
+        if (!filename.endsWith(".md")) continue;
+        const markdown = readFileSync(resolve(directory, filename), "utf8");
+        const branch = markdown.match(
+            /^\*\*(?:Feature Branch|Feature-Zweig|Cabang Fitur|機能ブランチ):\*\*\s+(.+)$/m,
+        )?.[1];
+        assert.ok(branch, filename);
+        const locale = filename.match(/\.(de|en|id|ja)\.md$/)?.[1];
+        assert.equal(
+            filename,
+            `${branch.replace(/^copilot\//, "").replaceAll("/", "-")}.${locale}.md`,
+        );
+        assert.match(
+            markdown,
+            /https:\/\/github\.com\/Cognis-Labs-HQ\/cognis-module-elevanlabs-tts\/commit\/[a-f0-9]{40}/,
+        );
+    }
+});

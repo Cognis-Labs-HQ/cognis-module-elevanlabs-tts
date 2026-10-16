@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><rect width="128" height="128" rx="24" fill="#142b42"/><g stroke="#73d4dc" stroke-width="8" stroke-linecap="round"><path d="M28 52v24M46 34v60M64 20v88M82 40v48M100 52v24"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+    <title id="title">ElevenLabs</title>
+    <rect width="64" height="64" fill="#fff"/>
+    <path fill="#000" transform="translate(22.03 16) scale(2.1692)" d="M0 0h3.079v14.752H0zM6.115 0h3.079v14.752H6.115z"/>
+</svg>

@@ -1,5 +1,5 @@
 import { createService } from "../../service.js";
-import { readJson, sendJson } from "../../reuse/http.js";
+import { readJson, sendJson } from "./http.js";
 
 export function registerConfigurationRoutes(ctx, service) {
     const base = "/api/v1/modules/elevenlabs-tts/config";
@@ -34,14 +34,31 @@ export function registerConfigurationRoutes(ctx, service) {
                         response.end(Buffer.from(result.data));
                     } else sendJson(response, 200, { data: result ?? null });
                 } catch (error) {
-                    const invalid = /^(invalid_|request_too_large)/.test(
-                        error.message,
+                    const code = error instanceof Error ? error.message : "";
+                    const invalid = [
+                        "invalid_configuration",
+                        "invalid_voice_id",
+                        "invalid_speech_input",
+                        "invalid_json",
+                    ].includes(code);
+                    const tooLarge = code === "request_too_large";
+                    ctx.log?.(
+                        "error",
+                        "ElevenLabs configuration request failed.",
+                        {
+                            component: "elevenlabs-tts",
+                            operation: action,
+                            errorName:
+                                error instanceof Error ? error.name : "Error",
+                        },
                     );
-                    sendJson(response, invalid ? 400 : 502, {
+                    sendJson(response, tooLarge ? 413 : invalid ? 400 : 502, {
                         error: {
-                            code: invalid
-                                ? "invalid_configuration"
-                                : "speech_unavailable",
+                            code: tooLarge
+                                ? "request_too_large"
+                                : invalid
+                                  ? "invalid_configuration"
+                                  : "speech_unavailable",
                         },
                     });
                 }

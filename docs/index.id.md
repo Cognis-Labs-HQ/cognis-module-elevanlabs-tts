@@ -21,3 +21,5 @@ Rute `/api/v1/modules/elevenlabs-tts/config` menyediakan GET, PUT, DELETE khusus
 Kapabilitas ucapan tidak berisi kebijakan Study. Pemanggil memeriksa otorisasi dan namespace sebelum meminta ucapan. Cognis Study hanya membuat ucapan untuk kartu global tersimpan; kartu pribadi dan kelas menerima rekaman atau merangkai audio kartu penyusun yang tersedia. Repositori ini tidak memuat paket bahasa.
 
 `npm install` · `npm run lint` · `npm test` · `npm run manifest:hashes` · `npm run check:manifest`
+
+Temukan suara melalui `cognisctl modules:elevenlabs-tts:voices`. Perintah memakai konfigurasi tersimpan dan rute `/config/voices` khusus administrator yang terautentikasi, termasuk paginasi penyedia. Kontrak bantuan CLI saat ini hanya menerima deskripsi literal; pesan ucapan dan konfigurasi tetap dilokalkan oleh host. Gambar modul memakai tanda ElevenLabs dari situs resminya dan banner gabungan Cognis/ElevenLabs.

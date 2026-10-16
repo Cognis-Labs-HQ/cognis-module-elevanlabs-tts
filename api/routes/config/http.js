@@ -1,5 +1,9 @@
 export function sendJson(response, status, payload) {
-    response.writeHead(status, { "content-type": "application/json" });
+    response.writeHead(status, {
+        "content-type": "application/json",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+    });
     response.end(JSON.stringify(payload));
 }
 

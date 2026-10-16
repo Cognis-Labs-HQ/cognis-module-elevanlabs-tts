@@ -2,13 +2,14 @@
     "id": "elevenlabs-tts",
     "uuid": "2b71bcdf-e29c-408b-8d12-ead6e377c82e",
     "name": "module.elevenlabs-tts.name",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "class": "extension",
     "coreApiVersion": "v1",
     "capabilities": ["speech:synthesis"],
     "entrypoints": {
         "bootstrap": "./bootstrap.js",
-        "disabledApi": "./api/routes/config/index.js"
+        "disabledApi": "./api/routes/config/index.js",
+        "cli": "./cli/index.js"
     },
     "ui": {
         "stringsBaseUrl": "/static/modules/elevenlabs-tts/languages",
@@ -28,7 +29,6 @@
             {
                 "key": "testText",
                 "type": "string",
-                "default": "Hello.",
                 "labelKey": "module.elevenlabs-tts.test.text"
             }
         ],
@@ -58,7 +58,7 @@
     "support": "https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/issues",
     "assets": {
         "icon": "assets/icon.svg",
-        "banner": "assets/banner.svg",
+        "banner": "assets/banner.png",
         "screenshots": []
     },
     "tags": ["module.elevenlabs-tts.tag"],
@@ -101,31 +101,31 @@
         },
         {
             "path": "README.de.md",
-            "sha256": "c784929aec1295c231cfb1f34fd6916f560e64a0cdea0c1bd5c7e1f63279934d"
+            "sha256": "fe9e36c1adb5861126df4ddfcdc2a1fa9d6f13666a0cc9232d606bd2c095630d"
         },
         {
             "path": "README.en.md",
-            "sha256": "7529fd559b5caf5ae39d20781d4ab7f3814f8b11f27c7c2cc52191b08a4fdc44"
+            "sha256": "e877db90df077f00ea8c8f409d41d351ea304b7f96556d6b250257c226dd93f6"
         },
         {
             "path": "README.id.md",
-            "sha256": "98a46a1895a713364e635a0a57def0b98ba13bdd0a54e1ee602feb0c1c767265"
+            "sha256": "1075b9b1db6e62a0d2a917082cafa0a2a4f8fb04494893ec52f9c883f0612ee4"
         },
         {
             "path": "README.ja.md",
-            "sha256": "6744259235fae817c1c79c7f21c9ad5dc9250cdd3bfb30ccb67ccd07543bb5eb"
+            "sha256": "a332282b43849a4bab950d3730966a4ebab6314c3fa285016a135f6f584e4f2e"
         },
         {
             "path": "api/config.js",
             "sha256": "48089d67a25582f38c9ff06c8bf562fc78704c99928a60cd59cbe555064bd32b"
         },
         {
-            "path": "api/reuse/http.js",
-            "sha256": "6af309497cf411e4d55ae345f75b80d3d4ef2ae76b5353cbc1d8a33d196d6838"
+            "path": "api/routes/config/http.js",
+            "sha256": "ce9d42d7cdd47922c51fcc2958b90bf29445aab37f37233804b9564baba1ec2d"
         },
         {
             "path": "api/routes/config/index.js",
-            "sha256": "1c9e4f0a85e991b8d1181a8c408ef85d905c536ca59a79ad8b10b315c8fdab3e"
+            "sha256": "de2d9e75176c03c2ad0c16ad1db67d80a20ed7e7b9e68ac05c7da74fdd502152"
         },
         {
             "path": "api/service.js",
@@ -133,7 +133,7 @@
         },
         {
             "path": "api/tests/documentation-convention.test.js",
-            "sha256": "118a286cc8012cd547424d50da8b6120722542b8d75073798f1999fa23652c7b"
+            "sha256": "23be182edbba96503f7a5b7f201e8ab171bec57fdfadbdb2b2027e0200e0f0f4"
         },
         {
             "path": "api/tests/manifest-targets.test.js",
@@ -157,47 +157,55 @@
         },
         {
             "path": "api/tests/synthesis.test.js",
-            "sha256": "f4726536cd23d62a49d96fd072fa0668e1eaef89894e5245fa7780fcca933d43"
+            "sha256": "c26249663ef931a2ac1ed64c6486cd92e7e14952fe127becc3189c232653f310"
         },
         {
             "path": "api/transport.js",
             "sha256": "0b285481c165b12daf931e4b0dec3e3fa3dfef4a1040c623e5af1bfe1876220e"
         },
         {
-            "path": "assets/banner.svg",
-            "sha256": "0bbd60975638a46e3e8371eb6dd884a4d3ddfc62cff673bf1f29836f3bda56b3"
+            "path": "assets/banner.png",
+            "sha256": "ba044161fb953586e1f8db4ff0347d64cb9367a557d8f7e5b5cea9fcd511e86c"
         },
         {
             "path": "assets/icon.svg",
-            "sha256": "0bbd60975638a46e3e8371eb6dd884a4d3ddfc62cff673bf1f29836f3bda56b3"
+            "sha256": "0d60be5171e0ec625aeac37caf70e73bb5e7999fae52a987f582323381ea64e4"
         },
         {
             "path": "bootstrap.js",
             "sha256": "1ae591fbf14e59e45415391406fc6502d04843c816b20f67afa55bb99e587356"
         },
         {
+            "path": "cli/index.js",
+            "sha256": "c4c222da6b0c36191f18fe7753d7c4b31b9ba962e702be4ef2e33afc2b1b87ad"
+        },
+        {
+            "path": "cli/tests/index.test.js",
+            "sha256": "46b07b9457bfa039955e2711af4920942dfacb002640366858aa3bf84cf92d90"
+        },
+        {
             "path": "docs/index.de.md",
-            "sha256": "c784929aec1295c231cfb1f34fd6916f560e64a0cdea0c1bd5c7e1f63279934d"
+            "sha256": "fe9e36c1adb5861126df4ddfcdc2a1fa9d6f13666a0cc9232d606bd2c095630d"
         },
         {
             "path": "docs/index.en.md",
-            "sha256": "7529fd559b5caf5ae39d20781d4ab7f3814f8b11f27c7c2cc52191b08a4fdc44"
+            "sha256": "e877db90df077f00ea8c8f409d41d351ea304b7f96556d6b250257c226dd93f6"
         },
         {
             "path": "docs/index.id.md",
-            "sha256": "98a46a1895a713364e635a0a57def0b98ba13bdd0a54e1ee602feb0c1c767265"
+            "sha256": "1075b9b1db6e62a0d2a917082cafa0a2a4f8fb04494893ec52f9c883f0612ee4"
         },
         {
             "path": "docs/index.ja.md",
-            "sha256": "6744259235fae817c1c79c7f21c9ad5dc9250cdd3bfb30ccb67ccd07543bb5eb"
+            "sha256": "a332282b43849a4bab950d3730966a4ebab6314c3fa285016a135f6f584e4f2e"
         },
         {
             "path": "package-lock.json",
-            "sha256": "895bd20a23f7bb68e7af5315c8167e97f1d01e18e688727b716a9f7dbca55463"
+            "sha256": "31eb3066d23be32f4fd887f5c300e3ff807d7c7505be548e428f0e6a1d1ff161"
         },
         {
             "path": "package.json",
-            "sha256": "a998df270a96fb496adf26b11f65b7166f9a6036ffd9e9784d96505abd2c6306"
+            "sha256": "ca6268235ac77d86612ef9d5a18513090d2bd53fc9d7cedadd289db34141eafa"
         },
         {
             "path": "routes.json",

@@ -21,3 +21,5 @@ const audio = await speech.synthesize(
 音声機能はStudy固有の規則を持ちません。呼び出し側が権限と名前空間を検証します。Cognis Studyは保存済みグローバルカードのみ音声生成し、個人・クラスカードでは録音または既存の構成カード音声を結合します。このリポジトリは言語コンテンツパックを含みません。
 
 `npm install` · `npm run lint` · `npm test` · `npm run manifest:hashes` · `npm run check:manifest`
+
+インストール済みCLIの `cognisctl modules:elevenlabs-tts:voices` で音声を検索します。保存済み設定と認証済み管理者専用の `/config/voices` ルートを使い、プロバイダーのページ処理にも対応します。CLIヘルプは現在、文字列の説明のみ受け付けます。音声・設定の実行時メッセージはホストが翻訳します。モジュール画像には公式サイトのElevenLabsマークとCognis/ElevenLabsの複合バナーを使用します。
