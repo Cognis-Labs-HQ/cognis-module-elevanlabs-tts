@@ -42,6 +42,10 @@ The existing host concealed-value contract masks configuration responses but doe
 
 Publish `elevenlabs-tts:synthesis` within the module-owned namespace and remove the privileged flag. English and Japanese Study resolve this capability through ctx using their existing optional module dependency. The Study bridge receives the live capability getter from its caller, preserving provider disable/re-enable and configured voice handling.
 
+## Keep speech optional
+
+The published capability reports live `configured` readiness. Study enables automatic speech only after both the API key and default voice are saved. If ElevenLabs is absent, disabled, or unconfigured, language registration still succeeds and uploaded audio and composite fallback remain available; no synthesis is requested.
+
 ## Commits
 
 - [fc07131](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fc071312db5bc106977928dc96b7a082c9db1cb8)
@@ -49,3 +53,4 @@ Publish `elevenlabs-tts:synthesis` within the module-owned namespace and remove 
 - [fa92c9b](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fa92c9b607e5a21abc2db3b63c231fa32888b378)
 - [dd89029](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/dd890299216d6f2ebe0fa6caf41103f64cfcde8f)
 - [0f0f782](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/0f0f782c697f80b86c1836da649172d47c3d4108)
+- [0f4014d](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/0f4014df51c8e31eb326d7db5ffa9ebee13d1559)

@@ -42,6 +42,10 @@ ElevenLabs合成を設定可能な独立モジュールへ移します。Study�
 
 モジュール自身の名前空間で `elevenlabs-tts:synthesis` を公開し、特権フラグを削除します。英語・日本語Studyは既存の任意依存関係を利用し、ctx経由で機能を解決します。Studyの橋渡し処理は呼び出し側から現在の機能を取得する関数を受け取り、無効化・再有効化と設定済み音声に対応します。
 
+## 音声機能を任意に維持
+
+公開機能は `configured` で現在の準備状態を通知します。StudyはAPIキーと既定の声が保存された後にのみ自動音声を有効にします。ElevenLabsが未導入・無効・未設定でも言語登録は成功し、アップロード音声と既存音声の結合を利用できます。合成は要求しません。
+
 ## コミット
 
 - [fc07131](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fc071312db5bc106977928dc96b7a082c9db1cb8)
@@ -49,3 +53,4 @@ ElevenLabs合成を設定可能な独立モジュールへ移します。Study�
 - [fa92c9b](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/fa92c9b607e5a21abc2db3b63c231fa32888b378)
 - [dd89029](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/dd890299216d6f2ebe0fa6caf41103f64cfcde8f)
 - [0f0f782](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/0f0f782c697f80b86c1836da649172d47c3d4108)
+- [0f4014d](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/0f4014df51c8e31eb326d7db5ffa9ebee13d1559)
