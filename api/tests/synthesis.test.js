@@ -24,6 +24,7 @@ function fixture(request) {
     const disposers = [];
     const routes = new Map();
     const capabilities = new Map();
+    const uiProviders = new Map();
     const logs = [];
     const ctx = {
         ...runtime,
@@ -34,6 +35,10 @@ function fixture(request) {
         },
         registerDisposer(disposer) {
             disposers.push(disposer);
+        },
+        registerCapabilityProvider(definition) {
+            uiProviders.set(definition.scriptUrl, definition);
+            disposers.push(() => uiProviders.delete(definition.scriptUrl));
         },
         registerStaticDir() {},
         contributePublicCapability(id, capability) {
@@ -51,6 +56,7 @@ function fixture(request) {
         request,
         routes,
         capabilities,
+        uiProviders,
         logs,
         disposers,
         database,

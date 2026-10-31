@@ -4,6 +4,10 @@ import { registerConfigurationRoutes } from "./api/routes/config/index.js";
 import path from "node:path";
 
 export async function bootstrapModule(ctx) {
+    ctx.registerCapabilityProvider({
+        scriptUrl: "/static/modules/elevenlabs-tts/tutorials/provider.js",
+        providesCapabilities: ["elevenlabs-tts:tutorials"],
+    });
     const service = await createService(ctx);
     registerConfigurationRoutes(ctx, service);
     ctx.registerStaticDir("", path.join(ctx.moduleRoot, "ui"));
