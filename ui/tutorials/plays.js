@@ -1,5 +1,6 @@
 export const definition = {
     version: 1,
+    page: "/administration/modules",
     id: "introduction",
     titleKey: "module.elevenlabs-tts.tutorial.title",
     steps: [
