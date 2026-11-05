@@ -11,7 +11,7 @@
     <string name="module.elevenlabs-tts.test">Buat audio uji</string>
     <string name="module.elevenlabs-tts.tutorial.title">Mengatur Sintesis Suara</string>
     <string name="module.elevenlabs-tts.tutorial.welcome.title">Temukan Pengaturan ElevenLabs</string>
-    <string name="module.elevenlabs-tts.tutorial.welcome.body">Cari kartu modul ElevenLabs di Modul. Akses administrator diperlukan; tutorial tidak meminta sintesis atau mengungkap kredensial.</string>
+    <string name="module.elevenlabs-tts.tutorial.welcome.body">Cari kartu modul ElevenLabs di Modul. Akses administrator diperlukan untuk mengaturnya.</string>
     <string name="module.elevenlabs-tts.tutorial.configuration.title">Konfigurasikan Penyedia</string>
-    <string name="module.elevenlabs-tts.tutorial.configuration.body">Buka rincian modul dan Pengaturan untuk konfigurasi biasa. Rahasiakan kredensial API. Membuka dialog konfigurasi mengakhiri tutorial dengan aman.</string>
+    <string name="module.elevenlabs-tts.tutorial.configuration.body">Buka rincian modul dan Pengaturan untuk mengatur penyedia serta kredensial API-nya.</string>
 </resources>

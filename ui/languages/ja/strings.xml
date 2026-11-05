@@ -11,7 +11,7 @@
     <string name="module.elevenlabs-tts.test">テスト音声を生成</string>
     <string name="module.elevenlabs-tts.tutorial.title">音声合成を設定する</string>
     <string name="module.elevenlabs-tts.tutorial.welcome.title">ElevenLabs の設定を探す</string>
-    <string name="module.elevenlabs-tts.tutorial.welcome.body">モジュール一覧で ElevenLabs のカードを探します。管理者権限が必要です。チュートリアルは合成を要求したり認証情報を表示したりしません。</string>
+    <string name="module.elevenlabs-tts.tutorial.welcome.body">モジュール一覧で ElevenLabs のカードを探します。設定には管理者権限が必要です。</string>
     <string name="module.elevenlabs-tts.tutorial.configuration.title">プロバイダーを設定する</string>
-    <string name="module.elevenlabs-tts.tutorial.configuration.body">モジュールの詳細と設定を開き、通常の操作で設定します。API 認証情報は非表示のまま扱ってください。設定ダイアログを開くとチュートリアルは安全に終了します。</string>
+    <string name="module.elevenlabs-tts.tutorial.configuration.body">モジュールの詳細と設定を開き、プロバイダーと API 認証情報を設定します。</string>
 </resources>

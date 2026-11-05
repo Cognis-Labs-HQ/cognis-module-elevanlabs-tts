@@ -2,7 +2,7 @@
     "id": "elevenlabs-tts",
     "uuid": "2b71bcdf-e29c-408b-8d12-ead6e377c82e",
     "name": "module.elevenlabs-tts.name",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "class": "extension",
     "coreApiVersion": "v1",
     "capabilities": ["elevenlabs-tts:synthesis"],
@@ -217,11 +217,11 @@
         },
         {
             "path": "package-lock.json",
-            "sha256": "a860a9769831368100eebe629916a8b77a654860c5b59e70d2206cbb3a938bee"
+            "sha256": "dc93f31f28f70f8d8983e2269279af1be301a9616944a769b9c7f3769e9b834b"
         },
         {
             "path": "package.json",
-            "sha256": "4814735efa45d78e4f152e9ab87b68aa2c10ad63ede8e843d0de022aa2af4fca"
+            "sha256": "ad4fb19e16760826e66cbc3fc46a540232d30e6be00d1d54fd8daa1ce5828952"
         },
         {
             "path": "routes.json",
@@ -249,19 +249,19 @@
         },
         {
             "path": "ui/languages/de/strings.xml",
-            "sha256": "521d2076e04707bdf9757ac2a1c71a10114e3f91ba48a3d0c46303c361e42089"
+            "sha256": "6b3f9dc51f0c07a41af07442d6d3de3f5ff771d166805bff042530b503c59ce9"
         },
         {
             "path": "ui/languages/en/strings.xml",
-            "sha256": "e872ac7dfc25ad7f322f9c0fb12a78d3293e79344a5c9ca8b6f3246bba0af222"
+            "sha256": "6f17f14774b57a17ec6540b0cb3647a99b2d536ea8b6e9121e924abdc864584c"
         },
         {
             "path": "ui/languages/id/strings.xml",
-            "sha256": "5adf8885679750e998f8cf26d6a5c2b1de9b4cd2747a3b8b639a2cbec78bdd1f"
+            "sha256": "3bd9de893377bf116ae72ab3d72082237b9f810a95f831af753a805fa5fccfbf"
         },
         {
             "path": "ui/languages/ja/strings.xml",
-            "sha256": "9a6f5f5f8ed16e8cd3a140f75712204268950356d30a12e6780803af24d6ea9e"
+            "sha256": "4b65d2dec40b732558fb0de171fc92393f7c8fdc4d938e803d4124e6fe77dc18"
         },
         {
             "path": "ui/tests/tutorials.test.js",

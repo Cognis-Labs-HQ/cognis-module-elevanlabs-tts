@@ -11,7 +11,7 @@
     <string name="module.elevenlabs-tts.test">Testaudio erzeugen</string>
     <string name="module.elevenlabs-tts.tutorial.title">Sprachausgabe einrichten</string>
     <string name="module.elevenlabs-tts.tutorial.welcome.title">ElevenLabs-Einstellungen finden</string>
-    <string name="module.elevenlabs-tts.tutorial.welcome.body">Suchen Sie die ElevenLabs-Modulkarte unter Module. Administratorzugriff ist erforderlich; die Anleitung fordert keine Synthese an und zeigt keine Zugangsdaten.</string>
+    <string name="module.elevenlabs-tts.tutorial.welcome.body">Suchen Sie die ElevenLabs-Modulkarte unter Module. Zum Konfigurieren ist Administratorzugriff erforderlich.</string>
     <string name="module.elevenlabs-tts.tutorial.configuration.title">Anbieter konfigurieren</string>
-    <string name="module.elevenlabs-tts.tutorial.configuration.body">Öffnen Sie die Moduldetails und Einstellungen zur normalen Konfiguration. Halten Sie API-Zugangsdaten verborgen. Ein Konfigurationsdialog beendet die Anleitung sicher.</string>
+    <string name="module.elevenlabs-tts.tutorial.configuration.body">Öffnen Sie die Moduldetails und Einstellungen, um den Anbieter und seine API-Zugangsdaten zu konfigurieren.</string>
 </resources>
