@@ -24,6 +24,18 @@ Setiap langkah tutorial kini menetapkan `highlightNext` secara eksplisit: penjel
 
 Setiap komponen antarmuka wajib dicakup tutorial. Panduan kontribusi mengharuskan alur tugas yang berfokus pada pengguna dan peninjauan tutorial setiap kali fitur atau perilaku antarmuka berubah.
 
+## Wilayah tutorial yang terlihat
+
+Wilayah tutorial dan isyarat Berikutnya ditetapkan secara eksplisit.
+
+## Antrean menu mengambang bersama
+
+Menu mengikuti antrean host bersama dan masa hidup komponen.
+
+## Kontrol pemulihan yang didokumentasikan
+
+Tampilan target hilang menyediakan Berikutnya dan Mulai Ulang Tutorial; pemutaran ulang juga menyediakan Batal.
+
 ## Komit
 
 - [8a833d3](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/8a833d311d6081e5f334759ebdeca75284117e80)

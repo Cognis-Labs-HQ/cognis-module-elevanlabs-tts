@@ -7,12 +7,13 @@ export const definition = {
         {
             highlightNext: true,
             id: "welcome",
+            target: "card",
             titleKey: "module.elevenlabs-tts.tutorial.welcome.title",
             bodyKey: "module.elevenlabs-tts.tutorial.welcome.body",
             effects: {
                 callout: true,
-                arrow: false,
-                spotlight: false,
+                arrow: true,
+                spotlight: true,
             },
             missing: {
                 timeoutMs: 5000,
