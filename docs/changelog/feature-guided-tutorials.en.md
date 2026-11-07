@@ -36,6 +36,10 @@ Menus follow the shared queued host contract and component lifetime.
 
 Missing-target views provide Next and Restart Tutorial; replay also provides Cancel.
 
+## Intentional tutorial guidance
+
+Tutorials explain distinct visible controls in UI order. Shared guidance covers active-view discovery, stable examples, empty states, conditional branches and lifecycle cleanup. Replay controls and reduced-motion documentation match the shared host.
+
 ## Commits
 
 - [8a833d3](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/8a833d311d6081e5f334759ebdeca75284117e80)
