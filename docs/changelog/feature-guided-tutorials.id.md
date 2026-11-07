@@ -47,3 +47,4 @@ Tutorial menjelaskan kontrol terlihat yang berbeda sesuai urutan UI. Petunjuk be
 - [29faa2b](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/29faa2b205e9438ba21114715dc348bc921e2db6)
 - [12f91d1](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/12f91d1edc8ef2b566ae7587a1a3b5b9fed0011b)
 - [ff982d9](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/ff982d9087add1a1a1d2db0225c2974e57f9bd66)
+- [e74c00138](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/e74c00138be73caf8dce73afd6d5690878033594)
