@@ -1,8 +1,8 @@
 {
     "id": "elevenlabs-tts",
     "uuid": "2b71bcdf-e29c-408b-8d12-ead6e377c82e",
-    "name": "module.elevenlabs-tts.name",
-    "version": "2.1.5",
+    "name": "module.elevenlabs.tts.name",
+    "version": "2.1.6",
     "class": "extension",
     "coreApiVersion": "v1",
     "capabilities": ["elevenlabs-tts:synthesis"],
@@ -18,30 +18,30 @@
                 "key": "apiKey",
                 "type": "password",
                 "required": true,
-                "labelKey": "module.elevenlabs-tts.api.key"
+                "labelKey": "module.elevenlabs.tts.api.key"
             },
             {
                 "key": "voiceId",
                 "type": "string",
                 "required": true,
-                "labelKey": "module.elevenlabs-tts.voice.id"
+                "labelKey": "module.elevenlabs.tts.voice.id"
             },
             {
                 "key": "testText",
                 "type": "string",
-                "labelKey": "module.elevenlabs-tts.test.text"
+                "labelKey": "module.elevenlabs.tts.test.text"
             }
         ],
         "configActions": [
             {
                 "id": "voices",
-                "labelKey": "module.elevenlabs-tts.discover",
+                "labelKey": "module.elevenlabs.tts.discover",
                 "result": "options",
                 "fieldKey": "voiceId"
             },
             {
                 "id": "test",
-                "labelKey": "module.elevenlabs-tts.test",
+                "labelKey": "module.elevenlabs.tts.test",
                 "result": "audio"
             }
         ]
@@ -49,9 +49,9 @@
     "publisher": "Cognis Labs HQ",
     "requires": [],
     "requiresCapabilities": ["db:executor"],
-    "summary": "module.elevenlabs-tts.summary",
-    "description": "module.elevenlabs-tts.description",
-    "categories": ["module.elevenlabs-tts.category"],
+    "summary": "module.elevenlabs.tts.summary",
+    "description": "module.elevenlabs.tts.description",
+    "categories": ["module.elevenlabs.tts.category"],
     "license": "AGPL-3.0-or-later",
     "repository": "https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts",
     "homepage": "https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts",
@@ -61,7 +61,7 @@
         "banner": "assets/banner.png",
         "screenshots": []
     },
-    "tags": ["module.elevenlabs-tts.tag"],
+    "tags": ["module.elevenlabs.tts.tag"],
     "files": [
         {
             "path": ".github/DOCUMENTATION_TEMPLATE.de.md",
@@ -81,7 +81,7 @@
         },
         {
             "path": ".github/copilot-instructions.md",
-            "sha256": "d3cc556cf627364d5a88b2819b5d61c19669a62629032df9508921dac7628f7e"
+            "sha256": "6a1269beb3ba90c9c4d82bf37464e0e661899fbfeec83e3ea03a9736205ff1c6"
         },
         {
             "path": ".gitignore",
@@ -141,7 +141,7 @@
         },
         {
             "path": "api/tests/module-structure.test.js",
-            "sha256": "64f72e6c7e05c87fcc9dee01844e4cf46d9af8147bc862b30f65c64c299307d0"
+            "sha256": "45cd21b2b31873c1831e52e3a1cfe97c5e52318bd99cb18ded73d21c9c74c83b"
         },
         {
             "path": "api/tests/packaging.test.js",
@@ -217,11 +217,11 @@
         },
         {
             "path": "package-lock.json",
-            "sha256": "542623e7616137a17739ee8e79a34226f391f3d1766473fe5267710a0a7a01db"
+            "sha256": "a56f258a6d6a8b9f2e7c78dd8d905ba386767e097e520c958568b137ba5a93ee"
         },
         {
             "path": "package.json",
-            "sha256": "cd451262ed8e1294d824b087fbb9650f12a799cfe36bbeb6630efd3741080d17"
+            "sha256": "2bdf6c709f676f170f022884170b4dade6a811beeb1420fd471afc4bc4257867"
         },
         {
             "path": "routes.json",
@@ -249,19 +249,19 @@
         },
         {
             "path": "ui/languages/de/strings.xml",
-            "sha256": "6b3f9dc51f0c07a41af07442d6d3de3f5ff771d166805bff042530b503c59ce9"
+            "sha256": "d17443b1d87d978a40793d987daa700f412410fad9bab6121a2920f7d97bea28"
         },
         {
             "path": "ui/languages/en/strings.xml",
-            "sha256": "6f17f14774b57a17ec6540b0cb3647a99b2d536ea8b6e9121e924abdc864584c"
+            "sha256": "a0c7e0054f29d3720158e1e9552e1602017b8432702f90b81331917415fc23e2"
         },
         {
             "path": "ui/languages/id/strings.xml",
-            "sha256": "3bd9de893377bf116ae72ab3d72082237b9f810a95f831af753a805fa5fccfbf"
+            "sha256": "e27c95152767f28e2e487b4305ff1d3bb78c48c346be1bbf726d4e9d6ab21b29"
         },
         {
             "path": "ui/languages/ja/strings.xml",
-            "sha256": "4b65d2dec40b732558fb0de171fc92393f7c8fdc4d938e803d4124e6fe77dc18"
+            "sha256": "42794f333782b897cb211426c6a2b572d615f2ffb9d11a4a574524ef94fc18e6"
         },
         {
             "path": "ui/tests/tutorials.test.js",
@@ -269,7 +269,7 @@
         },
         {
             "path": "ui/tutorials/plays.js",
-            "sha256": "ff1dfa283ea21fb2080f653c8923db8b37bd9bfa438f2ca20995e5985ce3cec4"
+            "sha256": "24a8ce93cf7ff87fdfe14956431ffb649004b5466ae61025b2e73e30f865ec63"
         },
         {
             "path": "ui/tutorials/provider.js",

@@ -1,17 +1,17 @@
 <resources>
-    <string name="module.elevenlabs-tts.name">Ucapan ElevenLabs</string>
-    <string name="module.elevenlabs-tts.summary">Buat ucapan dengan ElevenLabs.</string>
-    <string name="module.elevenlabs-tts.description">Atur suara bawaan dan sediakan sintesis ucapan melalui ctx.</string>
-    <string name="module.elevenlabs-tts.category">Audio</string>
-    <string name="module.elevenlabs-tts.tag">Ucapan</string>
-    <string name="module.elevenlabs-tts.api.key">Kunci API ElevenLabs</string>
-    <string name="module.elevenlabs-tts.voice.id">ID suara bawaan (cari atau masukkan manual)</string>
-    <string name="module.elevenlabs-tts.test.text">Frasa uji</string>
-    <string name="module.elevenlabs-tts.discover">Temukan suara</string>
-    <string name="module.elevenlabs-tts.test">Buat audio uji</string>
-    <string name="module.elevenlabs-tts.tutorial.title">Mengatur Sintesis Suara</string>
-    <string name="module.elevenlabs-tts.tutorial.welcome.title">Temukan Pengaturan ElevenLabs</string>
-    <string name="module.elevenlabs-tts.tutorial.welcome.body">Cari kartu modul ElevenLabs di Modul. Akses administrator diperlukan untuk mengaturnya.</string>
-    <string name="module.elevenlabs-tts.tutorial.configuration.title">Konfigurasikan Penyedia</string>
-    <string name="module.elevenlabs-tts.tutorial.configuration.body">Buka rincian modul dan Pengaturan untuk mengatur penyedia serta kredensial API-nya.</string>
+    <string name="module.elevenlabs.tts.name">Ucapan ElevenLabs</string>
+    <string name="module.elevenlabs.tts.summary">Buat ucapan dengan ElevenLabs.</string>
+    <string name="module.elevenlabs.tts.description">Atur suara bawaan dan sediakan sintesis ucapan melalui ctx.</string>
+    <string name="module.elevenlabs.tts.category">Audio</string>
+    <string name="module.elevenlabs.tts.tag">Ucapan</string>
+    <string name="module.elevenlabs.tts.api.key">Kunci API ElevenLabs</string>
+    <string name="module.elevenlabs.tts.voice.id">ID suara bawaan (cari atau masukkan manual)</string>
+    <string name="module.elevenlabs.tts.test.text">Frasa uji</string>
+    <string name="module.elevenlabs.tts.discover">Temukan suara</string>
+    <string name="module.elevenlabs.tts.test">Buat audio uji</string>
+    <string name="module.elevenlabs.tts.tutorial.title">Mengatur Sintesis Suara</string>
+    <string name="module.elevenlabs.tts.tutorial.welcome.title">Temukan Pengaturan ElevenLabs</string>
+    <string name="module.elevenlabs.tts.tutorial.welcome.body">Cari kartu modul ElevenLabs di Modul. Akses administrator diperlukan untuk mengaturnya.</string>
+    <string name="module.elevenlabs.tts.tutorial.configuration.title">Konfigurasikan Penyedia</string>
+    <string name="module.elevenlabs.tts.tutorial.configuration.body">Buka rincian modul dan Pengaturan untuk mengatur penyedia serta kredensial API-nya.</string>
 </resources>

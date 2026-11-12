@@ -1,17 +1,17 @@
 <resources>
-    <string name="module.elevenlabs-tts.name">ElevenLabs Sprache</string>
-    <string name="module.elevenlabs-tts.summary">Sprache mit ElevenLabs erzeugen.</string>
-    <string name="module.elevenlabs-tts.description">Eine Standardstimme konfigurieren und Sprachsynthese über ctx bereitstellen.</string>
-    <string name="module.elevenlabs-tts.category">Audio</string>
-    <string name="module.elevenlabs-tts.tag">Sprache</string>
-    <string name="module.elevenlabs-tts.api.key">ElevenLabs-API-Schlüssel</string>
-    <string name="module.elevenlabs-tts.voice.id">Standardstimmen-ID (suchen oder manuell eingeben)</string>
-    <string name="module.elevenlabs-tts.test.text">Testsatz</string>
-    <string name="module.elevenlabs-tts.discover">Stimmen suchen</string>
-    <string name="module.elevenlabs-tts.test">Testaudio erzeugen</string>
-    <string name="module.elevenlabs-tts.tutorial.title">Sprachausgabe einrichten</string>
-    <string name="module.elevenlabs-tts.tutorial.welcome.title">ElevenLabs-Einstellungen finden</string>
-    <string name="module.elevenlabs-tts.tutorial.welcome.body">Suchen Sie die ElevenLabs-Modulkarte unter Module. Zum Konfigurieren ist Administratorzugriff erforderlich.</string>
-    <string name="module.elevenlabs-tts.tutorial.configuration.title">Anbieter konfigurieren</string>
-    <string name="module.elevenlabs-tts.tutorial.configuration.body">Öffnen Sie die Moduldetails und Einstellungen, um den Anbieter und seine API-Zugangsdaten zu konfigurieren.</string>
+    <string name="module.elevenlabs.tts.name">ElevenLabs Sprache</string>
+    <string name="module.elevenlabs.tts.summary">Sprache mit ElevenLabs erzeugen.</string>
+    <string name="module.elevenlabs.tts.description">Eine Standardstimme konfigurieren und Sprachsynthese über ctx bereitstellen.</string>
+    <string name="module.elevenlabs.tts.category">Audio</string>
+    <string name="module.elevenlabs.tts.tag">Sprache</string>
+    <string name="module.elevenlabs.tts.api.key">ElevenLabs-API-Schlüssel</string>
+    <string name="module.elevenlabs.tts.voice.id">Standardstimmen-ID (suchen oder manuell eingeben)</string>
+    <string name="module.elevenlabs.tts.test.text">Testsatz</string>
+    <string name="module.elevenlabs.tts.discover">Stimmen suchen</string>
+    <string name="module.elevenlabs.tts.test">Testaudio erzeugen</string>
+    <string name="module.elevenlabs.tts.tutorial.title">Sprachausgabe einrichten</string>
+    <string name="module.elevenlabs.tts.tutorial.welcome.title">ElevenLabs-Einstellungen finden</string>
+    <string name="module.elevenlabs.tts.tutorial.welcome.body">Suchen Sie die ElevenLabs-Modulkarte unter Module. Zum Konfigurieren ist Administratorzugriff erforderlich.</string>
+    <string name="module.elevenlabs.tts.tutorial.configuration.title">Anbieter konfigurieren</string>
+    <string name="module.elevenlabs.tts.tutorial.configuration.body">Öffnen Sie die Moduldetails und Einstellungen, um den Anbieter und seine API-Zugangsdaten zu konfigurieren.</string>
 </resources>

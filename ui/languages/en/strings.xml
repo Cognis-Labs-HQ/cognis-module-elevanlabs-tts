@@ -1,17 +1,17 @@
 <resources>
-    <string name="module.elevenlabs-tts.name">ElevenLabs Speech</string>
-    <string name="module.elevenlabs-tts.summary">Generate speech with ElevenLabs.</string>
-    <string name="module.elevenlabs-tts.description">Configure a default voice and publish reusable speech synthesis through ctx.</string>
-    <string name="module.elevenlabs-tts.category">Audio</string>
-    <string name="module.elevenlabs-tts.tag">Speech</string>
-    <string name="module.elevenlabs-tts.api.key">ElevenLabs API key</string>
-    <string name="module.elevenlabs-tts.voice.id">Default voice ID (discover or enter manually)</string>
-    <string name="module.elevenlabs-tts.test.text">Test phrase</string>
-    <string name="module.elevenlabs-tts.discover">Discover voices</string>
-    <string name="module.elevenlabs-tts.test">Generate test audio</string>
-    <string name="module.elevenlabs-tts.tutorial.title">Configure Speech Synthesis</string>
-    <string name="module.elevenlabs-tts.tutorial.welcome.title">Find ElevenLabs Settings</string>
-    <string name="module.elevenlabs-tts.tutorial.welcome.body">Find the ElevenLabs module card in Modules. Administrator access is required to configure it.</string>
-    <string name="module.elevenlabs-tts.tutorial.configuration.title">Configure The Provider</string>
-    <string name="module.elevenlabs-tts.tutorial.configuration.body">Open the module details and Settings to configure the provider and its API credentials.</string>
+    <string name="module.elevenlabs.tts.name">ElevenLabs Speech</string>
+    <string name="module.elevenlabs.tts.summary">Generate speech with ElevenLabs.</string>
+    <string name="module.elevenlabs.tts.description">Configure a default voice and publish reusable speech synthesis through ctx.</string>
+    <string name="module.elevenlabs.tts.category">Audio</string>
+    <string name="module.elevenlabs.tts.tag">Speech</string>
+    <string name="module.elevenlabs.tts.api.key">ElevenLabs API key</string>
+    <string name="module.elevenlabs.tts.voice.id">Default voice ID (discover or enter manually)</string>
+    <string name="module.elevenlabs.tts.test.text">Test phrase</string>
+    <string name="module.elevenlabs.tts.discover">Discover voices</string>
+    <string name="module.elevenlabs.tts.test">Generate test audio</string>
+    <string name="module.elevenlabs.tts.tutorial.title">Configure Speech Synthesis</string>
+    <string name="module.elevenlabs.tts.tutorial.welcome.title">Find ElevenLabs Settings</string>
+    <string name="module.elevenlabs.tts.tutorial.welcome.body">Find the ElevenLabs module card in Modules. Administrator access is required to configure it.</string>
+    <string name="module.elevenlabs.tts.tutorial.configuration.title">Configure The Provider</string>
+    <string name="module.elevenlabs.tts.tutorial.configuration.body">Open the module details and Settings to configure the provider and its API credentials.</string>
 </resources>

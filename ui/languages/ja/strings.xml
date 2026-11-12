@@ -1,17 +1,17 @@
 <resources>
-    <string name="module.elevenlabs-tts.name">ElevenLabs音声</string>
-    <string name="module.elevenlabs-tts.summary">ElevenLabsで音声を生成します。</string>
-    <string name="module.elevenlabs-tts.description">既定の声を設定し、ctx経由で音声合成を提供します。</string>
-    <string name="module.elevenlabs-tts.category">音声</string>
-    <string name="module.elevenlabs-tts.tag">読み上げ</string>
-    <string name="module.elevenlabs-tts.api.key">ElevenLabs APIキー</string>
-    <string name="module.elevenlabs-tts.voice.id">既定の音声ID（検索または手動入力）</string>
-    <string name="module.elevenlabs-tts.test.text">テスト用フレーズ</string>
-    <string name="module.elevenlabs-tts.discover">音声を検索</string>
-    <string name="module.elevenlabs-tts.test">テスト音声を生成</string>
-    <string name="module.elevenlabs-tts.tutorial.title">音声合成を設定する</string>
-    <string name="module.elevenlabs-tts.tutorial.welcome.title">ElevenLabs の設定を探す</string>
-    <string name="module.elevenlabs-tts.tutorial.welcome.body">モジュール一覧で ElevenLabs のカードを探します。設定には管理者権限が必要です。</string>
-    <string name="module.elevenlabs-tts.tutorial.configuration.title">プロバイダーを設定する</string>
-    <string name="module.elevenlabs-tts.tutorial.configuration.body">モジュールの詳細と設定を開き、プロバイダーと API 認証情報を設定します。</string>
+    <string name="module.elevenlabs.tts.name">ElevenLabs音声</string>
+    <string name="module.elevenlabs.tts.summary">ElevenLabsで音声を生成します。</string>
+    <string name="module.elevenlabs.tts.description">既定の声を設定し、ctx経由で音声合成を提供します。</string>
+    <string name="module.elevenlabs.tts.category">音声</string>
+    <string name="module.elevenlabs.tts.tag">読み上げ</string>
+    <string name="module.elevenlabs.tts.api.key">ElevenLabs APIキー</string>
+    <string name="module.elevenlabs.tts.voice.id">既定の音声ID（検索または手動入力）</string>
+    <string name="module.elevenlabs.tts.test.text">テスト用フレーズ</string>
+    <string name="module.elevenlabs.tts.discover">音声を検索</string>
+    <string name="module.elevenlabs.tts.test">テスト音声を生成</string>
+    <string name="module.elevenlabs.tts.tutorial.title">音声合成を設定する</string>
+    <string name="module.elevenlabs.tts.tutorial.welcome.title">ElevenLabs の設定を探す</string>
+    <string name="module.elevenlabs.tts.tutorial.welcome.body">モジュール一覧で ElevenLabs のカードを探します。設定には管理者権限が必要です。</string>
+    <string name="module.elevenlabs.tts.tutorial.configuration.title">プロバイダーを設定する</string>
+    <string name="module.elevenlabs.tts.tutorial.configuration.body">モジュールの詳細と設定を開き、プロバイダーと API 認証情報を設定します。</string>
 </resources>
