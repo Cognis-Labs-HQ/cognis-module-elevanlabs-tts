@@ -13,10 +13,13 @@ export async function mountProvider(ctx) {
         const targets = {};
         const cards = ctx.capabilities.get("ui:moduleTutorialTargets");
         if (!cards) throw new Error("module_tutorial_targets_unavailable");
-        const card = await cards.card("elevenlabs-tts", {
-            signal: owner.signal,
-        });
-        targets.card = card.id;
+        const options = { signal: owner.signal };
+        targets.settings = await cards.settings("elevenlabs-tts", options);
+        for (const key of ["apiKey", "voiceId", "testText"])
+            targets[key] = await cards.field("elevenlabs-tts", key, options);
+        for (const key of ["voices", "test"])
+            targets[key] = await cards.action("elevenlabs-tts", key, options);
+        targets.preview = await cards.preview("elevenlabs-tts", options);
         const { isAdminScope } = await reuse.importModule("access-role.js");
         const play = await owner.register({
             ...definition,
@@ -27,7 +30,19 @@ export async function mountProvider(ctx) {
             requires: ["ui:navigate", "ui:moduleTutorialTargets"],
             steps: definition.steps.map((step) => ({
                 ...step,
-                ...(step.target ? { target: targets[step.target] } : {}),
+                target: targets[step.target].id,
+                ...(targets[step.target].popup
+                    ? { popup: targets[step.target].popup }
+                    : {}),
+                ...(step.id === "configuration"
+                    ? {
+                          enter: ({ groupSignal }) => {
+                              cards.bindSettings("elevenlabs-tts", {
+                                  signal: groupSignal,
+                              });
+                          },
+                      }
+                    : {}),
             })),
         });
         ctx.capabilities.contribute("elevenlabs-tts:tutorials", play);

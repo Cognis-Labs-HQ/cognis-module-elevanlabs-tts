@@ -4,7 +4,7 @@ Modul ini mengikat panduan pengantarnya pada halamannya melalui `ui:tutorials`. 
 
 ## Contoh Penggunaan
 
-Alur mengarahkan administrator ke kartu marketplace modul ini melalui kapabilitas target modul publik milik host. Kredensial tidak pernah dibaca atau diubah.
+Panduan administrator dimulai pada halaman detail ElevenLabs. Mengklik Pengaturan membuka cabang kunci API, suara bawaan, penemuan suara, frasa uji, pembuatan audio, dan pemutaran opsional. Berikutnya tanpa membuka Pengaturan melewati cabang. Kontrol diperoleh dari kontrak target modul publik host tanpa memeriksa markup popup milik komponen lain. Registrasi tidak mengubah penyelesaian tutorial atau kredensial.
 
 ## Spesifikasi Teknis
 

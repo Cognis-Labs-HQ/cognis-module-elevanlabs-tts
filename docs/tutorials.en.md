@@ -4,7 +4,7 @@ This module binds its introductory play to its own page through `ui:tutorials`. 
 
 ## Usage Examples
 
-The play points administrators to this module’s marketplace card through the host’s public module-target capability. It never reads or changes credentials.
+The administrator guide starts on the ElevenLabs detail page. Clicking Settings opens a branch for the API key, default voice, voice discovery, test phrase, audio generation and optional playback. Next without opening Settings bypasses the branch. Controls are resolved through the host’s public module-target contract, never by inspecting foreign popup markup. Tutorial completion and credentials remain unchanged by registration.
 
 ## Technical Specification
 

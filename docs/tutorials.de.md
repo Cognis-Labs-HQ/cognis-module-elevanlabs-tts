@@ -4,7 +4,7 @@ Dieses Modul bindet seinen Einführungsablauf über `ui:tutorials` an seine eige
 
 ## Anwendungsbeispiele
 
-Der Ablauf zeigt Administratoren über die öffentliche Modulziel-Capability die Marketplace-Karte dieses Moduls. Zugangsdaten werden weder gelesen noch geändert.
+Die Administratoranleitung beginnt auf der ElevenLabs-Detailseite. Einstellungen öffnet einen Zweig für API-Schlüssel, Standardstimme, Stimmensuche, Testsatz, Audioerzeugung und optionale Wiedergabe. Weiter ohne geöffnete Einstellungen überspringt den Zweig. Ziele kommen aus dem öffentlichen Modulvertrag des Hosts, ohne fremdes Popup-Markup zu untersuchen. Registrierung verändert weder Tutorialabschlüsse noch Zugangsdaten.
 
 ## Technische Spezifikation
 

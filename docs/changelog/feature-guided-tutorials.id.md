@@ -44,6 +44,10 @@ Tutorial menjelaskan kontrol terlihat yang berbeda sesuai urutan UI. Petunjuk be
 
 Kunci terjemahan menggunakan kata huruf kecil yang dipisahkan titik pada metadata modul dan tutorial. Entri katalog mempertahankan nilai terjemahan asli dan mengikuti indentasi XML di sekitarnya. Pemeriksaan namespace yang ketat menolak tanda hubung dan garis bawah pada kunci terjemahan. ID modul, UUID, kapabilitas, dan identitas penyelesaian tutorial tetap sama.
 
+## Panduan Lengkap Dan Sesuai Akses
+
+Panduan administrator dimulai pada halaman detail ElevenLabs. Mengklik Pengaturan membuka cabang kunci API, suara bawaan, penemuan suara, frasa uji, pembuatan audio, dan pemutaran opsional. Berikutnya tanpa membuka Pengaturan melewati cabang. Kontrol diperoleh dari kontrak target modul publik host tanpa memeriksa markup popup milik komponen lain. Registrasi tidak mengubah penyelesaian tutorial atau kredensial.
+
 ## Komit
 
 - [8a833d3](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/8a833d311d6081e5f334759ebdeca75284117e80)

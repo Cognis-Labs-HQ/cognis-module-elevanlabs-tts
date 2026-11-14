@@ -44,6 +44,10 @@ Tutorials explain distinct visible controls in UI order. Shared guidance covers 
 
 Translation keys use lowercase period-delimited words throughout the module metadata and tutorials. Catalog entries retain their original translated values and match the surrounding XML indentation. Strict namespace checks reject hyphens and underscores in translation keys. Module IDs, UUIDs, capabilities and tutorial completion identities remain unchanged.
 
+## Complete And Accessible Walkthroughs
+
+The administrator guide starts on the ElevenLabs detail page. Clicking Settings opens a branch for the API key, default voice, voice discovery, test phrase, audio generation and optional playback. Next without opening Settings bypasses the branch. Controls are resolved through the host’s public module-target contract, never by inspecting foreign popup markup. Tutorial completion and credentials remain unchanged by registration.
+
 ## Commits
 
 - [8a833d3](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/8a833d311d6081e5f334759ebdeca75284117e80)

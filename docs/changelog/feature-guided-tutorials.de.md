@@ -44,6 +44,10 @@ Anleitungen erklären unterschiedliche sichtbare Bedienelemente in UI-Reihenfolg
 
 Übersetzungsschlüssel verwenden in Modulmetadaten und Tutorials durchgehend kleingeschriebene, durch Punkte getrennte Wörter. Katalogeinträge behalten ihre ursprünglichen Übersetzungen und entsprechen der umgebenden XML-Einrückung. Strenge Namensraumprüfungen weisen Bindestriche und Unterstriche in Übersetzungsschlüsseln zurück. Modul-IDs, UUIDs, Fähigkeiten und Tutorialabschluss-Bezeichner bleiben unverändert.
 
+## Vollständige und zugängliche Anleitungen
+
+Die Administratoranleitung beginnt auf der ElevenLabs-Detailseite. Einstellungen öffnet einen Zweig für API-Schlüssel, Standardstimme, Stimmensuche, Testsatz, Audioerzeugung und optionale Wiedergabe. Weiter ohne geöffnete Einstellungen überspringt den Zweig. Ziele kommen aus dem öffentlichen Modulvertrag des Hosts, ohne fremdes Popup-Markup zu untersuchen. Registrierung verändert weder Tutorialabschlüsse noch Zugangsdaten.
+
 ## Commits
 
 - [8a833d3](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/8a833d311d6081e5f334759ebdeca75284117e80)

@@ -62,10 +62,29 @@ function fixture({ fail = false } = {}) {
         [
             "ui:moduleTutorialTargets",
             {
-                card: async (id, { signal }) => {
+                settings: async (id, { signal }) => {
                     assert.equal(id, manifest.id);
                     assert.equal(signal, owner.signal);
-                    return { id: `ui.modules:${id}` };
+                    return {
+                        id: "ui.modules:settings",
+                        popup: "published-settings-surface",
+                    };
+                },
+                field: async (_id, key) => ({
+                    id: `ui.modules:field.${key}`,
+                    popup: "published-settings-surface",
+                }),
+                action: async (_id, key) => ({
+                    id: `ui.modules:action.${key}`,
+                    popup: "published-settings-surface",
+                }),
+                preview: async () => ({
+                    id: "ui.modules:preview",
+                    popup: "published-settings-surface",
+                }),
+                bindSettings: (_id, options) => {
+                    targets.push(options.signal);
+                    return () => {};
                 },
             },
         ],
@@ -117,7 +136,16 @@ test("the module contributes a localized, permission-aware play through the publ
     assert.equal(typeof dispose, "function");
     assert.ok(state.published.has(`${manifest.id}:tutorials`));
     assert.equal(state.play.version, 1);
-    assert.equal(state.play.page, "/administration/modules");
+    assert.equal(
+        state.play.page({
+            pathname: `/administration/modules/${manifest.uuid}`,
+        }),
+        true,
+    );
+    assert.equal(
+        state.play.page({ pathname: "/administration/modules" }),
+        false,
+    );
     assert.ok(state.play.steps.length >= 1);
     assert.equal(
         new Set(state.play.steps.map((step) => step.target)).size,
@@ -195,4 +223,37 @@ test("an unsupported host contract is rejected before allocating an owner", asyn
         mountProvider(state.ctx),
         /tutorial_contract_unavailable/,
     );
+});
+
+test("Settings is an interaction-gated branch using only published module targets", async () => {
+    const state = fixture();
+    const dispose = await mountProvider(state.ctx);
+    const [trigger, ...steps] = state.play.steps;
+    const branch = new AbortController();
+    const release = trigger.enter({ groupSignal: branch.signal });
+    assert.equal(state.targets.at(-1), branch.signal);
+    assert.equal(trigger.advance.event, "click");
+    assert.equal(trigger.highlightNext, false);
+    assert.deepEqual(
+        steps.map((step) => step.target),
+        [
+            "ui.modules:field.apiKey",
+            "ui.modules:field.voiceId",
+            "ui.modules:field.testText",
+            "ui.modules:action.voices",
+            "ui.modules:action.test",
+            "ui.modules:preview",
+        ],
+    );
+    for (const step of steps) {
+        assert.deepEqual(step.dependsOn, ["configuration"]);
+        assert.equal(step.popup, "published-settings-surface");
+        assert.equal(step.layer, "overlay");
+    }
+    assert.equal(steps[0].missing.action, "retry");
+    for (const step of steps.slice(1))
+        assert.equal(step.when({ targetAvailable: false }), false);
+    assert.equal(release, undefined);
+    branch.abort();
+    dispose();
 });
