@@ -58,3 +58,4 @@ The administrator guide starts on the ElevenLabs detail page. Clicking Settings 
 - [e74c00138](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/e74c00138be73caf8dce73afd6d5690878033594)
 - [a1451bd2c](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/a1451bd2c93bc2bdfedf01318185caadbaaee51a)
 - [24be657](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/24be6574c1e61dac2842888a5bcc6eb70c4575c2)
+- [e15c665](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/e15c6657d952ebf4a5eb2c184f885a1df8868efa)
