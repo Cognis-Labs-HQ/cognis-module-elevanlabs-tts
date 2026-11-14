@@ -1,0 +1,61 @@
+# Guided tutorial
+
+**Feature Branch:** feature-guided-tutorials
+
+## Technical Specification
+
+The play points administrators to this module’s marketplace card through the host’s public module-target capability. It never reads or changes credentials.
+
+The module registers its own play and localized strings through ctx. The host owns the catalog, callouts, arrows, spotlight, keyboard and pointer controls, guarded SPA navigation and accessibility. Closing a tutorial, navigating away, losing access or disabling the module releases the session. Failed provider mounting rolls back its registrations.
+
+Provider tests check the public contract, all four translations, availability rules, rollback and rejection of unsupported host versions.
+
+## Page-bound First Visits
+
+The host owns callouts, arrows, spotlight, accessibility and the shared floating action menu. First-time runs offer Next throughout, without Cancel or Skip. Replays offer Cancel with `btn-cancel`. Completion is stored per account in the browser. Navigation, access loss and provider removal release the session; failed mounts roll back registrations.
+
+## Actionable Tutorial Copy
+
+Tutorial steps focus on the controls and tasks available on the page, without unrelated reassurances about permissions or actions the guide does not perform.
+
+## Author Next cues per step
+
+Each tutorial step now explicitly declares `highlightNext`: explanations that require Next or Finish enable it, while interaction- and wait-driven exercises disable it. The cue retains a static outline for reduced motion.
+
+Tutorial coverage is required for every UI-facing component. Contributor guidance requires user-first, task-focused walkthroughs and a review of existing tutorials whenever features or UI behavior change.
+
+## Visible tutorial regions
+
+Tutorial regions and Next cues are authored explicitly.
+
+## Shared floating-menu queue
+
+Menus follow the shared queued host contract and component lifetime.
+
+## Documented recovery controls
+
+Missing-target views provide Next and Restart Tutorial; replay also provides Cancel.
+
+## Intentional tutorial guidance
+
+Tutorials explain distinct visible controls in UI order. Shared guidance covers active-view discovery, stable examples, empty states, conditional branches and lifecycle cleanup. Replay controls and reduced-motion documentation match the shared host.
+
+## Consistent Translation Catalogs
+
+Translation keys use lowercase period-delimited words throughout the module metadata and tutorials. Catalog entries retain their original translated values and match the surrounding XML indentation. Strict namespace checks reject hyphens and underscores in translation keys. Module IDs, UUIDs, capabilities and tutorial completion identities remain unchanged.
+
+## Complete And Accessible Walkthroughs
+
+The administrator guide starts on the ElevenLabs detail page. Clicking Settings opens a branch for the API key, default voice, voice discovery, test phrase, audio generation and optional playback. Next without opening Settings bypasses the branch. Controls are resolved through the host’s public module-target contract, never by inspecting foreign popup markup. Tutorial completion and credentials remain unchanged by registration.
+
+## Commits
+
+- [8a833d3](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/8a833d311d6081e5f334759ebdeca75284117e80)
+- [8e04486](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/8e044869c477a4bcd7c9326f5495ddb77c5b142f)
+- [29faa2b](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/29faa2b205e9438ba21114715dc348bc921e2db6)
+- [12f91d1](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/12f91d1edc8ef2b566ae7587a1a3b5b9fed0011b)
+- [ff982d9](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/ff982d9087add1a1a1d2db0225c2974e57f9bd66)
+- [e74c00138](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/e74c00138be73caf8dce73afd6d5690878033594)
+- [a1451bd2c](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/a1451bd2c93bc2bdfedf01318185caadbaaee51a)
+- [24be657](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/24be6574c1e61dac2842888a5bcc6eb70c4575c2)
+- [e15c665](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/e15c6657d952ebf4a5eb2c184f885a1df8868efa)
