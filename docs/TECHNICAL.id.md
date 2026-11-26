@@ -1,18 +1,24 @@
-# Ucapan ElevenLabs
+# Referensi Teknis
+
+Antarmuka publik, konfigurasi, dan siklus hidup Suara ElevenLabs.
+
+## Antarmuka
 
 Atur modul melalui popup konfigurasi administrator, termasuk saat dinonaktifkan. Masukkan kunci API ElevenLabs, temukan dan pilih suara bawaan, atau masukkan ID secara manual bila pencarian tidak tersedia. Audio uji memakai pengaturan formulir yang belum disimpan. Kunci disembunyikan saat dibaca dan bertahan setelah mulai ulang atau penonaktifan; penghapusan konten modul menghapus kunci.
 
-## Penggunaan
+## Konfigurasi
 
-```js
-const speech = ctx.getCapability("elevenlabs-tts:synthesis");
-const audio = await speech.synthesize(
-    { text: phrase, language, voiceId },
-    signal,
-);
-```
+Manifes modul mendeklarasikan pengaturan dan dependensi yang didukung. Konfigurasikan hanya modul pemilik atau adapter autentikasi yang dideklarasikan melalui Administration; titik masuk aktif dan nonaktif mengikuti manifes.
 
-## Spesifikasi teknis
+### Bidang administrator yang dideklarasikan
+
+| Kunci      | Jenis      |
+| ---------- | ---------- |
+| `apiKey`   | `password` |
+| `voiceId`  | `string`   |
+| `testText` | `string`   |
+
+## Perilaku
 
 Modul aktif menerbitkan `elevenlabs-tts:synthesis`. Panggil `synthesize({ text, language?, voiceId?, phonemes? }, signal?)` untuk memperoleh `{ mediaType, data }`. Tanpa `voiceId`, suara bawaan digunakan. `revision` berubah saat konfigurasi disimpan agar cache dapat diperbarui. Fonem IPA bahasa Inggris memakai SSML dengan `eleven_turbo_v2`. Permintaan bahasa eksplisit memakai `eleven_flash_v2_5` yang menghormati kode bahasa yang didukung; kode tidak didukung ditolak sebelum permintaan. Tanpa bahasa, `eleven_multilingual_v2` mendeteksinya otomatis. Masukan dibatasi 5000 karakter dan keluaran berupa MP3 terbatas. Permintaan memakai asal HTTPS tetap, menolak pengalihan, dan memiliki batas waktu; penghentian modul membatalkan permintaan. Log tidak memuat kunci, teks, atau audio.
 
@@ -28,10 +34,24 @@ Respons audio dibatasi 64 MiB untuk masukan 5000 karakter pada 128 kbps. Penyimp
 
 Kontrak nilai tersembunyi host menyamarkan kredensial pada pembacaan API; kontrak ini tidak menyediakan penyimpanan kredensial terenkripsi atau kapabilitas penyimpanan rahasia dengan referensi opak. Kunci API operasional tetap berada di basis data konfigurasi modul. Prasyarat penyimpanan oleh host dicatat di [Cognis #515](https://github.com/Cognis-Labs-HQ/Cognis/issues/515).
 
-Terbitkan `elevenlabs-tts:synthesis` di namespace milik modul dan hapus penanda hak istimewa. Study Inggris dan Jepang menemukan kapabilitas ini melalui ctx dengan dependensi modul opsional yang ada. Jembatan Study menerima pengambil kapabilitas langsung dari pemanggil sehingga penonaktifan, pengaktifan kembali, dan suara yang diatur tetap berfungsi.
+`elevenlabs-tts:synthesis` memakai namespace milik modul; manifes tidak meminta akses host berhak istimewa. Study Inggris dan Jepang menemukan kapabilitas ini melalui ctx dengan dependensi modul opsional yang ada. Jembatan Study menerima pengambil kapabilitas langsung dari pemanggil sehingga penonaktifan, pengaktifan kembali, dan suara yang diatur tetap berfungsi.
 
 Kapabilitas yang diterbitkan melaporkan kesiapan langsung melalui `configured`. Study mengaktifkan ucapan otomatis hanya setelah kunci API dan suara bawaan disimpan. Jika ElevenLabs tidak terpasang, dinonaktifkan, atau belum diatur, pendaftaran bahasa tetap berhasil dan audio unggahan serta komposisi cadangan tetap tersedia tanpa meminta sintesis.
 
-## Tutorial terpandu
+### Tutorial terpandu
 
-[Tutorial terpandu](tutorials.id.md)
+[Tutorial terpandu](TECHNICAL.id.md)
+
+Pengujian penyedia memeriksa kontrak publik, keempat terjemahan, aturan ketersediaan, pembersihan saat gagal, dan penolakan versi host yang tidak didukung.
+
+Host bersama menyediakan aksi mengambang melalui antreannya. Kunjungan awal menawarkan Berikutnya/Selesai tanpa Batal atau Lewati; pemutaran ulang menawarkan Lewati sebelum tahap terlihat terakhir. Mulai Ulang Tutorial muncul setelah tahap terlihat pertama. Penyelesaian tetap berlaku setelah pembaruan konten. Flag highlightNext hanya mengaktifkan animasi berdenyut untuk penjelasan; pengurangan gerakan menonaktifkannya. Setiap tahap menyorot kontrol nyata berbeda sesuai urutan UI. Panduan tetap terikat ke tampilan aktif, menangani keadaan kosong dan opsional, serta membersihkan sumber daya saat navigasi atau pelepasan pemilik.
+
+## Keamanan
+
+Transport penyedia memakai tujuan HTTPS tetap, menolak pengalihan, dan membatasi audio. Pembacaan konfigurasi menyembunyikan kunci API, tetapi kunci tetap dalam basis data konfigurasi; penyembunyian bukan penyimpanan rahasia terenkripsi. Pemanggil sintesis menegakkan otorisasi konten. Log tidak memuat kunci, teks, atau audio; teks pratinjau tidak disimpan.
+
+## Referensi
+
+- [manifest.json](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/blob/HEAD/manifest.json)
+- [bootstrap.js](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/blob/HEAD/bootstrap.js)
+- [Cognis](https://github.com/Cognis-Labs-HQ/Cognis/blob/HEAD/src/docs/modules/external/TECHNICAL.en.md)
