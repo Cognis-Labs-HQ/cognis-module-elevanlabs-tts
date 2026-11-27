@@ -10,6 +10,11 @@ Info, Penggunaan, dan Teknis menjadi keluarga dokumen terlokalisasi lengkap yang
 
 Diagnostik runtime memakai gerbang logging host beserta kebijakan keluarannya. Laporan perintah memakai aliran terminal, dan pemeriksaan konsol native mencakup JavaScript modul, alias, serta akses terhitung. Kepemilikan penyedia, otorisasi, dan identitas penyelesaian tutorial tetap dipertahankan.
 
+## Nama binding deskriptif
+
+Binding modul memakai nama peran deskriptif dengan mempertahankan label API publik, kunci muatan, dan target impor. Validasi pohon sintaks memindai bootstrap, skrip, pengujian, dan fixture, menggantikan pemeriksaan berbasis baris. Enam puluh fixture regresi bersama mencakup deklarasi, destrukturisasi, parameter, anggota privat, binding enum/namespace, penegasan tipe TypeScript, dan identitas tipe yang diizinkan. Petunjuk komponen dan manual teknis dalam empat bahasa menjelaskan kebijakan yang sama; versi, berkas kunci, dan hash paket diselaraskan.
+
 ## Commit
 
 - [aebdd20](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/aebdd200a70db17c6e97b76cf88ef227f161b4a5)
+- [d47b3a6](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/commit/d47b3a6872389446b739af45345497a3cea2c7bb)
