@@ -2,7 +2,7 @@
     "id": "elevenlabs-tts",
     "uuid": "2b71bcdf-e29c-408b-8d12-ead6e377c82e",
     "name": "module.elevenlabs.tts.name",
-    "version": "2.1.8",
+    "version": "2.1.9",
     "class": "extension",
     "coreApiVersion": "v1",
     "capabilities": ["elevenlabs-tts:synthesis"],
@@ -65,7 +65,7 @@
     "files": [
         {
             "path": ".github/copilot-instructions.md",
-            "sha256": "1ef43cc25c62fcc75f2ce6f3186fd3a71ee1bab51328476047d6a6d70afec72f"
+            "sha256": "fd4b2f4b1fd59a3dcef70647b88038e774052fad9a5e18712b1ee0610891b998"
         },
         {
             "path": ".github/documentation/README.de.md",
@@ -181,15 +181,15 @@
         },
         {
             "path": "api/tests/logging-boundary.test.js",
-            "sha256": "118e83a19550bc7b81cdfd672b18e8ca97726c8d91064377f5f731ced7fce69e"
+            "sha256": "4932d2e7198cff80da061f3bbe79511f7839cce31277101256bd0712028962ae"
         },
         {
             "path": "api/tests/manifest-targets.test.js",
-            "sha256": "ead5d55842241939d629b43556cb20f87590b6a6c4b8cd5ae3c3dd4a8f188dd6"
+            "sha256": "a1df451a83f84633d07590fa311f6bce00093db609d16684267dd4f13e229aa6"
         },
         {
             "path": "api/tests/module-structure.test.js",
-            "sha256": "45cd21b2b31873c1831e52e3a1cfe97c5e52318bd99cb18ded73d21c9c74c83b"
+            "sha256": "31f86828eb3bd3ca497aa4250ff9395dc42e943891ffb9d41a5c722a5129930a"
         },
         {
             "path": "api/tests/packaging.test.js",
@@ -205,7 +205,7 @@
         },
         {
             "path": "api/tests/synthesis.test.js",
-            "sha256": "e58846715c0e2d7bbe661422b9dede0f2ee38d65921f14fc7ed413a7594564bc"
+            "sha256": "cbd3f5cdf5d1b9f2c86c64d2bcf5c1d45f5a2cb03ae2545cf4382808b9617d85"
         },
         {
             "path": "api/transport.js",
@@ -225,11 +225,11 @@
         },
         {
             "path": "cli/index.js",
-            "sha256": "c4c222da6b0c36191f18fe7753d7c4b31b9ba962e702be4ef2e33afc2b1b87ad"
+            "sha256": "c2523218ca4ae4e69b09718e07a319d30e9a7accb172690be7a40bcedfa5078c"
         },
         {
             "path": "cli/tests/index.test.js",
-            "sha256": "46b07b9457bfa039955e2711af4920942dfacb002640366858aa3bf84cf92d90"
+            "sha256": "3883dff9660dd6718ad7e7f3d62a50d46750812c22dce755e25dcf68a4852dd1"
         },
         {
             "path": "docs/README.de.md",
@@ -249,19 +249,19 @@
         },
         {
             "path": "docs/TECHNICAL.de.md",
-            "sha256": "0c7b523052dd271f5252a3b632f2f584f6a9c9316a514d38c30c68ea468f34b5"
+            "sha256": "4d473d4ee9cee57ceaebf9e94afc19cbe5980b5bd2ef5e3de0c8a78efabc84e9"
         },
         {
             "path": "docs/TECHNICAL.en.md",
-            "sha256": "515d734e460cfbdae1674893a54c5b949d7db2c30e2139d5e7c78c4bc2b3bf83"
+            "sha256": "1fd61b44baf1237cc13583ee35feb635cc09ba4a244776d1c3be609aa895c85e"
         },
         {
             "path": "docs/TECHNICAL.id.md",
-            "sha256": "187c74995571e19b43c2f6d0ec42038d54dc24e3ee6514c76fb8b26c9965edd4"
+            "sha256": "081747e30a8a2fc95a53121e293bcc524566a9de43c023a89fae01f76e2970fe"
         },
         {
             "path": "docs/TECHNICAL.ja.md",
-            "sha256": "619c3fc1e533edc6739d206e3e4ab6dd851f9241fb7c2d9362f231c5b4c73335"
+            "sha256": "f37d336ec031ab5100bdfab502737ba98986310592a267b409eeece98c4e5da4"
         },
         {
             "path": "docs/USAGE.de.md",
@@ -281,11 +281,11 @@
         },
         {
             "path": "package-lock.json",
-            "sha256": "5c5f01f1894ddcd579115a5ad114c1e4eddba22aa82bf151c584709e621ccc3c"
+            "sha256": "3ac04464aa45ff97208b62722bae9de5a5266840937cc5919617760feee9914f"
         },
         {
             "path": "package.json",
-            "sha256": "16eca4ffc21bfa8a83a40f6be909679a853229b7602f848614e1b4719eeb681e"
+            "sha256": "aa54bc40988fb299b981ace23bedcd9a8dc68945aba6d69dc521a86127862bd0"
         },
         {
             "path": "routes.json",
@@ -313,19 +313,31 @@
         },
         {
             "path": "scripts/reuse/documentation/validate.js",
-            "sha256": "65ff780303eac72989389f736d6e764afb283364807a58b39f3de0dcf86e851c"
+            "sha256": "2ce2de0666f4ff21e3606c29a0380b217aec5d0085457a8892c3fe47c5dedbee"
         },
         {
             "path": "scripts/update-manifest-hashes.js",
-            "sha256": "97b2cd93f2b872c7ba5d9608960083c9227b4108987e15e1ea7b9a1a1bf08a30"
+            "sha256": "ad4469f4b4a3f920e906d97bc22e89324ca21f2c932e487571c8d50bb62dbeb2"
         },
         {
             "path": "scripts/validate-manifest.js",
-            "sha256": "dc3edf1dd5922b231fb8934ee51626b025a17c8662c51baf905448a8fc88d33c"
+            "sha256": "d5c85424c4ffa92c6a81d329d3126300ab1fb9bc584f92efbe6f8f9d0c6fd31b"
+        },
+        {
+            "path": "tooling/reuse/ambiguous-name-words.json",
+            "sha256": "28bd9ccb5289fcda39e25bd50e6b3e2e6043d625375bea217fa5ab64d7904d4a"
+        },
+        {
+            "path": "tooling/reuse/ambiguous-names.js",
+            "sha256": "13ab2ce7f0e3b7e46e12bc02990ac20ec230fcb157ee27ddd60139507e6708ec"
+        },
+        {
+            "path": "tooling/reuse/source-files.js",
+            "sha256": "2f2a2f0f28cac4757e1fd7e18577f845741aa419011022e77468fad8a4469705"
         },
         {
             "path": "tooling/scripts/lint-placeholder.mjs",
-            "sha256": "c869f4af45abd4f82500f836d5e50af93b9988a56283477ae45bd0aa45f47fd1"
+            "sha256": "699215ed82fd9070f816f7ad140021e6368afb538e50d9671028337222d0e731"
         },
         {
             "path": "tooling/scripts/lint-readable.mjs",
@@ -346,6 +358,14 @@
         {
             "path": "ui/languages/ja/strings.xml",
             "sha256": "978dead01620edd39d31cd0875c667ac8ba55d930d58a956579faf560b5fe462"
+        },
+        {
+            "path": "ui/tests/ambiguous-names.test.js",
+            "sha256": "82aefaaefafa5916288c7ad02d60be1de85c0b371f7cf3fcf19a8c8271f92924"
+        },
+        {
+            "path": "ui/tests/fixtures/naming-cases.json",
+            "sha256": "fe6bba637f173b438292c1ce765a5566ac195a47c96831854b434c3745d9ee36"
         },
         {
             "path": "ui/tests/tutorials.test.js",

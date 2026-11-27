@@ -55,3 +55,7 @@ Transport penyedia memakai tujuan HTTPS tetap, menolak pengalihan, dan membatasi
 - [manifest.json](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/blob/HEAD/manifest.json)
 - [bootstrap.js](https://github.com/Cognis-Labs-HQ/cognis-module-elevanlabs-tts/blob/HEAD/bootstrap.js)
 - [Cognis](https://github.com/Cognis-Labs-HQ/Cognis/blob/HEAD/src/docs/modules/external/TECHNICAL.en.md)
+
+### Validasi nama
+
+`npm test` memeriksa nama binding dengan detektor pohon sintaks lokal, termasuk bootstrap, skrip, pengujian, dan fixture. Kesalahan penguraian menggagalkan validasi. Fixture regresi mencakup deklarasi, parameter, anggota privat, penegasan tipe TypeScript, dan nama khusus tipe yang sah. Lihat [standar penamaan host](https://github.com/Cognis-Labs-HQ/Cognis/blob/HEAD/src/docs/standard/TECHNICAL.id.md#nama-binding) untuk kebijakan bersama.
