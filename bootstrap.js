@@ -10,7 +10,7 @@ export async function bootstrapModule(ctx) {
     });
     const service = await createService(ctx);
     registerConfigurationRoutes(ctx, service);
-    ctx.registerStaticDir("", path.join(ctx.moduleRoot, "ui"));
+    ctx.registerStaticDirectory("", path.join(ctx.moduleRoot, "ui"));
     ctx.contributePublicCapability("elevenlabs-tts:synthesis", {
         get configured() {
             return service.configured;

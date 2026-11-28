@@ -2,7 +2,7 @@
     "id": "elevenlabs-tts",
     "uuid": "2b71bcdf-e29c-408b-8d12-ead6e377c82e",
     "name": "module.elevenlabs.tts.name",
-    "version": "2.1.10",
+    "version": "2.1.11",
     "class": "extension",
     "coreApiVersion": "v1",
     "capabilities": ["elevenlabs-tts:synthesis"],
@@ -65,7 +65,7 @@
     "files": [
         {
             "path": ".github/copilot-instructions.md",
-            "sha256": "fcbc8dd6316f5179fa3bd73fd71b5a27a487b488c56c038a7d9bf81929c16d93"
+            "sha256": "be639c27828525316ad5ff60b0f8a9134dfc3a2cb2229e50dbe7b4f6d3bae231"
         },
         {
             "path": ".github/documentation/README.de.md",
@@ -205,7 +205,7 @@
         },
         {
             "path": "api/tests/synthesis.test.js",
-            "sha256": "e58846715c0e2d7bbe661422b9dede0f2ee38d65921f14fc7ed413a7594564bc"
+            "sha256": "ebb9fe13f4d2bc4c06383c2550f8c25187f645dab76235946e39e27ee5a0b536"
         },
         {
             "path": "api/transport.js",
@@ -221,7 +221,7 @@
         },
         {
             "path": "bootstrap.js",
-            "sha256": "8b2c6ddab9595a15b134b2822daff5fe4913cc544a8eaff42eb9c7c7958225c3"
+            "sha256": "f804f62397a432d7db6e49048f451332e9b4c23e4371fdbe536469b3033d107e"
         },
         {
             "path": "cli/index.js",
@@ -249,19 +249,19 @@
         },
         {
             "path": "docs/TECHNICAL.de.md",
-            "sha256": "c7c026fd20c354e65616158f07d19bf4f144909090fcdfe625e4d6010c341dc2"
+            "sha256": "ea061f8163388511d40a889c442890a90ad2a09c39711514a13d7d180ac0a0e8"
         },
         {
             "path": "docs/TECHNICAL.en.md",
-            "sha256": "644c8798872ea46f1739d0381b9332bf4798c225026aa3e8e2e7a5c252cceb09"
+            "sha256": "905fc06ceb224a53e6165734a577b6c3dc23ef1235622ac96d7ec055c2785964"
         },
         {
             "path": "docs/TECHNICAL.id.md",
-            "sha256": "8a4e9727aa1d9031c7ddf613aa17d8437f0dce75a8f6899b19da814ec2e212ed"
+            "sha256": "f897d21f5e5a0386948103b16fd65dc676c8e2907b550fe5374bb0e09ec12bb2"
         },
         {
             "path": "docs/TECHNICAL.ja.md",
-            "sha256": "c5221d00aeaf6d2df9eca027eaf5558108585bfd42feabf44c6b1aeaf2f55bfe"
+            "sha256": "ed6c36b706d1e7d1484b15841472dc78e092e695052c3af95734df6421ef24d5"
         },
         {
             "path": "docs/USAGE.de.md",
@@ -281,11 +281,11 @@
         },
         {
             "path": "package-lock.json",
-            "sha256": "7f0789250b80c83eec290a19ca843f2bfa3204433bb529ef1612f782239f05e2"
+            "sha256": "ba3724504a1b9c6422a5d5476dcece21437250f28ffcbf92f3c58f3cea029f95"
         },
         {
             "path": "package.json",
-            "sha256": "2d9c60fc43cc926a4a85d6282d416d519bbe6761b890ff780d154650a9fa9b0d"
+            "sha256": "d02b9d4a3f206d4836479c2bf8b2bf94c906aa6887f49fb9e969cab09dc2bc55"
         },
         {
             "path": "routes.json",
@@ -325,11 +325,11 @@
         },
         {
             "path": "tooling/reuse/ambiguous-name-words.json",
-            "sha256": "6497157b3318484b935fdb74cc29ca2ece8986de2f6b67af9b916eab2eb6bb02"
+            "sha256": "4b021010dde8a029186cc4d4e9bcaf5e3ac2484c38d27733ece49c53916cf212"
         },
         {
             "path": "tooling/reuse/ambiguous-names.js",
-            "sha256": "ff528f440cf36bbaf6dea37effb017c54cdc971cac948e91e02a8a5286ddf6aa"
+            "sha256": "428bed8de094747472e17de6795aee6e0d5fc939538afc02b8d2aeba0cb72423"
         },
         {
             "path": "tooling/reuse/source-files.js",
@@ -337,7 +337,7 @@
         },
         {
             "path": "tooling/scripts/lint-placeholder.mjs",
-            "sha256": "699215ed82fd9070f816f7ad140021e6368afb538e50d9671028337222d0e731"
+            "sha256": "c869f4af45abd4f82500f836d5e50af93b9988a56283477ae45bd0aa45f47fd1"
         },
         {
             "path": "tooling/scripts/lint-readable.mjs",
@@ -365,7 +365,7 @@
         },
         {
             "path": "ui/tests/fixtures/naming-cases.json",
-            "sha256": "cb41869e22a818b508240726cf22dc5b3a072092d2631edb0273bbf31e0d28a5"
+            "sha256": "dcb3f32c6d28e24f2442687bd241379b7779d95db9a22f3cd574b460c42b3ef2"
         },
         {
             "path": "ui/tests/tutorials.test.js",

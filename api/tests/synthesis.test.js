@@ -40,7 +40,7 @@ function fixture(request) {
             uiProviders.set(definition.scriptUrl, definition);
             disposers.push(() => uiProviders.delete(definition.scriptUrl));
         },
-        registerStaticDir() {},
+        registerStaticDirectory() {},
         contributePublicCapability(id, capability) {
             capabilities.set(id, capability);
         },
