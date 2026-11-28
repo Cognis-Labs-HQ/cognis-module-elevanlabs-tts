@@ -2,7 +2,7 @@ export function registerCommands({ register, apiPost }) {
     const usage = "cognisctl modules:elevenlabs-tts:voices";
     register(
         "modules:elevenlabs-tts:voices",
-        async ({ args, apiBaseUrl, getApiToken }) => {
+        async ({ args: args, apiBaseUrl, getApiToken }) => {
             if (args.length) throw new Error(usage);
             return apiPost(
                 apiBaseUrl,
