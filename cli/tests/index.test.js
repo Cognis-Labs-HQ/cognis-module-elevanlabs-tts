@@ -9,8 +9,8 @@ test("voice discovery command calls the authenticated public configuration route
         register: (name, handler, options) => {
             command = { name, handler, options };
         },
-        apiPost: async (...argumentsList) => {
-            request = argumentsList;
+        apiPost: async (...args) => {
+            request = args;
             return { data: { options: [{ value: "voice", label: "Voice" }] } };
         },
     });

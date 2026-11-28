@@ -44,8 +44,8 @@ function fixture(request) {
         contributePublicCapability(id, capability) {
             capabilities.set(id, capability);
         },
-        log(...argumentsList) {
-            logs.push(argumentsList);
+        log(...args) {
+            logs.push(args);
         },
     };
     for (const method of ["Get", "Put", "Delete", "Post"])
