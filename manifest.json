@@ -2,7 +2,7 @@
     "id": "elevenlabs-tts",
     "uuid": "2b71bcdf-e29c-408b-8d12-ead6e377c82e",
     "name": "module.elevenlabs.tts.name",
-    "version": "2.1.11",
+    "version": "2.1.12",
     "class": "extension",
     "coreApiVersion": "v1",
     "capabilities": ["elevenlabs-tts:synthesis"],
@@ -65,7 +65,7 @@
     "files": [
         {
             "path": ".github/copilot-instructions.md",
-            "sha256": "be639c27828525316ad5ff60b0f8a9134dfc3a2cb2229e50dbe7b4f6d3bae231"
+            "sha256": "771f9dea6f87fda8b3e5c9505b368ccfedd599b3b68dc75e9259cc7da35bb9cc"
         },
         {
             "path": ".github/documentation/README.de.md",
@@ -249,19 +249,19 @@
         },
         {
             "path": "docs/TECHNICAL.de.md",
-            "sha256": "ea061f8163388511d40a889c442890a90ad2a09c39711514a13d7d180ac0a0e8"
+            "sha256": "b1c5a7453580508dee7be3ed4cb1fd73cf77377b6ca2c35af90eac6180426cf6"
         },
         {
             "path": "docs/TECHNICAL.en.md",
-            "sha256": "905fc06ceb224a53e6165734a577b6c3dc23ef1235622ac96d7ec055c2785964"
+            "sha256": "60c98179f5458eca4f84ec824f31587ff1704c155402b1e15cabcf5f41f5328f"
         },
         {
             "path": "docs/TECHNICAL.id.md",
-            "sha256": "f897d21f5e5a0386948103b16fd65dc676c8e2907b550fe5374bb0e09ec12bb2"
+            "sha256": "3d6eb4c3335186bc8297ead52b2b16eb5c77141d21fd31f73f4590851c86deab"
         },
         {
             "path": "docs/TECHNICAL.ja.md",
-            "sha256": "ed6c36b706d1e7d1484b15841472dc78e092e695052c3af95734df6421ef24d5"
+            "sha256": "b173e531e5d9ad985f9ef00e00e475ce3d3de6eef8ae5922927df5259356c9c0"
         },
         {
             "path": "docs/USAGE.de.md",
@@ -281,11 +281,11 @@
         },
         {
             "path": "package-lock.json",
-            "sha256": "ba3724504a1b9c6422a5d5476dcece21437250f28ffcbf92f3c58f3cea029f95"
+            "sha256": "c2620928781d239b1dc39f884182676f82156033c9204da02cc3c0bb7b5736ee"
         },
         {
             "path": "package.json",
-            "sha256": "d02b9d4a3f206d4836479c2bf8b2bf94c906aa6887f49fb9e969cab09dc2bc55"
+            "sha256": "2bb21338a7e09e1c2f4d2e19f5e245332a6f8a0b12f70af1499e7f5e7fe94171"
         },
         {
             "path": "routes.json",
@@ -325,11 +325,11 @@
         },
         {
             "path": "tooling/reuse/ambiguous-name-words.json",
-            "sha256": "4b021010dde8a029186cc4d4e9bcaf5e3ac2484c38d27733ece49c53916cf212"
+            "sha256": "1c181f2061b3a4c452a8f79045a9291a400b0e3247fc337cda5949f98d2d2d2e"
         },
         {
             "path": "tooling/reuse/ambiguous-names.js",
-            "sha256": "428bed8de094747472e17de6795aee6e0d5fc939538afc02b8d2aeba0cb72423"
+            "sha256": "a1b37d839e684e5dd73076e80a8338c5b820cb6a3bac2ffa9a3bdc8a13368e89"
         },
         {
             "path": "tooling/reuse/source-files.js",
@@ -365,7 +365,7 @@
         },
         {
             "path": "ui/tests/fixtures/naming-cases.json",
-            "sha256": "dcb3f32c6d28e24f2442687bd241379b7779d95db9a22f3cd574b460c42b3ef2"
+            "sha256": "262bd84ff7483a61a4cba4162e2567d68466fff68ee6b3b1cae263a0cc332289"
         },
         {
             "path": "ui/tests/tutorials.test.js",
